@@ -1,0 +1,53 @@
+---
+title: "ProblemSet_1"
+author: "Zachary Johnigan"
+date: "2026-07-22"
+output: pdf_document
+---
+test to see if i can work from my phone on r workbench now.
+
+Zachary Johnigan  
+Aida Pacheco-Applegate  
+Data For Policy Analys/Mgmt SSAD 48500/1 [60558]  
+Due: Sun Aug 2, 2026 11:59pm  
+
+\centering
+ProblemSet_1
+
+1. Prepare the data for analysis. Subset the NSECE dataset to include the following
+variables:
+o WF9_WORK_WAGE (hourly wage)
+o WF9_WORK_ROLE (staff role)
+o WF9_WORK_YRS (number of years worked in the program)
+o WF9_CHAR_HISP (Hispanic/Latino ethnicity)
+o WF9_CHAR_RACE (race)
+o WF9_CHAR_EDUC (highest level of education completed)
+o WF9_CHAR_GENDER (gender)
+Rename the variables using clear, descriptive names. Perform any data cleaning you
+consider necessary. For each variable, identify its level of measurement (nominal,
+ordinal, or interval/ratio) and whether it is discrete or continuous. Include the
+appropriate descriptive statistics, tables, or graphs, as well as measures of central
+tendency, dispersion, and shape when applicable. Describe and interpret your findings.
+(4 points)
+```{r}
+```
+
+2. Examine the following relationships. For each analysis, include the appropriate
+statistical test to determine whether the observed differences or associations are
+statistically significant. Interpret your results in the context of the ECE workforce. (4
+points)
+o a. Hourly wage and staff role
+o b. Hourly wage and number of years worked in the program
+o c. Hourly wage and race/ethnicity
+o d. Hourly wage and educational attainment
+o e. Hourly wage and gender
+```{r}
+```
+
+3. Policy implications. Based on your analyses, describe the segment(s) of the ECE
+workforce that appear to be most affected by low wages. What characteristics would
+you consider when designing a policy to improve compensation in the ECE sector?
+Support your answer using evidence from your analyses. (2 points)
+```{r}
+```
+
