@@ -1,0 +1,95 @@
+---
+title: "Lecture_2"
+output: html_document
+---
+
+## Notes about assigned Readings
+```{r, eval=FALSE}
+- [ ] Huntington-Klein, N. – Chapter 2
+https://theeffectbook.net/ch-ResearchQuestions.html
+Table of Contents
+- [x] ﻿﻿﻿2.1 What Is a Research Question?
+* a research question is a question that can be answered, and for which having that answer will improve your understanding of how the world works.
+- [x] ﻿﻿﻿2.2 Why Start with a Question?
+* Without a disciplined research question, there’s no reason not to just check everything! Something is going to pop up as related by random chance if you check enough stuff. 
+- [x] ﻿﻿﻿2.3 Where Do Research Questions Come From?
+* Research questions can come from lots of places. Mostly, curiosity. We want to know how the world works, and that naturally leads to questions!
+* There are two steps in this process: thinking about theory, and coming up with a research question. Either one can come first.
+- [x] ﻿2.4 How Do You Know if You've Got a Good One?
+* First, consider the potential answers you might get. Then, imagine what kind of sense you’d make of that result, or what conclusion you would draw.
+
+```
+
+## Notes from lecture
+- You can find a statistical realtionship in pretty much anything. 
+- 3 Types of  research questions
+- Descriptive
+- Predictive
+- Causal
+- HW: Choose and think about the research question for 
+- Working with a sample is easier.
+- Question: What is the name of the dataset we are working with for this quarter and how do I download it? 
+- Question: Lecture Slide 9, How many variable types are there? Three?
+- [Insert photo of the slide here]
+- Question: Lecture Slide 11, ...
+- [Insert photo of the slide here]
+- When loading the libraries, notice the conflicts section. Conflicts - there is a function called filter(), if you want to use it, you must indicate which package you want it work with. Should I use it for dplyr or stats? Using from dplyr(), then you will have to indicate that.
+- [HW Insert screenshot of the console here]
+
+```{r}
+getwd()
+setwd("/Users/zacharyjohnigan/Library/CloudStorage/OneDrive-TheUniversityofChicago/UChicago Student/Quarter 8 - Summer 2026/2 Data For Policy Analys:Mgmt/Week 1/DFPAM_Lecture_2/DFPAM_Lecture_2")
+```
+
+```{r}
+getwd()
+list.files()
+```
+
+```{r}
+write.csv(da37941.0005, file = "37941-0005-Data.csv", row.names = FALSE)
+```
+
+## Group Work
+can be answered using quantitative data and is related to social policy.
+
+##### Policy Field
+Environmental Policy
+
+##### Question Type
+Causal: How do organic vs non-organic foods affect consumer's ability to meet everyday living expenses?
+
+##### Data: 
+Survey data, those who consume organic foods.
+
+##### Example Question: 
+"Was your decision to purchase or not purchase organic foods based upon your finances?"
+
+##### Who would be included in the data set: 
+Those undergraduate students at UChicago who either recieve or don't financial aid. Knowing that UChicago has a high percentage of studetents in the 1% (change this word later), and knowing that those who receive financial aid is a good determinant of being within the other 99%.
+
+
+
+
+## Group Work 2
+
+For each variable, determine:
+
+##### Variable 1
+• CB9_AGECAT_SERVE_SA - Type (Serves School-age Children)
+
+Type of variable (measurement scale):
+• Nominal
+
+Form of the variable:
+• Discrete
+
+
+##### Variable 2
+• CB9_AGECAT_SERVE_1
+
+Type of variable (measurement scale):
+• Interval/Ratio - Numeric values with meaningful difference (0 for no, 1 for yes)
+
+Form of the variable:
+• Discrete - 
