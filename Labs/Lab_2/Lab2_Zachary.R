@@ -231,7 +231,7 @@ nsece_2019_fulltime_fqtable <-
          prop = ifelse(!is.na(fullpart_time_char), # the following lines are creating the proportion of my frequency table only when the value of the variable is NOT NA
                        n / total_sample, # the "ifelse" command indicates R to do something if a condition is met, in this case: if the value of the variable fullpart_time_char is NOT NA, then generate a proportion, if the value is NA then keep NA
                        NA))
-write_csv(nsece_2019_fulltime_fqtable, "nsece_2019_fulltime_fqtable.csv")  
+#write_csv(nsece_2019_fulltime_fqtable, "nsece_2019_fulltime_fqtable.csv")  
 
 #Months work 
 

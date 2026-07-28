@@ -103,6 +103,9 @@ nsece_2019_wf_recode <-
            gender == "(2) Female" ~ "Female",
            gender == "(1) Male" ~ "Male"))
 
+table(nsece_2019_wf_recode$fullpart_time_char)
+table(nsece_2019_wf_recode$gender_char)
+
 #------------------------------------------------------------------------------#
 # 5. Variable summaries
 #------------------------------------------------------------------------------#
@@ -131,6 +134,7 @@ mode_fulltime
 # result returned by which.max() is the position of the maximum count rather than 
 # the category name itself.
 
+# !!!!!!!!!!!!!! Bookmark !!!!!!!!!!!!!!
 # Gender (nominal + discrete) + mode [SAME CODE AS FULL-TIME VARIABLE]
 
 nsece_2019_gender_fqtable <- 
@@ -184,6 +188,7 @@ nsece_2019_respect_fqtable <- # same code as FULL-TIME VARIABLE
   count(respect) %>%
   filter(!is.na(respect)) %>%
   mutate(prop = n/sum(n))
+view(nsece_2019_respect_fqtable)
 
 nsece_2019_respect_summary <- 
   nsece_2019_wf_recode %>%
@@ -207,6 +212,7 @@ nsece_2019_respect_summary <-
     # again, convert the numeric result back to the original category label
     IQR = IQR(as.numeric(respect), na.rm = TRUE))
     # since IQR requires numeric values, we use the numeric factor codes
+view(nsece_2019_respect_summary)
 
 # The variable respect is an ordered factor (ordinal variable). Because functions 
 # such as median(), quantile(), and IQR() only work with numeric values, we 
@@ -235,6 +241,7 @@ wage_summary_table <-
     Range  = Max - Min,
     SD     = sd(hr_wage, na.rm = TRUE),
     IQR    = IQR(hr_wage, na.rm = TRUE))
+view(wage_summary_table)
 
 wage_mode <- 
   nsece_2019_wf_recode %>%

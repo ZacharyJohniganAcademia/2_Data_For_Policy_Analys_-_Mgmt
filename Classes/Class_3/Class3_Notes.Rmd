@@ -9,5 +9,7 @@ Standard Deviation
 Large SD, means the data is more spread out.
 Small SD, means the data is clustered near the mean
 Zero SD, means there is no variation in the data
+You cannot calculate the SD for a descrete variable.
+
 
 Median and node are not affected by outliers
