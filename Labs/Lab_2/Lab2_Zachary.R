@@ -39,7 +39,7 @@ my_directory
 my_data        <- paste0(my_directory, "/Data/")
 my_data
 
-output_dir     <- paste0(my_directory, "/Classes/Class_2/")
+output_dir     <- paste0(my_directory, "/Classes/Class_2")
 output_dir
 
 
@@ -248,8 +248,8 @@ hist_months
 #------------------------------------------------------------------------------#
 
 write.csv(nsece_2019_fulltime_fqtable, 
-          paste0(output_dir, "Lab/NSECE2019_fulltime_table.csv"), 
+          paste0(output_dir, "/Lab/NSECE2019_fulltime_table.csv"), 
           row.names = FALSE)
 
-ggsave(paste0(output_dir, "Lab/histogram_months.png"),
+ggsave(paste0(output_dir, "/Lab/histogram_months.png"),
        plot = hist_months)
