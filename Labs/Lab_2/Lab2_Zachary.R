@@ -3,8 +3,8 @@
 # class.
 # PROJECT NAME : Data for Policy Analysis
 # DATA SETS USED BY THIS CODE : 37941-0005-Data.rda
-# R VERSION : 4.5.3
-# AUTHOR : Aida Pacheco-Applegate
+# R VERSION : 4.5.2
+# AUTHOR : Zachary Johnigan
 # DATE CREATED : 06-23-2026
 # NOTES : 
 #------------------------------------------------------------------------------#
