@@ -4,3 +4,10 @@ output: html_document
 ---
 
 If your data is skewed, use the median, not the average or mode.
+
+Standard Deviation
+Large SD, means the data is more spread out.
+Small SD, means the data is clustered near the mean
+Zero SD, means there is no variation in the data
+
+Median and node are not affected by outliers
