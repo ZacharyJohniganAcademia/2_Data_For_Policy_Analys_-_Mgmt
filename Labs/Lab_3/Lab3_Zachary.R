@@ -109,6 +109,8 @@ nsece_2019_wf_recode <-
 
 # Full-time (create frequency table with no NAs count) and calculate 
 # mode (nominal + discrete)
+#rm(nsece_2019_fulltime_fqtable)
+#ls()
 
 nsece_2019_fulltime_fqtable <- 
   nsece_2019_wf_recode %>%
