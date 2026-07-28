@@ -3,3 +3,4 @@ title: "Class3_Notes"
 output: html_document
 ---
 
+If your data is skewed, use the median, not the average or mode.
