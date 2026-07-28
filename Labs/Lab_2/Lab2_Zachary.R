@@ -39,7 +39,7 @@ my_directory
 my_data        <- paste0(my_directory, "/Data/")
 my_data
 
-output_dir     <- paste0(my_directory, "/Classes/Class_2")
+output_dir     <- paste0(my_directory, "/Classes/Class_2/")
 output_dir
 
 
