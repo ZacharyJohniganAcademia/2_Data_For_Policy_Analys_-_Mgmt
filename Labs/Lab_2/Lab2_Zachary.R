@@ -33,7 +33,7 @@ getwd()
 
 ## set up working directory 
 
-my_directory   <- "/home/zacharyjohnigan/UChicago_Student/2_Data_For_Policy_Analys_&_Mgmt/Lectures/DFPAM_Lecture_2"
+my_directory   <- "/home/zacharyjohnigan/UChicago_Student/2_Data_For_Policy_Analys_-_Mgmt"
 my_directory
 
 my_data        <- paste0(my_directory, "/Data/")
@@ -165,7 +165,7 @@ nsece_2019_wf_subset <-
          respect = WF9_WORK_RESPECT, #orginal + discrete
          hr_wage = WF9_WORK_WAGE) #ratio + continuous 
 
-# Creating a CSV file out of the nsece_2019_wf_subset
+# Creating a CSV file out of the nsece_2019_wf_subset. Then I stored it in ~/UChicago_Student/2_Data_For_Policy_Analys_-_Mgmt/Data/NSECE_Dataset_Help
 write_csv(nsece_2019_wf_subset, "nsece_2019_wf_subset.csv")
 
 
