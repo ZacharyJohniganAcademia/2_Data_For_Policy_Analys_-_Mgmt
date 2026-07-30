@@ -14,6 +14,7 @@
 #------------------------------------------------------------------------------#
 
 rm(list=ls())
+?rm()
 options("error") 
 options(lifecycle_disable_verbose_retirement = TRUE)
 
