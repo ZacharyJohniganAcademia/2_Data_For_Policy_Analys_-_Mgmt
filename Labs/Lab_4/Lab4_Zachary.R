@@ -35,8 +35,7 @@ for (p in package.list){
 getwd()
 
 ## set up working directory 
-
-my_directory   <- "/Users/aidapacheco-applegate/Desktop/PhD/Summer 2026/Data for Policy Analysis/"
+my_directory   <- "/home/zacharyjohnigan/UChicago_Student/2_Data_For_Policy_Analys_-_Mgmt/"
 my_data        <- paste0(my_directory, "Data/")
 output_dir     <- paste0(my_directory, "Classes/Class 4/")
 
@@ -69,11 +68,9 @@ class(da37941.0005$WF9_WORK_WAGE) #numeric
 #------------------------------------------------------------------------------#
 
 # Rename dataset
-
 nsece_2019_wf <- da37941.0005
 
 # Subset dataset and rename variables
-
 nsece_2019_wf_subset <- 
   nsece_2019_wf %>%
   select(WF9_WORK_FT, WF9_CHAR_GENDER, WF9_WORK_MONTHS, WF9_WORK_RESPECT,
@@ -88,7 +85,6 @@ nsece_2019_wf_subset <-
 # numeric / character values for all other types of variables. 
 
 # Recode full/part-time and gender
-
 nsece_2019_wf_recode <- 
   nsece_2019_wf_subset %>%
   mutate(fullpart_time_char = as.character(fullpart_time),
@@ -172,10 +168,12 @@ cor_wage_months <-
 #------------------------------------------------------------------------------#
 
 # Employment Status vs. Gender (discrete vs. discrete) - chi-square test
-
+## An example of this code can be located here: https://stats.oarc.ucla.edu/r/whatstat/what-statistical-analysis-should-i-usestatistical-analyses-using-r/#chisq
 chi_test_fulltime_gender <- 
   chisq.test(xtabs(n ~ gender_char + fullpart_time_char, 
                    data = cont_table_fulltime_gender))
+
+chisq.test(table(female, schtyp))
 
 # Create a contingency table using the count variable (n)
 # the rows represent gender categories
