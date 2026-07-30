@@ -2,6 +2,12 @@
 title: "Class3_Notes"
 output: html_document
 ---
+Zachary Johnigan, B.A.
+Aida Pacheco-Applegate
+Data For Policy Analysis & Management
+Tuesday, July 28, 2026
+
+Class 3 & Lab 3
 
 If your data is skewed, use the median, not the average or mode.
 
@@ -13,3 +19,5 @@ You cannot calculate the SD for a descrete variable.
 
 
 Median and node are not affected by outliers
+
+5,192 observations in the dataset

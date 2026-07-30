@@ -1,10 +1,10 @@
 #------------------------------------------------------------------------------#
 # This file xxxxx
-# PROJECT NAME : xxxxx
+# PROJECT NAME : Lab4_Zachary
 # DATA SETS USED BY THIS CODE : 37941-0005-Data.rda
-# R VERSION : 4.5.3
-# AUTHOR : xxxx
-# DATE CREATED : xxxxx
+# R VERSION : 4.5.2
+# AUTHOR : Zachary Johnigan
+# DATE CREATED : Thursday, July 30, 2026
 # NOTES : xxxx
 #------------------------------------------------------------------------------#
 
