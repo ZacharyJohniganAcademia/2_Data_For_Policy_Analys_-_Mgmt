@@ -78,4 +78,13 @@ Read <- [https://stats.oarc.ucla.edu/r/whatstat/what-statistical-analysis-should
 
 - You calculate by by doing 2 groups for example, group 1 minus two. The CI is telling you the direction of the relationship. 
 
-- 
+- Never say something like "with 90% confidence interval, blah blah blah". Instead, say something like; "In this sample, I was/was not able to find an association"
+
+You will use this linear regression a lot
+# Number of months worked vs. hourly wage - linear regression 
+lm_wage_months <- lm(hr_wage ~ months_work,
+                     data = nsece_2019_wf_recode)
+
+summary(lm_wage_months)
+
+Jesus Christ
