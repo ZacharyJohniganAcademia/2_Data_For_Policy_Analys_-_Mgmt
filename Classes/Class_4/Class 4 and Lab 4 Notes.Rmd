@@ -1,0 +1,81 @@
+---
+title: "Class 4 and Lab 4 Notes"
+output: html_document
+---
+Zachary Johnigan
+Aida ???-Applegate, Ph.D. Candidate
+Data For Policy Analysis and Management
+Thursday, July 30, 2026
+
+Class 4 and Lab 4 Notes
+
+x = variable
+y = predictor
+
+We will talk about regression next class.
+
+Key takeaway: You have to know the correct tools to display the information you want to communicate.
+
+What is Statistical Difference?
+- 
+
+Statistical Tests for Relationships Between Two Variables
+- From now on, have in mind how you will describe your outcome variable!
+- Most applied research asks a simple question: Do two groups-differ?
+- We answer this by comparing outcomes across-gropus defined by a second variable
+- The key idea is-bivariate analysi:
+- One variable defines the groups ()
+
+Most Common Tests
+- Two-Sample T-tests: ???
+- Two-Sample z-test: ???
+- Chi-Squyare Test: ???
+- One-way ANOVA: ???
+- Prepaired t-test: ???
+
+
+
+Independednt Saples
+Most Common Case
+- Independednt samples consist of two groups made up of entirely different people.
+- The groups are 
+- Comparing proporitions, your variables will be descrete
+- 
+Homework
+[] HW: print the  "One-Way ANOVA (Comparing Means Across Multiple Groups)"
+- ANOVA is important to know for the assignment #2.
+- 
+
+Key Concepts - P Value
+- Everybody talks about the "P-Value"? What is the P-Value?. It is a number that measures the ...
+
+Researchers choose either to accpet or reject the null hypothesis,  Accepting about 5% chance when nothing actually exists. For example, "There is a 5% chance that I am incorrectly concludng", in reality means "I am 95% confident that, that relation ship is real"?
+
+Some researcher take it a step further. "I will accept 1%", means "I am 99% confident that blah, blah, " is true.  With 90% confidence, we want to make sure that whatever we are finding is true. In R, when we show linear regressions, R is giving you 99% results and 95% and 90%. This will allow us to see which variable is significant at each leve. I am confident that 95% of the relationship is true.
+
+The convention is that if the P-Value is less that 5%, you are "rejecting" the null hypothesis. More than 
+
+Confidence Intervals
+- Shows direction, evidence, size, and precision of the difference. If the difference is defined as Difference = Group 1 Mean - Group 2 Mean, the confidence interval tells us.
+
+How to Choose the Right Test
+- Question 1: What is the Outcome?
+- Question 2: How are Groups Structured?
+
+One sample t-test
+t.test(write, mu = 50)
+## 	One Sample t-test
+Read <- [https://stats.oarc.ucla.edu/r/whatstat/what-statistical-analysis-should-i-usestatistical-analyses-using-r/#1sampm]
+
+## data:  write 
+## t = 4.14, df = 199, p-value = 5.121e-05
+## alternative hypothesis: true mean is not equal to 50 
+## 95 percent confidence interval:
+##   51.5 54.1 
+## sample estimates:
+## mean of x 
+##   52.8
+
+- You calculate by by doing 2 groups for example, group 1 minus two. The CI is telling you the direction of the relationship. 
+
+- 
