@@ -22,7 +22,7 @@ options(lifecycle_disable_verbose_retirement = TRUE)
 package.list <- c("tidyverse")
 
 # read the `package.list` for the list of packages we will be needing
-# Check what packages are installed installed arleady 
+# Check what packages are installed already 
 # If any of the packages in the c() list are not currently installed, install them.
 for (p in package.list){
   if (!p %in% installed.packages()[, "Package"]) install.packages(p)
@@ -155,6 +155,7 @@ cor_wage_months <-
   drop_na(months_work, hr_wage) %>% # remove observations with missing values in either variable
   summarise(correlation = cor(months_work, hr_wage)) # create a summary table with the Pearson correlation coefficient
 
+cor_wage_months
 # b. Interpret relationship
 
 # After examining the graph and the calculated correlation coefficient of 0.036, we can 
@@ -203,7 +204,6 @@ t_test_wage_gender
 # difference using the conventional 5% criterion.
 
 # Number of months worked vs. hourly wage - linear regression 
-
 lm_wage_months <- lm(hr_wage ~ months_work,
                      data = nsece_2019_wf_recode)
 
