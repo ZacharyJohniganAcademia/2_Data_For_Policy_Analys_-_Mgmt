@@ -22,9 +22,9 @@ o WF9_CHAR_RACE (race)
 o WF9_CHAR_EDUC (highest level of education completed)
 o WF9_CHAR_GENDER (gender)
 
-- Rename the variables using clear, descriptive names. 
-- Perform any data cleaning you consider necessary. 
-- For each variable, identify its level of measurement (nominal, ordinal, or 
+[x] Rename the variables using clear, descriptive names. 
+[-] Perform any data cleaning you consider necessary. 
+[-] For each variable, identify its level of measurement (nominal, ordinal, or 
 interval/ratio) and whether it is discrete or continuous. 
 
 Include the appropriate descriptive statistics, tables, or graphs, as well as measures of central tendency, dispersion, and shape when applicable. 
@@ -96,6 +96,7 @@ nsece_2019_wf <- da37941.0005
 # WF9_CHAR_RACE (race)
 # WF9_CHAR_EDUC (highest level of education completed)
 # WF9_CHAR_GENDER (gender)
+
 hourly_wage
 staff_role
 number_of_years_worked_in_the_program
@@ -129,8 +130,10 @@ nsece_2019_wf_subset <-
 ```
 
 
+# Each variable's level of measurement (nominal, ordinal, or interval/ratio) and whether it is discrete or continuous.
+```{r}
 
-
+```
 
 
 
