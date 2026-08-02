@@ -33,8 +33,66 @@ measures of central tendency, dispersion, and shape when applicable.
 
 Describe and interpret your findings.
 (4 points)
+
+# 1. Set up working space and import packages
 ```{r}
+# This cleans up everything in the "Environment" pane.
+rm(list=ls())
+options("error") 
+options(lifecycle_disable_verbose_retirement = TRUE)
+
+# Import packages
+package.list <- c("tidyverse")
+
+# read the `package.list` for the list of packages we will be needing
+# Check what packages are installed already 
+# If any of the packages in the c() list are not currently installed, install them.
+for (p in package.list){
+  if (!p %in% installed.packages()[, "Package"]) install.packages(p)
+  library(p, character.only=TRUE)
+}
+
+# Set up working directory 
+
+## check your directory
+getwd()
+
+## set up working directory 
+my_directory   <- "/home/zacharyjohnigan/UChicago_Student/2_Data_For_Policy_Analys_-_Mgmt/"
+my_data        <- paste0(my_directory, "Data/")
+output_dir     <- paste0(my_directory, "Problem_Sets/Problem_Set_1/")
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 2. Examine the following relationships. For each analysis, include the appropriate
 statistical test to determine whether the observed differences or associations are
