@@ -96,6 +96,13 @@ nsece_2019_wf <- da37941.0005
 # WF9_CHAR_RACE (race)
 # WF9_CHAR_EDUC (highest level of education completed)
 # WF9_CHAR_GENDER (gender)
+hourly_wage
+staff_role
+number_of_years_worked_in_the_program
+Hispanic_Latino_ethnicity
+race
+highest_level_of_education_completed
+gender
 ```
 
 # Subset the NSECE dataset
@@ -111,22 +118,14 @@ nsece_2019_wf_subset <-
     WF9_CHAR_EDUC,
     WF9_CHAR_GENDER) %>%
   rename(
-    WF9_WORK_WAGE, 
-    WF9_WORK_ROLE, 
-    WF9_WORK_YRS, 
-    WF9_CHAR_HISP,
-    WF9_CHAR_RACE,
-    WF9_CHAR_EDUC,
-    WF9_CHAR_GENDER)
+    hourly_wage = WF9_WORK_WAGE, 
+    staff_role = WF9_WORK_ROLE, 
+    number_of_years_worked_in_the_program = WF9_WORK_YRS, 
+    Hispanic_Latino_ethnicity = WF9_CHAR_HISP,
+    race = WF9_CHAR_RACE,
+    highest_level_of_education_completed = WF9_CHAR_EDUC,
+    gender = WF9_CHAR_GENDER
   )
-  rename(
-    easy_name = variable, 
-    easy_name = variable, 
-    easy_name = variable, 
-    easy_name = variable,
-    easy_name = variable,
-    easy_name = variable,
-    easy_name = variable)
 ```
 
 
