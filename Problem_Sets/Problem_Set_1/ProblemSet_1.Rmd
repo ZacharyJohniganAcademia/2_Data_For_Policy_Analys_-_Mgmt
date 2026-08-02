@@ -4,7 +4,6 @@ author: "Zachary Johnigan"
 date: "2026-07-22"
 output: pdf_document
 ---
-test to see if i can work from my phone on r workbench now.
 
 Zachary Johnigan  
 Aida Pacheco-Applegate  
@@ -23,11 +22,16 @@ o WF9_CHAR_HISP (Hispanic/Latino ethnicity)
 o WF9_CHAR_RACE (race)
 o WF9_CHAR_EDUC (highest level of education completed)
 o WF9_CHAR_GENDER (gender)
-Rename the variables using clear, descriptive names. Perform any data cleaning you
-consider necessary. For each variable, identify its level of measurement (nominal,
-ordinal, or interval/ratio) and whether it is discrete or continuous. Include the
-appropriate descriptive statistics, tables, or graphs, as well as measures of central
-tendency, dispersion, and shape when applicable. Describe and interpret your findings.
+
+- Rename the variables using clear, descriptive names. 
+- Perform any data cleaning you consider necessary. 
+- For each variable, identify its level of measurement (nominal, ordinal, or 
+interval/ratio) and whether it is discrete or continuous. 
+
+Include the appropriate descriptive statistics, tables, or graphs, as well as 
+measures of central tendency, dispersion, and shape when applicable. 
+
+Describe and interpret your findings.
 (4 points)
 ```{r}
 ```
