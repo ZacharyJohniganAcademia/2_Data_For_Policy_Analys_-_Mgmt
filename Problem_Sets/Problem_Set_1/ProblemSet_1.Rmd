@@ -89,9 +89,9 @@ nsece_2019_wf <- da37941.0005
 # Manipulation if the data
 # Subset the NSECE dataset to include the following variables:
 ```{r}
-# WF9_WoRK_WAGE (hourly wage)
-# WF9_WoRK_RoLE (staff role)
-# WF9_WoRK_YRS (number of years worked in the program)
+# WF9_WORK_WAGE (hourly wage)
+# WF9_WORK_ROLE (staff role)
+# WF9_WORK_YRS (number of years worked in the program)
 # WF9_CHAR_HISP (Hispanic/Latino ethnicity)
 # WF9_CHAR_RACE (race)
 # WF9_CHAR_EDUC (highest level of education completed)
@@ -103,19 +103,31 @@ nsece_2019_wf <- da37941.0005
 nsece_2019_wf_subset <- 
   nsece_2019_wf %>%
   select(
-    WF9_WORK_FT, 
-    WF9_CHAR_GENDER, 
-    WF9_WORK_MONTHS, 
-    WF9_WORK_RESPECT,
-    WF9_WORK_WAGE) %>%
+    WF9_WORK_WAGE, 
+    WF9_WORK_ROLE, 
+    WF9_WORK_YRS, 
+    WF9_CHAR_HISP,
+    WF9_CHAR_RACE,
+    WF9_CHAR_EDUC,
+    WF9_CHAR_GENDER) %>%
   rename(
-    fullpart_time = WF9_WORK_FT, 
-    gender = WF9_CHAR_GENDER, 
-    months_work = WF9_WORK_MONTHS, 
-    respect = WF9_WORK_RESPECT,
-    hr_wage = WF9_WORK_WAGE)
+    WF9_WORK_WAGE, 
+    WF9_WORK_ROLE, 
+    WF9_WORK_YRS, 
+    WF9_CHAR_HISP,
+    WF9_CHAR_RACE,
+    WF9_CHAR_EDUC,
+    WF9_CHAR_GENDER)
+  )
+  rename(
+    easy_name = variable, 
+    easy_name = variable, 
+    easy_name = variable, 
+    easy_name = variable,
+    easy_name = variable,
+    easy_name = variable,
+    easy_name = variable)
 ```
-
 
 
 
