@@ -40,18 +40,23 @@ Describe and interpret your findings.
 rm(list=ls())
 options("error") 
 options(lifecycle_disable_verbose_retirement = TRUE)
+```
 
+```{r}
 # Import packages
 package.list <- c("tidyverse")
 
 # read the `package.list` for the list of packages we will be needing
 # Check what packages are installed already 
 # If any of the packages in the c() list are not currently installed, install them.
+# Note: Check the "Packages" tab to verify that they were installed. If they were not, then check the box and click "Install".
 for (p in package.list){
   if (!p %in% installed.packages()[, "Package"]) install.packages(p)
   library(p, character.only=TRUE)
 }
+```
 
+```{r}
 # Set up working directory 
 
 ## check your directory
@@ -59,8 +64,13 @@ getwd()
 
 ## set up working directory 
 my_directory   <- "/home/zacharyjohnigan/UChicago_Student/2_Data_For_Policy_Analys_-_Mgmt/"
+my_directory
+
 my_data        <- paste0(my_directory, "Data/")
+my_data
+
 output_dir     <- paste0(my_directory, "Problem_Sets/Problem_Set_1/")
+output_dir
 ```
 
 
