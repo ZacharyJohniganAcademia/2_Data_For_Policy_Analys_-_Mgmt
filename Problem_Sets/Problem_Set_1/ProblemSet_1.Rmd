@@ -134,13 +134,26 @@ nsece_2019_wf_subset <-
 According to the 37941-0005-User_guide.pdf, "manual provides information on the 2019 National Survey of Early Care and
 Education (NSECE) workforce public-use data files"(), and the lecture we can define each of the 7 variables as follows.
 
-WF9_WORK_WAGE - 
-WF9_WORK_ROLE - 
-WF9_WORK_YRS - 
-WF9_CHAR_HISP - 
-WF9_CHAR_RACE - 
-WF9_CHAR_EDUC - 
-WF9_CHAR_GENDER - 
+WF9_WORK_WAGE - hourly_wage - Hourly wage for Workforce respondent (top-coded)
+Level of Measurement: Ratio, Continuous
+
+WF9_WORK_ROLE - staff_role - Role of Workforce respondent
+Level of Measurement: Ordinal, Discreate
+
+WF9_WORK_YRS - number_of_years_worked_in_the_program - Num of years respondent worked in program
+Level of Measurement: Ratio, Continuous
+
+WF9_CHAR_HISP - Hispanic_Latino_ethnicity - Respondent is of Hispanic/Latino descent
+Level of Measurement: Nominal, Discrete
+
+WF9_CHAR_RACE - race - Respondent's race
+Level of Measurement: Nominal, Discrete
+
+WF9_CHAR_EDUC - highest_level_of_education_completed - Highest education level obtained
+Level of Measurement: Ordinal, Discrete
+
+WF9_CHAR_GENDER - gender - The respondent’s self-reported gender
+Level of Measurement: Nominal, Discrete
 
 # Citations
 NSECE Project Team (National Opinion Research Center). (2019). National Survey of Early Care and Education (NSECE), [United States], 2019: NSECE user’s guide for workforce public-use data file (ICPSR 37941). Inter-university Consortium for Political and Social Research.
