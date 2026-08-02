@@ -131,9 +131,21 @@ nsece_2019_wf_subset <-
 
 
 # Each variable's level of measurement (nominal, ordinal, or interval/ratio) and whether it is discrete or continuous.
-```{r}
+According to the 37941-0005-User_guide.pdf, "manual provides information on the 2019 National Survey of Early Care and
+Education (NSECE) workforce public-use data files"(), and the lecture we can define each of the 7 variables as follows.
 
-```
+WF9_WORK_WAGE - 
+WF9_WORK_ROLE - 
+WF9_WORK_YRS - 
+WF9_CHAR_HISP - 
+WF9_CHAR_RACE - 
+WF9_CHAR_EDUC - 
+WF9_CHAR_GENDER - 
+
+# Citations
+NSECE Project Team (National Opinion Research Center). (2019). National Survey of Early Care and Education (NSECE), [United States], 2019: NSECE user’s guide for workforce public-use data file (ICPSR 37941). Inter-university Consortium for Political and Social Research.
+
+Pacheco-Applegate, A. (2026). Data for Policy Analysis and Management: Class 2—Data measurement and variables [PowerPoint slides]. Harris School of Public Policy, University of Chicago.
 
 
 
