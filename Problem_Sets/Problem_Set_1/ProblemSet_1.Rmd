@@ -13,11 +13,10 @@ Due: Sun Aug 2, 2026 11:59pm
 \centering
 ProblemSet_1
 
-1. Prepare the data for analysis. Subset the NSECE dataset to include the following
-variables:
-o WF9_WORK_WAGE (hourly wage)
-o WF9_WORK_ROLE (staff role)
-o WF9_WORK_YRS (number of years worked in the program)
+1. Prepare the data for analysis. Subset the NSECE dataset to include the following variables:
+o WF9_WoRK_WAGE (hourly wage)
+o WF9_WoRK_RoLE (staff role)
+o WF9_WoRK_YRS (number of years worked in the program)
 o WF9_CHAR_HISP (Hispanic/Latino ethnicity)
 o WF9_CHAR_RACE (race)
 o WF9_CHAR_EDUC (highest level of education completed)
@@ -28,8 +27,7 @@ o WF9_CHAR_GENDER (gender)
 - For each variable, identify its level of measurement (nominal, ordinal, or 
 interval/ratio) and whether it is discrete or continuous. 
 
-Include the appropriate descriptive statistics, tables, or graphs, as well as 
-measures of central tendency, dispersion, and shape when applicable. 
+Include the appropriate descriptive statistics, tables, or graphs, as well as measures of central tendency, dispersion, and shape when applicable. 
 
 Describe and interpret your findings.
 (4 points)
@@ -73,16 +71,50 @@ output_dir     <- paste0(my_directory, "Problem_Sets/Problem_Set_1/")
 output_dir
 ```
 
+# 2. Load dataset
+```{r}
+# Import NSECE 2019 workforce questionnnaire (since the data is already in R
+# format we just need to use the line 52 of this code to load it into our work 
+# environment)
 
+load(paste0(my_data, "37941-0005-Data.rda"))
+```
 
+# 4. Basic cleaning of the data
+```{r}
+# Rename dataset
+nsece_2019_wf <- da37941.0005
+```
 
+# Manipulation if the data
+# Subset the NSECE dataset to include the following variables:
+```{r}
+# WF9_WoRK_WAGE (hourly wage)
+# WF9_WoRK_RoLE (staff role)
+# WF9_WoRK_YRS (number of years worked in the program)
+# WF9_CHAR_HISP (Hispanic/Latino ethnicity)
+# WF9_CHAR_RACE (race)
+# WF9_CHAR_EDUC (highest level of education completed)
+# WF9_CHAR_GENDER (gender)
+```
 
-
-
-
-
-
-
+# Subset the NSECE dataset
+```{r}
+nsece_2019_wf_subset <- 
+  nsece_2019_wf %>%
+  select(
+    WF9_WORK_FT, 
+    WF9_CHAR_GENDER, 
+    WF9_WORK_MONTHS, 
+    WF9_WORK_RESPECT,
+    WF9_WORK_WAGE) %>%
+  rename(
+    fullpart_time = WF9_WORK_FT, 
+    gender = WF9_CHAR_GENDER, 
+    months_work = WF9_WORK_MONTHS, 
+    respect = WF9_WORK_RESPECT,
+    hr_wage = WF9_WORK_WAGE)
+```
 
 
 
@@ -115,6 +147,59 @@ o d. Hourly wage and educational attainment
 o e. Hourly wage and gender
 ```{r}
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 3. Policy implications. Based on your analyses, describe the segment(s) of the ECE
 workforce that appear to be most affected by low wages. What characteristics would

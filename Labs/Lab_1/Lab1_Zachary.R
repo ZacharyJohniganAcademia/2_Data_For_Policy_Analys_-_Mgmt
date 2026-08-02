@@ -53,7 +53,7 @@ output_dir
 # format we just need to use the line 52 of this code to load it into our work 
 # environment)
 
-load("/Users/aidapacheco-applegate/Desktop/PhD/Summer 2026/Data for Policy Analysis/Data/37941-0005-Data.rda")
+load(paste0(my_data, "37941-0005-Data.rda"))
 
 ## To import .CSV files use this code
 ## data <- read.csv("[full directory here]")
