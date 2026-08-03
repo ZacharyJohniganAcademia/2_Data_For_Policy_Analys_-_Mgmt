@@ -13,7 +13,9 @@ Due: Sun Aug 2, 2026 11:59pm
 \centering
 ProblemSet_1
 
-1. Prepare the data for analysis. Subset the NSECE dataset to include the following variables:
+1. Prepare the data for analysis. 
+
+[x] Subset the NSECE dataset to include the following variables:
 o WF9_WoRK_WAGE (hourly wage)
 o WF9_WoRK_RoLE (staff role)
 o WF9_WoRK_YRS (number of years worked in the program)
