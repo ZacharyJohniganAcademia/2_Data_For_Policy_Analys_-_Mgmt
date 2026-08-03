@@ -14,7 +14,6 @@ Due: Sun Aug 2, 2026 11:59pm
 ProblemSet_1
 
 1. Prepare the data for analysis. 
-
 [x] Subset the NSECE dataset to include the following variables:
 o WF9_WoRK_WAGE (hourly wage)
 o WF9_WoRK_RoLE (staff role)
