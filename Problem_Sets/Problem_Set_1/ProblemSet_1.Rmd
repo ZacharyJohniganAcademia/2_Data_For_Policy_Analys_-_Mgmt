@@ -24,10 +24,9 @@ o WF9_CHAR_GENDER (gender)
 
 [x] Rename the variables using clear, descriptive names. 
 [-] Perform any data cleaning you consider necessary. 
-[-] For each variable, identify its level of measurement (nominal, ordinal, or 
+[x] For each variable, identify its level of measurement (nominal, ordinal, or 
 interval/ratio) and whether it is discrete or continuous. 
-
-Include the appropriate descriptive statistics, tables, or graphs, as well as measures of central tendency, dispersion, and shape when applicable. 
+[-] Include the appropriate descriptive statistics, tables, or graphs, as well as measures of central tendency, dispersion, and shape when applicable. 
 
 Describe and interpret your findings.
 (4 points)
@@ -86,26 +85,8 @@ load(paste0(my_data, "37941-0005-Data.rda"))
 nsece_2019_wf <- da37941.0005
 ```
 
-# Manipulation if the data
+# Manipulation of the data
 # Subset the NSECE dataset to include the following variables:
-```{r}
-# WF9_WORK_WAGE (hourly wage)
-# WF9_WORK_ROLE (staff role)
-# WF9_WORK_YRS (number of years worked in the program)
-# WF9_CHAR_HISP (Hispanic/Latino ethnicity)
-# WF9_CHAR_RACE (race)
-# WF9_CHAR_EDUC (highest level of education completed)
-# WF9_CHAR_GENDER (gender)
-
-hourly_wage
-staff_role
-number_of_years_worked_in_the_program
-Hispanic_Latino_ethnicity
-race
-highest_level_of_education_completed
-gender
-```
-
 # Subset the NSECE dataset
 ```{r}
 nsece_2019_wf_subset <- 
@@ -159,8 +140,6 @@ Level of Measurement: Nominal, Discrete
 NSECE Project Team (National Opinion Research Center). (2019). National Survey of Early Care and Education (NSECE), [United States], 2019: NSECE user’s guide for workforce public-use data file (ICPSR 37941). Inter-university Consortium for Political and Social Research.
 
 Pacheco-Applegate, A. (2026). Data for Policy Analysis and Management: Class 2—Data measurement and variables [PowerPoint slides]. Harris School of Public Policy, University of Chicago.
-
-
 
 
 
