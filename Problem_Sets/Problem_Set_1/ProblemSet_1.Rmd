@@ -167,7 +167,7 @@ From lecture 4, we learn that a bivariate analysis describes, compares, and inte
 
 We also learn about statistical tests for determining whether the observed differences or associations are
 statistically significant. There are five tests we can use to perform these analysis, including: Two-sample t-test, Two-sample z-test, ANOVA, Chi-square test and Paired test. 
-![lecture image](imag.jpg)
+![lecture image](image.jpg)
 
 I will specify which test I used for each comparison and what sort of relationship they have—either positive, negative or null.
 
@@ -178,7 +178,26 @@ Take hourly_wage and staff_role for example. We can start by asking first; among
 
 a. Hourly_wage and staff_role
 ```{r}
+# a. Hourly wage and staff role
 
+# Research question:
+# Does hourly wage differ by staff role among ECE workers?
+
+wage_by_role <-
+  nsece_2019_wf_recode %>%
+  select(staff_role, hourly_wage) %>%          # keep only variables of interest
+  drop_na(staff_role, hourly_wage) %>%         # remove missing values
+  group_by(staff_role) %>%                     # calculate statistics within each role
+  summarize(
+    n = n(),
+    mean_wage = mean(hourly_wage),
+    median_wage = median(hourly_wage),
+    sd_wage = sd(hourly_wage),
+    min_wage = min(hourly_wage),
+    max_wage = max(hourly_wage)
+  )
+
+wage_by_role
 ```
 
 b. Hourly wage and number of years worked in the program
