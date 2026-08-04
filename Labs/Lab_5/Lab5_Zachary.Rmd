@@ -52,7 +52,7 @@ getwd()
 ## set up working directory 
 
 ```{r}
-my_directory   <- "/Users/aidapacheco-applegate/Desktop/PhD/Summer 2026/Data for Policy Analysis/"
+my_directory   <- "/home/zacharyjohnigan/UChicago_Student/2_Data_For_Policy_Analys_-_Mgmt/"
 my_data        <- paste0(my_directory, "Data/")
 output_dir     <- paste0(my_directory, "Classes/Class 5/")
 
@@ -78,8 +78,7 @@ load(paste0(my_data, "37941-0005-Data.rda"))
 
 # Understand variable class WF9_PROFDEV_WRKSHP,
 # WF9_PROFDEV_COACH, WF9_PROFDEV_MEETING, WF9_PROFDEV_COURSE, WF9_WORK_WAGE 
-
-```{r}
+```{r, eval=FALSE}
 class(da37941.0005$WF9_PROFDEV_WRKSHP) #factor
 summary(da37941.0005$WF9_PROFDEV_WRKSHP) #nominal + discrete
 
@@ -97,23 +96,46 @@ summary(da37941.0005$WF9_PROFDEV_WRKSHP) #ratio + continuous
 
 ```
 
+```{r}
+class(da37941.0005$WF9_PROFDEV_WRKSHP) # factor
+summary(da37941.0005$WF9_PROFDEV_WRKSHP) # nominal + discrete
+
+class(da37941.0005$WF9_PROFDEV_COACH) # factor
+summary(da37941.0005$WF9_PROFDEV_COACH) # nominal + discrete
+
+class(da37941.0005$WF9_PROFDEV_MEETING) # factor
+summary(da37941.0005$WF9_PROFDEV_MEETING) # nominal + discrete
+
+class(da37941.0005$WF9_PROFDEV_COURSE) # factor
+summary(da37941.0005$WF9_PROFDEV_COURSE) # nominal + discrete
+
+class(da37941.0005$WF9_WORK_WAGE) # numeric
+summary(da37941.0005$WF9_WORK_WAGE) # ratio + continuous
+```
+![35 DFPAM_Lab_5_Variable_Exploration_Summary](35 DFPAM_Lab_5_Variable_Exploration_Summary.png)
+This chunk examines the class and summary of each variable to better understand the dataset before beginning any analysis. The four professional development variables are stored as factors, meaning they are categorical variables with response options such as “Yes” and “No.” The hourly wage variable (WF9_WORK_WAGE) is stored as a numeric variable, meaning it contains continuous numerical values that can be used to calculate statistics such as the mean and standard deviation.
+
+For the output specifically:
+The summaries show that each professional development variable contains three possible outcomes: Yes, No, and missing values (NA). In this sample, 3,658 respondents answered “Yes,” 990 answered “No,” and 544 observations were missing. The output also confirms that WF9_WORK_WAGE is numeric, making it appropriate for quantitative analyses such as calculating averages and comparing wages across groups.
+
 #------------------------------------------------------------------------------#
 # 4. Basic cleaning and manipulation
 #------------------------------------------------------------------------------#
 
 # Rename dataset
-
 ```{r}
 nsece_2019_wf <- da37941.0005
 
 ```
 
 # Subset dataset and rename variables
-
 ```{r}
 nsece_2019_wf_subset <- 
   nsece_2019_wf %>%
-  select(WF9_PROFDEV_WRKSHP, WF9_PROFDEV_COACH, WF9_PROFDEV_MEETING, WF9_PROFDEV_COURSE,
+  select(WF9_PROFDEV_WRKSHP, 
+         WF9_PROFDEV_COACH, 
+         WF9_PROFDEV_MEETING, 
+         WF9_PROFDEV_COURSE,
          WF9_WORK_WAGE) %>%
   rename(part_workshop = WF9_PROFDEV_WRKSHP,
          part_coaching = WF9_PROFDEV_COACH, 
@@ -123,12 +145,9 @@ nsece_2019_wf_subset <-
 
 ```
 
-# I suggest keeping the factor variables for ordinal variables but work with 
-# numeric / character values for all other types of variables. 
-# Since all the predictor variables are nominal, I will convert them as character variables.
+# I suggest keeping the factor variables for ordinal variables but work with numeric / character values for all other types of variables.Since all the predictor variables are nominal, I will convert them as character variables.
 
 # Recode professional development variables
-
 ```{r}
 nsece_2019_wf_recode <- 
   nsece_2019_wf_subset %>%
@@ -153,9 +172,12 @@ nsece_2019_wf_recode <-
            part_course == "(2) No" ~ "No"))
          
 ```
+This chunk creates a new dataset with cleaner versions of several variables. It uses mutate() to add new columns and case_when() to replace coded responses like “(1) Yes” and “(2) No” with the simpler labels “Yes” and “No”. The original variables are preserved, while the new _char variables make the data easier to analyze, graph, and interpret.
+
+
+!!!!!!!Bookmark!!!!!!!
 
 # Create new professional development variable
-
 ```{r}
 nsece_2019_wf_pd <- 
   nsece_2019_wf_recode %>%
