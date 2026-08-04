@@ -1,0 +1,37 @@
+---
+title: "Class5_Notes"
+output: html_document
+---
+
+
+Read
+The Prevalence and Economic Value of Doubling Up
+Pilkauskas, N., Garfinkel, I., & McLanahan, S . (2014). The Prevalence and Economic Value of Doubling Up. Demography. 51. , 1667-1676. DOI 10.1007/s13524-014-0327-4
+
+Homeownership and Rent
+* If a mother reports owning a home, she is coded as a 'homeowner'.
+* Otherwise, she is coded as a 'renter'.
+    * Excludes mothers who are homeless or living in a shelter.
+
+Rent and Mortgage Information
+* Renters are asked:
+    * “How much rent do you pay each month?”
+    * Monthly rent is used to calculate yearly rental payments.
+* Homeowners report:
+    * Annual mortgage payments.
+
+Additional Housing Information
+* Mothers report whether they:
+    * Live in a home they own.
+    * Live in a home owned by someone else.
+* Renters are also asked:
+    * Whose name is on the lease?
+
+Final Housing Categories
+The study classifies mothers into one of the following groups:
+* Own their own home.
+* Live in a home owned by another person and pay no rent.
+* Live in a home owned by another person and pay rent.
+* Rent their own home (or their partner rents).
+* Live in a home rented by another person and pay rent.
+* Live in a home rented by another person and pay no rent.

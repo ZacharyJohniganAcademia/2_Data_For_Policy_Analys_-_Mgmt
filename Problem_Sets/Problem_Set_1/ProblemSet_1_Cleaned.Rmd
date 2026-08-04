@@ -179,7 +179,7 @@ statistically significant. There are five tests we can use to perform these anal
 
 I will specify which test I used for each comparison and what sort of relationship they have—either positive, negative or null.
 
-In a bivariate analysis, one variable defines the groups (explanatory variable) ⟶ X  and the other variable is the outcome we measure (response variable) ⟶ Y
+In a bivariate analysis, one variable defines the groups (explanatory variable)  X  and the other variable is the outcome we measure (response variable) Y
 
 Take hourly_wage and staff_role for example. We can start by asking first; among the respondents, does hourly wage differ by staff role? This seems like an easy question to answer, but we can graph this to show the relationship visually. Let's try a two-sample t-test.
 

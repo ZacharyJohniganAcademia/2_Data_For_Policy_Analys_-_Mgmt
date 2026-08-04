@@ -1,0 +1,793 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={ProblemSet\_1},
+  pdfauthor={Zachary Johnigan},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{ProblemSet\_1}
+\author{Zachary Johnigan}
+\date{2026-07-22}
+
+\begin{document}
+\maketitle
+
+Zachary Johnigan Aida Pacheco-Applegate Data For Policy Analys/Mgmt SSAD
+48500/1 {[}60558{]} Due: Sun Aug 2, 2026 11:59pm
+
+\centering
+
+ProblemSet\_1
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Prepare the data for analysis. {[}x{]} Subset the NSECE dataset to
+  include the following variables: o WF9\_WoRK\_WAGE (hourly wage) o
+  WF9\_WoRK\_RoLE (staff role) o WF9\_WoRK\_YRS (number of years worked
+  in the program) o WF9\_CHAR\_HISP (Hispanic/Latino ethnicity) o
+  WF9\_CHAR\_RACE (race) o WF9\_CHAR\_EDUC (highest level of education
+  completed) o WF9\_CHAR\_GENDER (gender)
+\end{enumerate}
+
+{[}x{]} Rename the variables using clear, descriptive names. {[}-{]}
+Perform any data cleaning you consider necessary. {[}x{]} For each
+variable, identify its level of measurement (nominal, ordinal, or
+interval/ratio) and whether it is discrete or continuous. {[}-{]}
+Include the appropriate descriptive statistics, tables, or graphs, as
+well as measures of central tendency, dispersion, and shape when
+applicable.
+
+Describe and interpret your findings. (4 points)
+
+\section{1. Set up working space and import
+packages}\label{set-up-working-space-and-import-packages}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# This cleans up everything in the "Environment" pane.}
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list=}\FunctionTok{ls}\NormalTok{())}
+\FunctionTok{options}\NormalTok{(}\StringTok{"error"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $error
+## NULL
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{lifecycle\_disable\_verbose\_retirement =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Import packages}
+\NormalTok{package.list }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
+
+\CommentTok{\# read the \textasciigrave{}package.list\textasciigrave{} for the list of packages we will be needing}
+\CommentTok{\# Check what packages are installed already}
+\CommentTok{\# If any of the packages in the c() list are not currently installed, install them.}
+\CommentTok{\# Note: Check the "Packages" tab to verify that they were installed. If they were not, then check the box and click "Install".}
+\ControlFlowTok{for}\NormalTok{ (p }\ControlFlowTok{in}\NormalTok{ package.list)\{}
+  \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\NormalTok{p }\SpecialCharTok{\%in\%} \FunctionTok{installed.packages}\NormalTok{()[, }\StringTok{"Package"}\NormalTok{]) }\FunctionTok{install.packages}\NormalTok{(p)}
+  \FunctionTok{library}\NormalTok{(p, }\AttributeTok{character.only=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.2.1     v readr     2.2.0
+## v forcats   1.0.1     v stringr   1.6.0
+## v ggplot2   4.0.3     v tibble    3.3.1
+## v lubridate 1.9.5     v tidyr     1.3.2
+## v purrr     1.2.2     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Set up working directory}
+
+\DocumentationTok{\#\# check your directory}
+\FunctionTok{getwd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "/home/zacharyjohnigan/UChicago_Student/2_Data_For_Policy_Analys_-_Mgmt/Problem_Sets/Problem_Set_1"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# set up working directory}
+\NormalTok{my\_directory   }\OtherTok{\textless{}{-}} \StringTok{"/home/zacharyjohnigan/UChicago\_Student/2\_Data\_For\_Policy\_Analys\_{-}\_Mgmt/"}
+\NormalTok{my\_directory}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "/home/zacharyjohnigan/UChicago_Student/2_Data_For_Policy_Analys_-_Mgmt/"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_data        }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(my\_directory, }\StringTok{"Data/"}\NormalTok{)}
+\NormalTok{my\_data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "/home/zacharyjohnigan/UChicago_Student/2_Data_For_Policy_Analys_-_Mgmt/Data/"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{output\_dir     }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(my\_directory, }\StringTok{"Problem\_Sets/Problem\_Set\_1/"}\NormalTok{)}
+\NormalTok{output\_dir}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "/home/zacharyjohnigan/UChicago_Student/2_Data_For_Policy_Analys_-_Mgmt/Problem_Sets/Problem_Set_1/"
+\end{verbatim}
+
+\section{2. Load dataset}\label{load-dataset}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Import NSECE 2019 workforce questionnnaire (since the data is already in R}
+\CommentTok{\# format we just need to use the line 52 of this code to load it into our work}
+\CommentTok{\# environment)}
+
+\FunctionTok{load}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(my\_data, }\StringTok{"37941{-}0005{-}Data.rda"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\section{4. Basic cleaning of the
+data}\label{basic-cleaning-of-the-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Rename dataset}
+\NormalTok{nsece\_2019\_wf }\OtherTok{\textless{}{-}}\NormalTok{ da37941}\FloatTok{.0005}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Manipulation of the data}\label{manipulation-of-the-data}
+
+\section{Subset the NSECE dataset to include the following
+variables:}\label{subset-the-nsece-dataset-to-include-the-following-variables}
+
+\section{Subset the NSECE dataset}\label{subset-the-nsece-dataset}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nsece\_2019\_wf\_subset }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_2019\_wf }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}
+\NormalTok{    WF9\_WORK\_WAGE,}
+\NormalTok{    WF9\_WORK\_ROLE,}
+\NormalTok{    WF9\_WORK\_YRS,}
+\NormalTok{    WF9\_CHAR\_HISP,}
+\NormalTok{    WF9\_CHAR\_RACE,}
+\NormalTok{    WF9\_CHAR\_EDUC,}
+\NormalTok{    WF9\_CHAR\_GENDER) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rename}\NormalTok{(}
+    \AttributeTok{hourly\_wage =}\NormalTok{ WF9\_WORK\_WAGE,}
+    \AttributeTok{staff\_role =}\NormalTok{ WF9\_WORK\_ROLE,}
+    \AttributeTok{number\_of\_years\_worked\_in\_the\_program =}\NormalTok{ WF9\_WORK\_YRS,}
+    \AttributeTok{Hispanic\_Latino\_ethnicity =}\NormalTok{ WF9\_CHAR\_HISP,}
+    \AttributeTok{race =}\NormalTok{ WF9\_CHAR\_RACE,}
+    \AttributeTok{highest\_level\_of\_education\_completed =}\NormalTok{ WF9\_CHAR\_EDUC,}
+    \AttributeTok{gender =}\NormalTok{ WF9\_CHAR\_GENDER}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nsece\_2019\_wf\_recode }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_2019\_wf\_subset }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+
+    \AttributeTok{gender\_char =} \FunctionTok{as.character}\NormalTok{(gender),}
+    \AttributeTok{gender\_char =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{      gender }\SpecialCharTok{==} \StringTok{"(2) Female"} \SpecialCharTok{\textasciitilde{}} \StringTok{"Female"}\NormalTok{,}
+\NormalTok{      gender }\SpecialCharTok{==} \StringTok{"(1) Male"} \SpecialCharTok{\textasciitilde{}} \StringTok{"Male"}
+\NormalTok{    ),}
+
+    \AttributeTok{staff\_role\_char =} \FunctionTok{as.character}\NormalTok{(staff\_role),}
+    \AttributeTok{staff\_role\_char =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{      staff\_role }\SpecialCharTok{==} \StringTok{"(1) Aide or assistant teacher"} \SpecialCharTok{\textasciitilde{}} \StringTok{"Aide/Assistant"}\NormalTok{,}
+\NormalTok{      staff\_role }\SpecialCharTok{==} \StringTok{"(2) Teacher, instructor, or lead teacher"} \SpecialCharTok{\textasciitilde{}} \StringTok{"Teacher/Lead"}\NormalTok{,}
+\NormalTok{      staff\_role }\SpecialCharTok{==} \StringTok{"(3) Other/undetermined"} \SpecialCharTok{\textasciitilde{}} \StringTok{"Other"}
+\NormalTok{    )}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Each variable's level of measurement (nominal, ordinal, or
+interval/ratio) and whether it is discrete or
+continuous.}\label{each-variables-level-of-measurement-nominal-ordinal-or-intervalratio-and-whether-it-is-discrete-or-continuous.}
+
+According to the 37941-0005-User\_guide.pdf, ``manual provides
+information on the 2019 National Survey of Early Care and Education
+(NSECE) workforce public-use data files''(), and the lecture we can
+define each of the 7 variables as follows.
+
+WF9\_WORK\_WAGE - hourly\_wage - Hourly wage for Workforce respondent
+(top-coded) Level of Measurement: Ratio, Continuous
+
+WF9\_WORK\_ROLE - staff\_role - Role of Workforce respondent Level of
+Measurement: Ordinal, Discreate
+
+WF9\_WORK\_YRS - number\_of\_years\_worked\_in\_the\_program - Num of
+years respondent worked in program Level of Measurement: Ratio,
+Continuous
+
+WF9\_CHAR\_HISP - Hispanic\_Latino\_ethnicity - Respondent is of
+Hispanic/Latino descent Level of Measurement: Nominal, Discrete
+
+WF9\_CHAR\_RACE - race - Respondent's race Level of Measurement:
+Nominal, Discrete
+
+WF9\_CHAR\_EDUC - highest\_level\_of\_education\_completed - Highest
+education level obtained Level of Measurement: Ordinal, Discrete
+
+WF9\_CHAR\_GENDER - gender - The respondent's self-reported gender Level
+of Measurement: Nominal, Discrete
+
+\section{Citations}\label{citations}
+
+NSECE Project Team (National Opinion Research Center). (2019). National
+Survey of Early Care and Education (NSECE), {[}United States{]}, 2019:
+NSECE user's guide for workforce public-use data file (ICPSR 37941).
+Inter-university Consortium for Political and Social Research.
+
+Pacheco-Applegate, A. (2026). Data for Policy Analysis and Management:
+Class 2---Data measurement and variables {[}PowerPoint slides{]}. Harris
+School of Public Policy, University of Chicago.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Examine the following relationships. For each analysis, include the
+  appropriate statistical test to determine whether the observed
+  differences or associations are statistically significant. Interpret
+  your results in the context of the ECE workforce. (4 points)
+\end{enumerate}
+
+\section{My Answer}\label{my-answer}
+
+From lecture 4, we learn that a bivariate analysis describes, compares,
+and interprets associations between variables.
+\pandocbounded{\includegraphics[keepaspectratio]{ProblemSet_1_files/1 Types of Bivariate Analysis.png}}
+
+We also learn about statistical tests for determining whether the
+observed differences or associations are statistically significant.
+There are five tests we can use to perform these analysis, including:
+Two-sample t-test, Two-sample z-test, ANOVA, Chi-square test and Paired
+test.
+
+I will specify which test I used for each comparison and what sort of
+relationship they have---either positive, negative or null.
+
+In a bivariate analysis, one variable defines the groups (explanatory
+variable) ⟶ X and the other variable is the outcome we measure (response
+variable) ⟶ Y
+
+Take hourly\_wage and staff\_role for example. We can start by asking
+first; among the respondents, does hourly wage differ by staff role?
+This seems like an easy question to answer, but we can graph this to
+show the relationship visually. Let's try a two-sample t-test.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Hourly\_wage and staff\_role
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# a. Hourly wage and staff role}
+
+\CommentTok{\# Research question:}
+\CommentTok{\# Does hourly wage differ by staff role among ECE workers?}
+
+\NormalTok{wage\_by\_role }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_2019\_wf\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(staff\_role, hourly\_wage) }\SpecialCharTok{\%\textgreater{}\%}          \CommentTok{\# keep only variables of interest}
+  \FunctionTok{drop\_na}\NormalTok{(staff\_role, hourly\_wage) }\SpecialCharTok{\%\textgreater{}\%}         \CommentTok{\# remove missing values}
+  \FunctionTok{group\_by}\NormalTok{(staff\_role) }\SpecialCharTok{\%\textgreater{}\%}                     \CommentTok{\# calculate statistics within each role}
+  \FunctionTok{summarize}\NormalTok{(}
+    \AttributeTok{n =} \FunctionTok{n}\NormalTok{(),}
+    \AttributeTok{mean\_wage =} \FunctionTok{mean}\NormalTok{(hourly\_wage),}
+    \AttributeTok{median\_wage =} \FunctionTok{median}\NormalTok{(hourly\_wage),}
+    \AttributeTok{sd\_wage =} \FunctionTok{sd}\NormalTok{(hourly\_wage),}
+    \AttributeTok{min\_wage =} \FunctionTok{min}\NormalTok{(hourly\_wage),}
+    \AttributeTok{max\_wage =} \FunctionTok{max}\NormalTok{(hourly\_wage)}
+\NormalTok{  )}
+
+\NormalTok{wage\_by\_role}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 7
+##   staff_role                   n mean_wage median_wage sd_wage min_wage max_wage
+##   <fct>                    <int>     <dbl>       <dbl>   <dbl>    <dbl>    <dbl>
+## 1 (1) Aide or assistant t~  1469      13.7        12      9.17     1.5     108. 
+## 2 (2) Teacher, instructor~  2785      16.2        13.4   11.3      1.29    108. 
+## 3 (3) Other/undetermined      16      18.4        15.5    8.75     9        42.1
+\end{verbatim}
+
+The summary statistics show that average hourly wage varies across staff
+roles, with teachers, instructors, and lead teachers earning a higher
+average hourly wage than aides or assistant teachers. A graph of this
+comparison
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wage\_by\_role\_plot }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_2019\_wf\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{drop\_na}\NormalTok{(staff\_role, hourly\_wage) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ staff\_role, }\AttributeTok{y =}\NormalTok{ hourly\_wage)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}
+
+\NormalTok{wage\_by\_role\_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ProblemSet_1_files/ProblemSet_1_files/figure-latex/unnamed-chunk-9-1.pdf}}
+The boxplot shows that teachers, instructors, and lead teachers
+generally earn higher hourly wages than aides or assistant teachers,
+although there is considerable variation and some outliers within each
+staff role.
+
+\subsection{b. Hourly wage and number of years worked in the
+program}\label{b.-hourly-wage-and-number-of-years-worked-in-the-program}
+
+Take \textbf{hourly\_wage} and
+\textbf{number\_of\_years\_worked\_in\_the\_program} for example. We can
+start by asking first; among the respondents, does hourly wage differ
+depending on the number of years worked in the program? Because both
+variables are continuous, a scatterplot is an appropriate way to
+visualize the relationship.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# b. Hourly wage and number of years worked in the program}
+
+\CommentTok{\# Research question:}
+\CommentTok{\# Does hourly wage differ by the number of years worked in the program among ECE workers?}
+
+\NormalTok{wage\_by\_years }\OtherTok{\textless{}{-}}
+
+\NormalTok{  nsece\_2019\_wf\_recode }\SpecialCharTok{\%\textgreater{}\%}
+
+  \FunctionTok{select}\NormalTok{(number\_of\_years\_worked\_in\_the\_program, hourly\_wage) }\SpecialCharTok{\%\textgreater{}\%}
+
+  \FunctionTok{drop\_na}\NormalTok{(number\_of\_years\_worked\_in\_the\_program, hourly\_wage) }\SpecialCharTok{\%\textgreater{}\%}
+
+  \FunctionTok{group\_by}\NormalTok{(number\_of\_years\_worked\_in\_the\_program) }\SpecialCharTok{\%\textgreater{}\%}
+
+  \FunctionTok{summarize}\NormalTok{(}
+
+    \AttributeTok{n =} \FunctionTok{n}\NormalTok{(),}
+
+    \AttributeTok{mean\_wage =} \FunctionTok{mean}\NormalTok{(hourly\_wage),}
+
+    \AttributeTok{median\_wage =} \FunctionTok{median}\NormalTok{(hourly\_wage),}
+
+    \AttributeTok{sd\_wage =} \FunctionTok{sd}\NormalTok{(hourly\_wage),}
+
+    \AttributeTok{min\_wage =} \FunctionTok{min}\NormalTok{(hourly\_wage),}
+
+    \AttributeTok{max\_wage =} \FunctionTok{max}\NormalTok{(hourly\_wage)}
+
+\NormalTok{  )}
+
+\NormalTok{wage\_by\_years}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 16 x 7
+##    number_of_years_worke~1     n mean_wage median_wage sd_wage min_wage max_wage
+##    <fct>                   <int>     <dbl>       <dbl>   <dbl>    <dbl>    <dbl>
+##  1 (01) Less than half a ~   444      11.7        10.4    6.29     3.85    108. 
+##  2 (02) 7-12 months          379      14.5        12     10.4      1.29    108. 
+##  3 (03) 1 year               619      14.0        12      9.27     1.5     108. 
+##  4 (04) 2 years              470      14.8        12.4    9.75     1.56    108. 
+##  5 (05) 3 years              397      15.3        12.5   12.0      2.85    108. 
+##  6 (06) 4 years              284      15.0        13     10.1      2.22    108. 
+##  7 (07) 5 years              248      15.0        13.5    6.89     4.2      58.3
+##  8 (08) 6 years              173      16.7        14     12.2      2.31    108. 
+##  9 (09) 7 years              139      15.7        13.7    8.29     1.88     55.0
+## 10 (10) 8 years              109      16.1        14.3    8.42     2.08     51.4
+## 11 (11) 9 years               79      16.9        15      7.95     7.69     51.4
+## 12 (12) 10 years             148      15.5        13.7    8.03     5.77     63.3
+## 13 (13) 11 to 15 years       350      19.1        14.7   16.2      2.86    108. 
+## 14 (14) 16 to 20 years       219      18.0        15.4   11.8      3.75    108. 
+## 15 (15) 21 to 25 years       108      19.2        16.4   12.2      4.32    108. 
+## 16 (16) 26 or more years      89      18.8        16     13.3      1.86    108. 
+## # i abbreviated name: 1: number_of_years_worked_in_the_program
+\end{verbatim}
+
+The correlation coefficient summarizes the strength and direction of the
+relationship between years worked in the program and hourly wage.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wage\_by\_years\_plot }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_2019\_wf\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{drop\_na}\NormalTok{(number\_of\_years\_worked\_in\_the\_program, hourly\_wage) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ number\_of\_years\_worked\_in\_the\_program,}
+             \AttributeTok{y =}\NormalTok{ hourly\_wage)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{)}
+
+\NormalTok{wage\_by\_years\_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ProblemSet_1_files/ProblemSet_1_files/figure-latex/unnamed-chunk-11-1.pdf}}
+
+The scatterplot shows whether hourly wage tends to increase, decrease,
+or remain relatively constant as the number of years worked in the
+program increases.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{c.~Hourly wage and
+race/ethnicity}\label{c.-hourly-wage-and-raceethnicity}
+
+Take \textbf{hourly\_wage} and \textbf{race/ethnicity} for example. We
+can start by asking first; among the respondents, does hourly wage
+differ across racial and ethnic groups? We can graph this relationship
+using a boxplot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# c. Hourly wage and race}
+
+\CommentTok{\# Research question:}
+
+\CommentTok{\# Does hourly wage differ by race among ECE workers?}
+
+\NormalTok{wage\_by\_race }\OtherTok{\textless{}{-}}
+
+\NormalTok{  nsece\_2019\_wf\_recode }\SpecialCharTok{\%\textgreater{}\%}
+
+  \FunctionTok{select}\NormalTok{(race, hourly\_wage) }\SpecialCharTok{\%\textgreater{}\%}
+
+  \FunctionTok{drop\_na}\NormalTok{(race, hourly\_wage) }\SpecialCharTok{\%\textgreater{}\%}
+
+  \FunctionTok{group\_by}\NormalTok{(race) }\SpecialCharTok{\%\textgreater{}\%}
+
+  \FunctionTok{summarize}\NormalTok{(}
+
+    \AttributeTok{n =} \FunctionTok{n}\NormalTok{(),}
+
+    \AttributeTok{mean\_wage =} \FunctionTok{mean}\NormalTok{(hourly\_wage),}
+
+    \AttributeTok{median\_wage =} \FunctionTok{median}\NormalTok{(hourly\_wage),}
+
+    \AttributeTok{sd\_wage =} \FunctionTok{sd}\NormalTok{(hourly\_wage),}
+
+    \AttributeTok{min\_wage =} \FunctionTok{min}\NormalTok{(hourly\_wage),}
+
+    \AttributeTok{max\_wage =} \FunctionTok{max}\NormalTok{(hourly\_wage)}
+
+\NormalTok{  )}
+
+\NormalTok{wage\_by\_race}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 7
+##   race                         n mean_wage median_wage sd_wage min_wage max_wage
+##   <fct>                    <int>     <dbl>       <dbl>   <dbl>    <dbl>    <dbl>
+## 1 (1) White Only            2607      15.5        13.0   10.3      1.5      108.
+## 2 (2) Black or African Am~   882      13.7        11.5   10.0      1.29     108.
+## 3 (3) Asian Only             186      17.5        16      9.68     3.31     107.
+## 4 (8) Other                  204      15.9        13     11.6      5.71     108.
+\end{verbatim}
+
+The summary statistics show whether average hourly wage differs across
+racial and ethnic groups.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wage\_by\_race\_plot }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_2019\_wf\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{drop\_na}\NormalTok{(race, hourly\_wage) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ race, }\AttributeTok{y =}\NormalTok{ hourly\_wage)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}
+
+\NormalTok{wage\_by\_race\_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ProblemSet_1_files/ProblemSet_1_files/figure-latex/unnamed-chunk-13-1.pdf}}
+
+The boxplot illustrates the distribution of hourly wages within each
+racial and ethnic group, allowing differences in wages to be compared
+visually.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{d.~Hourly wage and educational
+attainment}\label{d.-hourly-wage-and-educational-attainment}
+
+Take \textbf{hourly\_wage} and
+\textbf{highest\_level\_of\_education\_completed} for example. We can
+start by asking first; among the respondents, does hourly wage differ by
+educational attainment? A boxplot can help visualize this relationship.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# d. Hourly wage and educational attainment}
+
+\CommentTok{\# Research question:}
+\CommentTok{\# Does hourly wage differ by educational attainment among ECE workers?}
+
+\NormalTok{wage\_by\_education }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_2019\_wf\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(highest\_level\_of\_education\_completed, hourly\_wage) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{drop\_na}\NormalTok{(highest\_level\_of\_education\_completed, hourly\_wage) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(highest\_level\_of\_education\_completed) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}
+    \AttributeTok{n =} \FunctionTok{n}\NormalTok{(),}
+    \AttributeTok{mean\_wage =} \FunctionTok{mean}\NormalTok{(hourly\_wage),}
+    \AttributeTok{median\_wage =} \FunctionTok{median}\NormalTok{(hourly\_wage),}
+    \AttributeTok{sd\_wage =} \FunctionTok{sd}\NormalTok{(hourly\_wage),}
+    \AttributeTok{min\_wage =} \FunctionTok{min}\NormalTok{(hourly\_wage),}
+    \AttributeTok{max\_wage =} \FunctionTok{max}\NormalTok{(hourly\_wage)}
+\NormalTok{  )}
+
+\NormalTok{wage\_by\_education}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 7 x 7
+##   highest_level_of_educa~1     n mean_wage median_wage sd_wage min_wage max_wage
+##   <fct>                    <int>     <dbl>       <dbl>   <dbl>    <dbl>    <dbl>
+## 1 (1) Less than High Scho~    75      10.3        9.75    3.91     4.44     28.3
+## 2 (3) GED or high school ~   120      11.4       10.3     4.89     4.44     51.4
+## 3 (4) High school graduate   710      11.5       10.5     5.51     1.29     51.4
+## 4 (5) Some college credit~  1179      12.5       12       5.03     1.56     51.4
+## 5 (6) Associate degree (A~   753      15.5       13.8    10.3      1.5     107. 
+## 6 (7) Bachelor's degree (~  1052      18.6       15.5    13.1      2.5     108. 
+## 7 (8) Graduate or profess~   374      24.1       20      16.7      1.86    108. 
+## # i abbreviated name: 1: highest_level_of_education_completed
+\end{verbatim}
+
+The summary statistics show whether average hourly wage differs across
+levels of educational attainment.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wage\_by\_education\_plot }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_2019\_wf\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{drop\_na}\NormalTok{(highest\_level\_of\_education\_completed, hourly\_wage) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ highest\_level\_of\_education\_completed, }\AttributeTok{y =}\NormalTok{ hourly\_wage)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}
+
+\NormalTok{wage\_by\_education\_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ProblemSet_1_files/ProblemSet_1_files/figure-latex/unnamed-chunk-15-1.pdf}}
+
+The boxplot shows the distribution of hourly wages across levels of
+educational attainment, making it easier to compare wages among
+respondents with different levels of education.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{e. Hourly wage and gender}\label{e.-hourly-wage-and-gender}
+
+Take \textbf{hourly\_wage} and \textbf{gender} for example. We can start
+by asking first; among the respondents, does hourly wage differ between
+men and women? We can graph this relationship using a boxplot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# e. Hourly wage and gender}
+
+\CommentTok{\# Research question:}
+\CommentTok{\# Does hourly wage differ by gender among ECE workers?}
+
+\NormalTok{wage\_by\_gender }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_2019\_wf\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(gender, hourly\_wage) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{drop\_na}\NormalTok{(gender, hourly\_wage) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(gender) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}
+    \AttributeTok{n =} \FunctionTok{n}\NormalTok{(),}
+    \AttributeTok{mean\_wage =} \FunctionTok{mean}\NormalTok{(hourly\_wage),}
+    \AttributeTok{median\_wage =} \FunctionTok{median}\NormalTok{(hourly\_wage),}
+    \AttributeTok{sd\_wage =} \FunctionTok{sd}\NormalTok{(hourly\_wage),}
+    \AttributeTok{min\_wage =} \FunctionTok{min}\NormalTok{(hourly\_wage),}
+    \AttributeTok{max\_wage =} \FunctionTok{max}\NormalTok{(hourly\_wage)}
+\NormalTok{  )}
+
+\NormalTok{wage\_by\_gender}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 7
+##   gender         n mean_wage median_wage sd_wage min_wage max_wage
+##   <fct>      <int>     <dbl>       <dbl>   <dbl>    <dbl>    <dbl>
+## 1 (1) Male      96      18.8        13.5    18.0     3.09     107.
+## 2 (2) Female  4133      15.3        12.8    10.4     1.29     108.
+\end{verbatim}
+
+The summary statistics show whether average hourly wage differs between
+men and women.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wage\_by\_gender\_plot }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_2019\_wf\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{drop\_na}\NormalTok{(gender, hourly\_wage) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ gender, }\AttributeTok{y =}\NormalTok{ hourly\_wage)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}
+
+\NormalTok{wage\_by\_gender\_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ProblemSet_1_files/ProblemSet_1_files/figure-latex/unnamed-chunk-17-1.pdf}}
+
+The boxplot shows the distribution of hourly wages for men and women,
+making it easier to compare differences in wages between the two groups.
+
+Citations Pacheco-Applegate, A. (2026). Data for Policy Analysis and
+Management: Class 4---Bivariate descriptive statistics and basic
+statistical tests {[}PowerPoint slides{]}. University of Chicago.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Policy implications. Based on your analyses, describe the segment(s)
+  of the ECE workforce that appear to be most affected by low wages.
+  What characteristics would you consider when designing a policy to
+  improve compensation in the ECE sector? Support your answer using
+  evidence from your analyses. (2 points)
+\end{enumerate}
+
+Based on my analyses, aides and assistant teachers appear to be the
+segment of the ECE workforce most affected by low wages, as they had the
+lowest average hourly wage compared with teachers, instructors, and lead
+teachers. The analyses also suggest that hourly wages differ across
+race, educational attainment, gender, and years worked in the program,
+indicating that compensation varies across multiple workforce
+characteristics. When designing a policy to improve compensation in the
+ECE sector, I would prioritize raising wages for lower-paid staff roles
+while also considering differences in education, experience, and
+demographic characteristics. Targeting these factors could help reduce
+wage disparities and improve equity across the ECE workforce.
+
+\end{document}
