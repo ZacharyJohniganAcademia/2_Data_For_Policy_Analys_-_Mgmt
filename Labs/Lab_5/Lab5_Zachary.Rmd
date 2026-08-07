@@ -174,9 +174,6 @@ nsece_2019_wf_recode <-
 ```
 This chunk creates a new dataset with cleaner versions of several variables. It uses mutate() to add new columns and case_when() to replace coded responses like “(1) Yes” and “(2) No” with the simpler labels “Yes” and “No”. The original variables are preserved, while the new _char variables make the data easier to analyze, graph, and interpret.
 
-
-!!!!!!!Bookmark_1!!!!!!!
-
 # Create new professional development variable
 ```{r}
 nsece_2019_wf_pd <- 
@@ -193,7 +190,31 @@ nsece_2019_wf_pd <-
 class(nsece_2019_wf_pd$pd) #numeric
 table(nsece_2019_wf_pd$pd) #the variable was created as expected 
 summary(nsece_2019_wf_pd$pd) 
+glimpse(nsece_2019_wf_pd)
+```
 
+# About the variables
+```{r, eval=FALSE}
+part_workshop = participated_in_workshop,
+# Indicates whether the respondent participated in a professional development workshop.
+part_coaching = participated_in_coaching,
+# Indicates whether the respondent participated in professional coaching.
+part_meeting = participated_in_professional_meeting,
+# Indicates whether the respondent attended a professional meeting.
+part_course = completed_professional_course,
+# Indicates whether the respondent completed a professional development course.
+hr_wage = hourly_wage,
+# The respondent's hourly wage.
+part_workshop_char = participated_in_workshop_char,
+# A "Yes"/"No" version of the workshop participation variable.
+part_coaching_char = participated_in_coaching_char,
+# A "Yes"/"No" version of the coaching participation variable.
+part_meeting_char = participated_in_professional_meeting_char,
+# A "Yes"/"No" version of the meeting participation variable.
+part_course_char = completed_professional_course_char,
+# A "Yes"/"No" version of the course participation variable.
+pd = participated_in_any_professional_development
+# Indicates whether the respondent participated in at least one professional development activity (1 = Yes, 0 = No, NA = Missing).
 ```
 
 #------------------------------------------------------------------------------#
