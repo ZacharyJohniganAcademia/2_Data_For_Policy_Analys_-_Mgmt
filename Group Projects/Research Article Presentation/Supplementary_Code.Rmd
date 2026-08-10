@@ -1,0 +1,98 @@
+---
+title: "Supplementary Code"
+subtitle: "Research Article Presentation — Medicaid Expansion and Access to Health Care"
+author: "Zachary Johnigan and Katia"
+date: "Summer 2026"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+---
+
+# Project Overview
+
+This R Markdown file contains supplementary code for our Research Article Presentation in **Data for Policy Analysis and Management**.
+
+## Research Article
+
+**Sommers, Benjamin D., Robert J. Blendon, E. John Orav, and Arnold M. Epstein.**  
+“Changes in Utilization and Health Among Low-Income Adults After Medicaid Expansion or Expanded Private Insurance.”  
+*JAMA Internal Medicine* 176, no. 10 (2016): 1501–1509.
+
+## Research Question
+
+How do two alternative state approaches to expanding health insurance—traditional Medicaid expansion and Arkansas’s private insurance expansion (“private option”)—affect health care utilization and health?
+
+## Study States
+
+- **Kentucky:** Traditional Medicaid expansion
+- **Arkansas:** Medicaid-funded private insurance expansion (“private option”)
+- **Texas:** No Medicaid expansion; comparison state
+
+## Study Period
+
+- **2013:** Before expansion
+- **2014:** First post-expansion year
+- **2015:** Second post-expansion year
+
+# Quantitative Methodology
+
+The authors used a **difference-in-differences research design** implemented with **multivariable linear regression**.
+
+The first analysis compared changes in Arkansas and Kentucky with changes in Texas to estimate the overall impact of coverage expansion.
+
+The second analysis added interaction terms to compare Arkansas’s private option with Kentucky’s traditional Medicaid expansion.
+
+# Purpose of This Supplementary Code
+
+The original respondent-level dataset and statistical code do not appear to be included with the article. The code in this document is therefore a **teaching demonstration** of the statistical logic described in the paper rather than an exact replication of the authors’ analysis.
+
+# Setup
+
+```{r setup, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+# Create Demonstration Dataset
+
+```{r}
+# Demonstration dataset will be created here.
+```
+
+# Inspect the Data
+
+```{r}
+# Code for examining the demonstration dataset will go here.
+```
+
+# Difference-in-Differences
+
+## Expansion States vs. Texas
+
+```{r}
+# Simplified difference-in-differences model will go here.
+```
+
+# Multivariable Linear Regression
+
+```{r}
+# Simplified teaching version of the regression described in the article
+# will go here.
+```
+
+# Arkansas Private Option vs. Kentucky Medicaid Expansion
+
+```{r}
+# Second analysis comparing the two expansion approaches will go here.
+```
+
+# Interpret the Results
+
+This section will translate the model results into plain English and connect them to the methodology and findings reported in the article.
+
+# Notes
+
+- This is **supplementary teaching code**, not the authors’ original statistical code.
+- The demonstration dataset is not the original survey dataset.
+- The goal is to understand how the quantitative methodology described in the article works in R.
