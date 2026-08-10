@@ -57,13 +57,103 @@ library(tidyverse)
 # Create Demonstration Dataset
 
 ```{r}
-# Demonstration dataset will be created here.
+# Create a small demonstration dataset
+medicaid_demo <- data.frame(
+  
+  # State where each respondent lives
+  state = rep(c("Arkansas", "Kentucky", "Texas"), each = 10),
+  
+  # Survey year
+  year = rep(c(2013, 2014, 2015, 2013, 2014), 6),
+  
+  # Whether the state expanded coverage
+  expansion = rep(c("Expansion", "Expansion", "No expansion"), each = 10),
+  
+  # Whether respondent reports having a personal doctor
+  # 0 = No, 1 = Yes
+  personal_doctor = c(
+    0,0,0,1,1,1,1,1,1,1,       # Arkansas
+    0,0,1,0,1,1,1,1,1,1,       # Kentucky
+    0,0,1,1,0,0,1,0,1,1        # Texas
+  ),
+  
+  # Demographic characteristics
+  age = c(
+    24,31,45,52,38,27,61,43,35,56,
+    29,47,33,59,41,22,50,36,63,44,
+    26,39,55,32,48,21,60,37,42,53
+  ),
+  
+  sex = rep(c("Female", "Male"), 15),
+  
+  race_ethnicity = rep(
+    c("White", "Black", "Hispanic", "White", "Black"), 6
+  ),
+  
+  marital_status = rep(
+    c("Single", "Married", "Single", "Married", "Single"), 6
+  ),
+  
+  family_size = rep(c(1, 2, 3, 4, 2), 6),
+  
+  education = rep(
+    c("High school", "Some college", "College",
+      "High school", "Some college"), 6
+  ),
+  
+  # Approximate annual income for demonstration purposes
+  income = c(
+    12000,18000,15000,22000,14000,19000,11000,21000,16000,13000,
+    17000,12500,20000,14500,23000,11500,18500,15500,21500,13500,
+    16000,20500,12000,17500,22500,13000,19500,15000,21000,14000
+  ),
+  
+  residence = rep(c("Urban", "Rural"), 15)
+)
+
+# View the demonstration dataset
+medicaid_demo
+
+# Optional: save the demonstration dataset
+# write_csv(medicaid_demo, "medicaid_demo.csv")
 ```
 
 # Inspect the Data
 
 ```{r}
-# Code for examining the demonstration dataset will go here.
+# Look at the demonstration dataset
+View(medicaid_demo)
+
+# Check the structure and variable types
+str(medicaid_demo)
+
+# Summarize all variables
+summary(medicaid_demo)
+
+# Count respondents by state
+table(medicaid_demo$state)
+
+# Count respondents by year
+table(medicaid_demo$year)
+
+# Count respondents by expansion status
+table(medicaid_demo$expansion)
+
+# Count who has a personal doctor
+# 0 = No, 1 = Yes
+table(medicaid_demo$personal_doctor)
+
+# Examine demographic variables
+table(medicaid_demo$sex)
+table(medicaid_demo$race_ethnicity)
+table(medicaid_demo$marital_status)
+table(medicaid_demo$education)
+table(medicaid_demo$residence)
+
+# Summarize numeric demographic variables
+summary(medicaid_demo$age)
+summary(medicaid_demo$family_size)
+summary(medicaid_demo$income)
 ```
 
 # Difference-in-Differences
@@ -71,27 +161,93 @@ library(tidyverse)
 ## Expansion States vs. Texas
 
 ```{r}
-# Simplified difference-in-differences model will go here.
+# Simplified difference-in-differences model
+# Compare Arkansas and Kentucky (expansion) with Texas (no expansion)
+
+did_model <- lm(
+  personal_doctor ~ expansion * factor(year),
+  data = medicaid_demo
+)
+
+# View the results
+summary(did_model)
 ```
 
 # Multivariable Linear Regression
 
 ```{r}
-# Simplified teaching version of the regression described in the article
-# will go here.
+# Multivariable linear regression
+# Same basic comparison as the DiD model, but now we also account
+# for characteristics of the respondents
+
+multivariable_model <- lm(
+  personal_doctor ~ expansion * factor(year) +
+    age +
+    sex +
+    race_ethnicity +
+    marital_status +
+    family_size +
+    education +
+    income +
+    residence,
+  data = medicaid_demo
+)
+
+# View the results
+summary(multivariable_model)
 ```
 
 # Arkansas Private Option vs. Kentucky Medicaid Expansion
 
 ```{r}
-# Second analysis comparing the two expansion approaches will go here.
+# Compare Arkansas's private option with Kentucky's
+# traditional Medicaid expansion
+
+expansion_comparison <- medicaid_demo %>%
+  filter(state %in% c("Arkansas", "Kentucky"))
+
+# Run the comparison model
+private_vs_medicaid_model <- lm(
+  personal_doctor ~ state * factor(year) +
+    age +
+    sex +
+    race_ethnicity +
+    marital_status +
+    family_size +
+    education +
+    income +
+    residence,
+  data = expansion_comparison
+)
+
+# View the results
+summary(private_vs_medicaid_model)
+```
+# Save the complete model results to a text file
+```{r}
+capture.output(
+  summary(private_vs_medicaid_model),
+  file = "private_vs_medicaid_results.txt"
+)
 ```
 
 # Interpret the Results
+Our demonstration model compares changes in access to a personal doctor between Arkansas and Kentucky over time. Arkansas represents the private insurance expansion approach, while Kentucky represents traditional Medicaid expansion.
 
-This section will translate the model results into plain English and connect them to the methodology and findings reported in the article.
+The most important results for this comparison are the interaction terms between state and year. These tell us whether Kentucky's change in access differed from Arkansas's change during the post-expansion years.
 
-# Notes
+For 2014, the interaction estimate was 0.233 with a p-value of 0.704. For 2015, the interaction estimate was 0.957 with a p-value of 0.233. Because both p-values are greater than 0.05, our small demonstration dataset does not provide statistically significant evidence that changes in access to a personal doctor differed between Arkansas and Kentucky.
+
+These results should not be interpreted as reproducing the findings of the actual study. Our dataset is a small, artificial dataset created only to demonstrate how the authors' statistical approach works. The actual researchers used a much larger sample and a more sophisticated analysis.
+
+# AI-Use Disclosure
+AI was used to assist in the creation of this simplified replica model for educational purposes. The model is in no way a viable substitute for the authors' actual dataset, statistical analysis, or results. Instead, it serves as a learning tool for imagining and better understanding how the authors may have conducted the linear regression portion of the study described in the Statistical Analysis section of the Methods.
+
+AI assistance was used to help create the small demonstration dataset, translate the statistical methodology described in the article into simplified R code, troubleshoot the code, and interpret the resulting model output in plain English.
+
+The demonstration data are artificial, and the results produced by the replica model should not be interpreted as reproducing or validating the findings of the original study. Any conclusions about the study itself are based on the authors' published research rather than the AI-assisted demonstration.
+
+
 
 - This is **supplementary teaching code**, not the authors’ original statistical code.
 - The demonstration dataset is not the original survey dataset.

@@ -1,0 +1,33 @@
+
+Call:
+lm(formula = personal_doctor ~ state * factor(year) + age + sex + 
+    race_ethnicity + marital_status + family_size + education + 
+    income + residence, data = expansion_comparison)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.5466 -0.3792  0.0000  0.2307  0.8148 
+
+Coefficients: (5 not defined because of singularities)
+                                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)                    -8.154e-01  9.218e-01  -0.885    0.399
+stateKentucky                  -3.237e-01  4.200e-01  -0.771    0.461
+factor(year)2014                5.705e-03  4.943e-01   0.012    0.991
+factor(year)2015               -6.969e-01  5.602e-01  -1.244    0.245
+age                             1.307e-02  1.767e-02   0.740    0.478
+sexMale                         2.974e-02  2.485e-01   0.120    0.907
+race_ethnicityHispanic                 NA         NA      NA       NA
+race_ethnicityWhite                    NA         NA      NA       NA
+marital_statusSingle            5.010e-01  3.935e-01   1.273    0.235
+family_size                     9.009e-02  2.438e-01   0.370    0.720
+educationHigh school                   NA         NA      NA       NA
+educationSome college                  NA         NA      NA       NA
+income                          3.616e-05  3.898e-05   0.928    0.378
+residenceUrban                         NA         NA      NA       NA
+stateKentucky:factor(year)2014  2.328e-01  5.935e-01   0.392    0.704
+stateKentucky:factor(year)2015  9.569e-01  7.477e-01   1.280    0.233
+
+Residual standard error: 0.5515 on 9 degrees of freedom
+Multiple R-squared:  0.3482,	Adjusted R-squared:  -0.3761 
+F-statistic: 0.4807 on 10 and 9 DF,  p-value: 0.8654
+
