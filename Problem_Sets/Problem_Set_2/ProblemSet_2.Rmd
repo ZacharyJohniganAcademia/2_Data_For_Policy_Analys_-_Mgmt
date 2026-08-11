@@ -1,7 +1,7 @@
 ---
 title: "Problem Set #2: Understanding Factors Affecting the Early Care and Education Workforce in the United States"
 author: "Zachary Johnigan"
-output: html_document
+output: pdf_document
 ---
 
 # Data for Policy Analysis and Management
@@ -15,7 +15,53 @@ output: html_document
 The mental health of early childhood educators is a critical component of a high-quality early care and education system (Murphy & Reid, 2025). Research has shown that educators' psychological well-being affects not only their own work experiences but also children's classroom environments, emotional development, and academic achievement (McLean & Connor, 2015; Oberle & Schonert-Reichl, 2016). In addition, educators with better mental health tend to have more positive interactions with children and report fewer behavioral challenges in their classrooms (Jeon et al., 2014; Kwon et al., 2019). Because early childhood experiences have lasting effects on children's health, educational attainment, and future opportunities, understanding the factors associated with educator mental health is an important research and policy priority (Murphy & Reid, 2025).
 
 In this problem set, you will examine factors associated with depression among staff working in center-based early care and education programs in the United States. Following the analytical approach of Murphy and Reid (2025), you will use data from the 2019 National Survey of Early Care and Education (NSECE) to apply the statistical techniques covered in class and investigate how educator characteristics are associated with depression.
+\newpage
+# 1. Set up working space and import packages
+```{r}
+# This cleans up everything in the "Environment" pane.
+rm(list=ls())
+options("error")
+options(lifecycle_disable_verbose_retirement = TRUE)
+```
 
+```{r}
+# Import packages
+package.list <- c("tidyverse")
+
+# read the `package.list` for the list of packages we will be needing
+# Check what packages are installed already
+# If any of the packages in the c() list are not currently installed, install them.
+# Note: Check the "Packages" tab to verify that they were installed. If they were not, then check the box and click "Install".
+for (p in package.list){
+  if (!p %in% installed.packages()[, "Package"]) install.packages(p)
+  library(p, character.only=TRUE)
+}
+```
+
+```{r}
+# Set up working directory
+
+## check your directory
+getwd()
+
+## set up working directory
+my_directory   <- "/home/zacharyjohnigan/UChicago_Student/2_Data_For_Policy_Analys_-_Mgmt/"
+my_data        <- paste0(my_directory, "Data/")
+output_dir     <- paste0(my_directory, "Problem_Sets/Problem_Set_2/")
+```
+
+# 2. Load dataset
+```{r}
+# Import NSECE 2019 workforce questionnnaire
+load(paste0(my_data, "37941-0005-Data.rda"))
+```
+
+# 4. Basic cleaning of the data
+```{r}
+# Rename dataset
+nsece_2019_wf <- da37941.0005
+```
+\newpage
 # Question 1 — Clean and Understand the Data (4 points)
 
 Subset the NSECE dataset to include the following variables:
@@ -32,19 +78,31 @@ Subset the NSECE dataset to include the following variables:
 Rename the variables using clear, descriptive names. Perform any data cleaning you consider necessary.
 
 ```{r}
-# Subset the NSECE dataset, rename variables, and perform initial cleaning here.
+# Subset the NSECE dataset and rename the variables
 
+nsece_ps2 <- 
+  nsece_2019_wf %>%
+  select(
+    hourly_wage = WF9_WORK_WAGE,
+    staff_role = WF9_WORK_ROLE,
+    race = WF9_CHAR_RACE,
+    education = WF9_CHAR_EDUC,
+    birth_year = WF9_CHAR_YEAR_BORN,
+    depression = WF9_CESD7_TOT
+  )
+
+#glimpse(nsece_ps2)
 ```
 
 Create the following variables using the code below:
 
 ```{r}
-# Replace the placeholder dataset names with your own dataset names.
+# Create staff age and hourly wage categories
 
-[name of your new dataset here] <-
-  [name of your previous dataset here] %>%
+nsece_ps2_recode <-
+  nsece_ps2 %>%
   mutate(
-    staff_age = 2019 - WF9_CHAR_YEAR_BORN,
+    staff_age = 2019 - birth_year,
 
     staff_age_new = case_when(
       staff_age >= 20 & staff_age <= 40 ~ "Between 20 and 40",
@@ -67,10 +125,10 @@ Create the following variables using the code below:
     ),
 
     hr_wage_new = case_when(
-      hr_wage <= 10 ~ "Less than $10",
-      hr_wage >= 11 & hr_wage <= 20 ~ "Between $11 and $20",
-      hr_wage >= 21 & hr_wage <= 30 ~ "Between $21 and $30",
-      hr_wage >= 31 ~ "More than $31"
+      hourly_wage <= 10 ~ "Less than $10",
+      hourly_wage >= 11 & hourly_wage <= 20 ~ "Between $11 and $20",
+      hourly_wage >= 21 & hourly_wage <= 30 ~ "Between $21 and $30",
+      hourly_wage >= 31 ~ "More than $31"
     ),
 
     hr_wage_new = factor(
@@ -89,6 +147,13 @@ Create the following variables using the code below:
       )
     )
   )
+
+# Examine newly created variables
+class(nsece_ps2_recode$staff_age_new)
+summary(nsece_ps2_recode$staff_age_new)
+
+class(nsece_ps2_recode$hr_wage_new)
+summary(nsece_ps2_recode$hr_wage_new)
 ```
 
 Using the variables **role, race, educational attainment, depression, staff age, and hourly wage** — including the new `staff_age_new` and `hr_wage_new` variables — complete the following tasks for **each variable**:
@@ -100,44 +165,161 @@ Using the variables **role, race, educational attainment, depression, staff age,
 
 > Full visualizations using `ggplot2` are not required.
 
+\newpage
 ## Q1 Analysis
 
 ### Staff Role
 
 ```{r}
+# Variable type: Nominal + Discrete
 
+# Frequency and percentage table
+staff_role_table <-
+  nsece_ps2_recode %>%
+  count(staff_role) %>%
+  mutate(proportion = (n / sum(n)) * 100)
+
+staff_role_table
+```
+```{r}
+ggplot(staff_role_table,
+       aes(x = staff_role, y = proportion)) +
+  geom_col() +
+  coord_flip() +
+  labs(
+    title = "Distribution of Staff Roles",
+    x = "Staff Role",
+    y = "Percentage"
+  ) +
+  theme_minimal()
 ```
 
 **Interpretation:**
+Staff role is a nominal, discrete variable because respondents are classified into distinct job categories that have no inherent ranking. Teachers, instructors, or lead teachers were the most common staff role (59.3%), followed by aides or assistant teachers (31.0%). Less than 1% (0.35%) were classified as other/undetermined, while 9.3% of observations were missing staff-role information. The frequency table and bar graph both show that teachers, instructors, or lead teachers make up the majority of respondents.
 
+Because staff role is nominal, the mode is the appropriate measure of central tendency. The modal category is teacher, instructor, or lead teacher. Numerical measures such as the mean, median, standard deviation, and measures of distributional shape are not meaningful for this variable.
 
+\newpage
 ### Race
 
 ```{r}
+# Variable type: Nominal + Discrete
 
+# Frequency and percentage table
+race_table <-
+  nsece_ps2_recode %>%
+  count(race) %>%
+  mutate(proportion = (n / sum(n)) * 100)
+
+race_table
+```
+```{r}
+ggplot(race_table,
+       aes(x = race, y = proportion)) +
+  geom_col() +
+  coord_flip() +
+  labs(
+    title = "Distribution of Race",
+    x = "Race",
+    y = "Percentage"
+  ) +
+  theme_minimal()
 ```
 
 **Interpretation:**
+Race is a nominal, discrete variable because respondents are classified into distinct racial categories that have no inherent ranking. White-only respondents were the largest group (54.4%), followed by Black or African American-only respondents (19.1%). Asian-only respondents accounted for 4.0%, and respondents classified as Other accounted for 4.1%. Approximately 18.3% of observations were missing race information.
 
+Because race is nominal, the mode is the appropriate measure of central tendency. The modal category is White Only. Numerical measures such as the mean, median, standard deviation, and measures of distributional shape are not meaningful for this variable.
 
+\newpage
 ### Educational Attainment
 
 ```{r}
+# Variable type: Ordinal + Discrete
 
+# Frequency and percentage table
+education_table <-
+  nsece_ps2_recode %>%
+  count(education) %>%
+  mutate(proportion = (n / sum(n)) * 100)
+
+education_table
+```
+
+```{r}
+ggplot(education_table,
+       aes(x = education, y = proportion)) +
+  geom_col() +
+  coord_flip() +
+  labs(
+    title = "Distribution of Educational Attainment",
+    x = "Educational Attainment",
+    y = "Percentage"
+  ) +
+  theme_minimal()
+```
+# Examine ordering of education categories
+```{r}
+class(nsece_ps2_recode$education)
+levels(nsece_ps2_recode$education)
+```
+# Cumulative percentage to identify the median category
+```{r}
+education_median <-
+  nsece_ps2_recode %>%
+  filter(!is.na(education)) %>%
+  count(education) %>%
+  mutate(
+    proportion = (n / sum(n)) * 100,
+    cumulative_proportion = cumsum(proportion)
+  )
+
+education_median
 ```
 
 **Interpretation:**
+Educational attainment is an ordinal, discrete variable because respondents fall into distinct educational categories that have a meaningful order. Among respondents with valid education data, the most common category (mode) was some college credit but no degree (27.3%), followed by a bachelor’s degree (24.9%). The median category was associate degree (AA, AS) because the cumulative percentage first exceeded 50% at that category. Approximately 9.1% of respondents held a graduate or professional degree, while relatively few had less than a high school education (1.8%) or a GED/high school equivalency (2.7%).
 
+Because educational attainment is ordinal rather than interval/ratio, the mean and standard deviation are not appropriate measures. The median, mode, frequency distribution, cumulative percentages, and bar graph appropriately describe its central tendency and distribution.
 
+\newpage
 ### Depression
 
 ```{r}
+# Variable type: Interval/Ratio + Discrete
 
+# Descriptive statistics
+nsece_ps2_recode %>%
+  summarise(
+    n = sum(!is.na(depression)),
+    missing = sum(is.na(depression)),
+    mean = mean(depression, na.rm = TRUE),
+    median = median(depression, na.rm = TRUE),
+    sd = sd(depression, na.rm = TRUE),
+    min = min(depression, na.rm = TRUE),
+    max = max(depression, na.rm = TRUE),
+    IQR = IQR(depression, na.rm = TRUE)
+  )
+```
+# Histogram of depression scores
+```{r}
+ggplot(nsece_ps2_recode,
+       aes(x = depression)) +
+  geom_histogram(binwidth = 1) +
+  labs(
+    title = "Distribution of Depression Scores",
+    x = "CESD7 Depression Score",
+    y = "Frequency"
+  ) +
+  theme_minimal()
 ```
 
 **Interpretation:**
+Depression score is an interval/ratio, discrete variable ranging from 0 to 21. Among the 4,537 respondents with non-missing depression scores, the mean score was approximately 2.52 and the median was 1. The standard deviation was approximately 3.22, and the interquartile range was 4. There were 655 observations with missing depression scores.
 
+The distribution of depression scores is strongly right-skewed. Most respondents reported relatively low depression scores, while a smaller number had substantially higher scores, producing a long right tail. This skewness also helps explain why the mean (2.52) is higher than the median (1). Overall, depressive symptoms were relatively low for most respondents, although some respondents reported much higher levels of depressive symptoms.
 
+\newpage
 ### Staff Age
 
 ```{r}
@@ -146,7 +328,7 @@ Using the variables **role, race, educational attainment, depression, staff age,
 
 **Interpretation:**
 
-
+\newpage
 ### Hourly Wage
 
 ```{r}
@@ -155,7 +337,7 @@ Using the variables **role, race, educational attainment, depression, staff age,
 
 **Interpretation:**
 
-
+\newpage
 # Question 2 — Prepare the Data for Linear Regression (2 points)
 
 Create the derived variables needed to estimate a multiple linear regression model:
@@ -166,6 +348,7 @@ Create the derived variables needed to estimate a multiple linear regression mod
 - Create **k - 1 binary variables for staff age**. After examining the variable, choose a **reference group**.
 - Create **k - 1 binary variables for hourly wage**. After examining the variable, choose a **reference group**.
 
+\newpage
 ## Staff Role Binary Variables
 
 ```{r}
@@ -174,7 +357,7 @@ Create the derived variables needed to estimate a multiple linear regression mod
 
 **Reference group:**
 
-
+\newpage
 ## Race Binary Variables
 
 ```{r}
@@ -183,7 +366,7 @@ Create the derived variables needed to estimate a multiple linear regression mod
 
 **Reference group:**
 
-
+\newpage
 ## Educational Attainment Binary Variables
 
 ```{r}
@@ -192,7 +375,7 @@ Create the derived variables needed to estimate a multiple linear regression mod
 
 **Reference group:**
 
-
+\newpage
 ## Staff Age Binary Variables
 
 ```{r}
@@ -201,7 +384,7 @@ Create the derived variables needed to estimate a multiple linear regression mod
 
 **Reference group:**
 
-
+\newpage
 ## Hourly Wage Binary Variables
 
 ```{r}
@@ -210,7 +393,7 @@ Create the derived variables needed to estimate a multiple linear regression mod
 
 **Reference group:**
 
-
+\newpage
 # Question 3 — Estimate the OLS Regression Model (4 points)
 
 Estimate an OLS regression model to examine factors associated with depression among center-based early care and education staff.
@@ -228,6 +411,7 @@ The model specified in the assignment is:
 \varepsilon
 \]
 
+\newpage
 ## Estimate the Model
 
 ```{r}
@@ -235,27 +419,28 @@ The model specified in the assignment is:
 
 ```
 
+\newpage
 ## Interpret Statistically Significant Coefficients
 
 Interpret the coefficient estimates for each statistically significant independent variable.
 
 **Answer:**
 
-
+\newpage
 ## Interpret Overall Model Fit
 
 Interpret the overall model fit, including **R²** and **adjusted R²**.
 
 **Answer:**
 
-
+\newpage
 ## Conclusions
 
 What conclusions can you draw about the factors associated with depression among center-based early care and education staff?
 
 **Answer:**
 
-
+\newpage
 ## Diagnostic Plots
 
 Create:
