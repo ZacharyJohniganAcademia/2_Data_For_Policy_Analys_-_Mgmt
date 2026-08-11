@@ -319,6 +319,7 @@ Depression score is an interval/ratio, discrete variable ranging from 0 to 21. A
 
 The distribution of depression scores is strongly right-skewed. Most respondents reported relatively low depression scores, while a smaller number had substantially higher scores, producing a long right tail. This skewness also helps explain why the mean (2.52) is higher than the median (1). Overall, depressive symptoms were relatively low for most respondents, although some respondents reported much higher levels of depressive symptoms.
 
+!!!!!!!!Bookmark!!!!!!!!
 \newpage
 ### Staff Age
 
