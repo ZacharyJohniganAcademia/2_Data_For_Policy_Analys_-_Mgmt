@@ -1,0 +1,279 @@
+---
+title: "Problem Set #2: Understanding Factors Affecting the Early Care and Education Workforce in the United States"
+author: "Zachary Johnigan"
+output: html_document
+---
+
+# Data for Policy Analysis and Management
+
+**Instructor:** Aida Pacheco-Applegate  
+**Course:** SSAD 48500  
+**Term:** Summer 2026  
+
+## Background
+
+The mental health of early childhood educators is a critical component of a high-quality early care and education system (Murphy & Reid, 2025). Research has shown that educators' psychological well-being affects not only their own work experiences but also children's classroom environments, emotional development, and academic achievement (McLean & Connor, 2015; Oberle & Schonert-Reichl, 2016). In addition, educators with better mental health tend to have more positive interactions with children and report fewer behavioral challenges in their classrooms (Jeon et al., 2014; Kwon et al., 2019). Because early childhood experiences have lasting effects on children's health, educational attainment, and future opportunities, understanding the factors associated with educator mental health is an important research and policy priority (Murphy & Reid, 2025).
+
+In this problem set, you will examine factors associated with depression among staff working in center-based early care and education programs in the United States. Following the analytical approach of Murphy and Reid (2025), you will use data from the 2019 National Survey of Early Care and Education (NSECE) to apply the statistical techniques covered in class and investigate how educator characteristics are associated with depression.
+
+# Question 1 — Clean and Understand the Data (4 points)
+
+Subset the NSECE dataset to include the following variables:
+
+- `WF9_WORK_WAGE` — hourly wage
+- `WF9_WORK_ROLE` — staff role
+- `WF9_CHAR_RACE` — race
+- `WF9_CHAR_EDUC` — highest level of education completed
+- `WF9_CHAR_YEAR_BORN` — staff's birth year
+- `WF9_CESD7_TOT` — staff's total score on CESD7 (depression) scale
+
+> **Note:** `WF9_CESD7_TOT` measures the respondent's overall level of depressive symptoms. Scores range from 0, indicating no signs of depression, to 21, indicating severe depressive symptoms. According to the NSECE User Guide (2019), a score of 8 or higher is the recommended cutoff for identifying individuals who may have major depressive disorder. For additional information about this measure, see page 220 of the NSECE User Guide (2019).
+
+Rename the variables using clear, descriptive names. Perform any data cleaning you consider necessary.
+
+```{r}
+# Subset the NSECE dataset, rename variables, and perform initial cleaning here.
+
+```
+
+Create the following variables using the code below:
+
+```{r}
+# Replace the placeholder dataset names with your own dataset names.
+
+[name of your new dataset here] <-
+  [name of your previous dataset here] %>%
+  mutate(
+    staff_age = 2019 - WF9_CHAR_YEAR_BORN,
+
+    staff_age_new = case_when(
+      staff_age >= 20 & staff_age <= 40 ~ "Between 20 and 40",
+      staff_age >= 41 & staff_age <= 50 ~ "Between 41 and 50",
+      staff_age >= 51 ~ "More than 51"
+    ),
+
+    staff_age_new = factor(
+      staff_age_new,
+      levels = c(
+        "Between 20 and 40",
+        "Between 41 and 50",
+        "More than 51"
+      ),
+      labels = c(
+        "Between 20 and 40",
+        "Between 41 and 50",
+        "More than 51"
+      )
+    ),
+
+    hr_wage_new = case_when(
+      hr_wage <= 10 ~ "Less than $10",
+      hr_wage >= 11 & hr_wage <= 20 ~ "Between $11 and $20",
+      hr_wage >= 21 & hr_wage <= 30 ~ "Between $21 and $30",
+      hr_wage >= 31 ~ "More than $31"
+    ),
+
+    hr_wage_new = factor(
+      hr_wage_new,
+      levels = c(
+        "Less than $10",
+        "Between $11 and $20",
+        "Between $21 and $30",
+        "More than $31"
+      ),
+      labels = c(
+        "Less than $10",
+        "Between $11 and $20",
+        "Between $21 and $30",
+        "More than $31"
+      )
+    )
+  )
+```
+
+Using the variables **role, race, educational attainment, depression, staff age, and hourly wage** — including the new `staff_age_new` and `hr_wage_new` variables — complete the following tasks for **each variable**:
+
+- Identify its level of measurement: **nominal, ordinal, or interval/ratio**.
+- Indicate whether it is **discrete or continuous**.
+- Present the appropriate **descriptive statistics, tables, or graphs**, including measures of **central tendency, dispersion, and shape** when applicable.
+- **Describe and interpret** your findings.
+
+> Full visualizations using `ggplot2` are not required.
+
+## Q1 Analysis
+
+### Staff Role
+
+```{r}
+
+```
+
+**Interpretation:**
+
+
+### Race
+
+```{r}
+
+```
+
+**Interpretation:**
+
+
+### Educational Attainment
+
+```{r}
+
+```
+
+**Interpretation:**
+
+
+### Depression
+
+```{r}
+
+```
+
+**Interpretation:**
+
+
+### Staff Age
+
+```{r}
+
+```
+
+**Interpretation:**
+
+
+### Hourly Wage
+
+```{r}
+
+```
+
+**Interpretation:**
+
+
+# Question 2 — Prepare the Data for Linear Regression (2 points)
+
+Create the derived variables needed to estimate a multiple linear regression model:
+
+- Create **k - 1 binary variables for staff role** (`k` = number of categories). After examining the variable, choose a **reference group**.
+- Create **k - 1 binary variables for race**. After examining the variable, choose a **reference group**.
+- Create **k - 1 binary variables for educational attainment**. After examining the variable, choose a **reference group**.
+- Create **k - 1 binary variables for staff age**. After examining the variable, choose a **reference group**.
+- Create **k - 1 binary variables for hourly wage**. After examining the variable, choose a **reference group**.
+
+## Staff Role Binary Variables
+
+```{r}
+
+```
+
+**Reference group:**
+
+
+## Race Binary Variables
+
+```{r}
+
+```
+
+**Reference group:**
+
+
+## Educational Attainment Binary Variables
+
+```{r}
+
+```
+
+**Reference group:**
+
+
+## Staff Age Binary Variables
+
+```{r}
+
+```
+
+**Reference group:**
+
+
+## Hourly Wage Binary Variables
+
+```{r}
+
+```
+
+**Reference group:**
+
+
+# Question 3 — Estimate the OLS Regression Model (4 points)
+
+Estimate an OLS regression model to examine factors associated with depression among center-based early care and education staff.
+
+The model specified in the assignment is:
+
+\[
+\text{Depression} =
+\beta_0 +
+\beta(\text{hourly wage}) +
+\beta(\text{staff role}) +
+\beta(\text{staff age}) +
+\beta(\text{education level categories}) +
+\beta(\text{race categories}) +
+\varepsilon
+\]
+
+## Estimate the Model
+
+```{r}
+# Estimate the OLS regression model here.
+
+```
+
+## Interpret Statistically Significant Coefficients
+
+Interpret the coefficient estimates for each statistically significant independent variable.
+
+**Answer:**
+
+
+## Interpret Overall Model Fit
+
+Interpret the overall model fit, including **R²** and **adjusted R²**.
+
+**Answer:**
+
+
+## Conclusions
+
+What conclusions can you draw about the factors associated with depression among center-based early care and education staff?
+
+**Answer:**
+
+
+## Diagnostic Plots
+
+Create:
+
+1. A **residual plot**
+2. A **histogram of the model residuals**
+
+```{r}
+# Residual plot
+
+```
+
+```{r}
+# Histogram of residuals
+
+```
+
+Do these diagnostic plots suggest that the assumptions of **linearity, homoscedasticity, and normality** are reasonably met? What hypotheses do you have about why the plots look the way they do?
+
+**Answer:**
+
