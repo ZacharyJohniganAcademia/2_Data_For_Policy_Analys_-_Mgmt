@@ -1,0 +1,456 @@
+---
+title: "Lab 7"
+author: "Aida Pacheco-Applegate"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#------------------------------------------------------------------------------#
+# This file generates the report of Lab 7
+#
+# PROJECT NAME : Data for Policy Analysis
+# DATA SETS USED BY THIS CODE : 
+# R VERSION : 4.5.3
+#
+# AUTHOR : Aida Pacheco-Applegate
+# DATE CREATED : 07-27-2026
+# NOTES : This code should be run using "Lab7.R" script
+#------------------------------------------------------------------------------#
+
+```
+
+# 1. Introduction
+
+The goal of the lab is to develop practical skills in organizing, analyzing, and communicating quantitative data by preparing a dataset for analysis, creating  visualizations using ggplot2, and producing a report in R Markdown.
+
+For this lab session we use data from the 2019 National Survey of Early Care and Education (NSECE) Workforce Questionnaire. The NSECE is a nationally representative survey sponsored by the U.S. Department of Health and Human Services that collects detailed information on the early care and education workforce in the country. 
+
+# 2. Summarizing Variables {.tabset}
+
+The following section summarizes each variable included in the analysis. 
+
+## Full-time status
+
+Full-time status is a discrete nominal variable, so I will examine its distribution using a frequency table (excluding missing values) to show the number and proportion of individuals in each category. Because this variable is categorical and has no inherent order, the only measure of central tendency that can be calculated is the mode, which identifies the most frequently occurring category.
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+
+# Frequency Table 
+nsece_2019_fulltime_fqtable <- 
+  nsece_2019_wf_log_wage %>%
+  select(full_time) %>% # I am only keeping the variable of interest
+  count(full_time) %>% # this create the table of counts 
+  filter(!is.na(full_time)) %>% # I am deleting the NA values
+  mutate(prop = n/sum(n)) # this creates the % 
+
+kable(nsece_2019_fulltime_fqtable, 
+      caption = "Table 1. Distribution of Full Time Status")
+
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+```{r, echo = FALSE, fig.width=8, fig.height=6, message = FALSE, warning = FALSE}
+
+# Bar chart 
+full_time_bar_plot <- 
+  ggplot(nsece_2019_fulltime_fqtable, aes(full_time, prop)) + 
+  geom_bar(stat = "identity", width = 0.5, fill="tomato2") + 
+      labs(title = "Distribution of Full Time Status",
+           y = "Proportion",
+           x = "Full-time status") +
+      theme(axis.text.x = element_text(vjust=0.6)) 
+
+full_time_bar_plot
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+
+# Mode 
+
+mode_fulltime <- 
+  names(which.max(table(nsece_2019_wf_log_wage$full_time, 
+                                       useNA = "no"))) 
+mode_fulltime
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+## Gender
+
+[WRITE SOME TEXT HERE ABOUT THE VARIABLE]
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+
+# Frequency Table 
+nsece_2019_gender_fqtable <- 
+  nsece_2019_wf_log_wage %>%
+  select(gender) %>%
+  count(gender) %>%
+  filter(!is.na(gender)) %>%
+  mutate(prop = n/sum(n))
+
+kable(nsece_2019_gender_fqtable, 
+      caption = "Table 2. Distribution of Gender")
+
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+```{r, echo = FALSE, fig.width=8, fig.height=6, message = FALSE, warning = FALSE}
+
+# Pie chart 
+full_time_pie_plot <- 
+  ggplot(nsece_2019_gender_fqtable, aes(x = "", y=prop, fill = factor(gender))) + 
+  geom_bar(width = 1, stat = "identity") + 
+  labs(fill="class", 
+       x=NULL, 
+       y=NULL, 
+       title="Distribution of Gender") + 
+  coord_polar(theta = "y", start=0) +
+  geom_text(aes(label = percent(prop)), 
+            position = position_stack(vjust = 0.5), 
+            color = "white") +
+  theme_void() 
+
+full_time_pie_plot
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+
+# Mode 
+
+mode_gender <- 
+  names(which.max(table(nsece_2019_wf_log_wage$gender, 
+                        useNA = "no")))
+mode_gender
+
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+## Years of Experience
+
+[WRITE SOME TEXT HERE ABOUT THE VARIABLE]
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+
+# Frequency Table 
+nsece_2019_yrexp_fqtable <- 
+  nsece_2019_wf_log_wage %>%
+  select(yrs_experience) %>%
+  count(yrs_experience) %>%
+  filter(!is.na(yrs_experience)) %>%
+  mutate(prop = n/sum(n))
+
+kable(nsece_2019_yrexp_fqtable, 
+      caption = "Table 3. Distribution of Years of Experience")
+
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+
+# Calculate median, mode and IQR (because variable is ordinal + discrete)
+
+nsece_2019_yrexp_summary <- 
+  nsece_2019_wf_log_wage %>%
+  select(yrs_experience) %>%
+  summarise(
+    n = sum(!is.na(yrs_experience)), 
+    Mode = names(sort(table(yrs_experience), decreasing = TRUE))[1], 
+    Median = levels(yrs_experience)[round(median(as.numeric(yrs_experience), na.rm = TRUE))],
+    Q1 = levels(yrs_experience)[quantile(as.numeric(yrs_experience), 0.25, na.rm = TRUE, type = 2)],
+    Q3 = levels(yrs_experience)[quantile(as.numeric(yrs_experience), 0.75, na.rm = TRUE, type = 2)],
+    IQR = IQR(as.numeric(yrs_experience), na.rm = TRUE))
+
+kable(nsece_2019_yrexp_summary, 
+      caption = "Table 4. Years of Experience Summary Table")
+
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+```{r, echo = FALSE, fig.width=8, fig.height=6, message = FALSE, warning = FALSE}
+
+# Lollipop Chart 
+lolipop_yrsexp <- 
+  ggplot(nsece_2019_yrexp_fqtable, aes(x=yrs_experience, y=prop)) + 
+  geom_point(size = 3) + 
+  geom_segment(aes(x = yrs_experience, 
+                   xend = yrs_experience, 
+                   y = 0, 
+                   yend = prop)) + 
+  labs(title = "Distribution of Years of Experience", 
+       x = "Years of Experience", 
+       y = "Proportion") + 
+  theme(axis.text.x = element_text(angle=65, vjust=0.6))
+
+lolipop_yrsexp
+```
+
+## Race 
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+
+# Frequency Table 
+nsece_2019_race_fqtable <- 
+  nsece_2019_wf_log_wage %>%
+  select(race) %>% 
+  count(race) %>% 
+  filter(!is.na(race)) %>% 
+  mutate(prop = n/sum(n)) 
+
+kable(nsece_2019_race_fqtable, 
+      caption = "Table 5. Distribution of Race")
+
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+```{r, echo = FALSE, fig.width=8, fig.height=6, message = FALSE, warning = FALSE}
+
+# Bar chart 
+race_bar_plot <- 
+  ggplot(nsece_2019_race_fqtable, aes(race, prop)) + 
+  geom_bar(stat = "identity", width = 0.5, fill="blue") + 
+      labs(title = "Distribution of Race",
+           y = "Proportion",
+           x = "Race Category") +
+      theme(axis.text.x = element_text(vjust=0.6)) 
+
+race_bar_plot
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+
+# Mode 
+
+mode_race <- 
+  names(which.max(table(nsece_2019_wf_log_wage$race, 
+                                       useNA = "no"))) 
+mode_race
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+## Hourly Wage
+
+[boxplot + histogram ]
+
+```{r, echo = FALSE, fig.width=8, fig.height=6, message = FALSE, warning = FALSE}
+
+hist_wage <- 
+  ggplot(nsece_2019_wf_log_wage, aes(x = log_hr_wage)) + 
+  geom_histogram(fill = "lightblue", color = "black") +
+  labs(title = "Histogram of Log Hourly Wages", 
+       x = "Log Hourly Wage",
+       y = "Count")
+
+hist_wage
+
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+
+wage_summary_table <- 
+  nsece_2019_wf_log_wage %>%
+  select(log_hr_wage) %>%
+  summarise(
+    n = sum(!is.na(log_hr_wage)),
+    Mean = mean(log_hr_wage, na.rm = TRUE),
+    Median = median(log_hr_wage, na.rm = TRUE),
+    Min    = min(log_hr_wage, na.rm = TRUE),
+    Max    = max(log_hr_wage, na.rm = TRUE),
+    Range  = Max - Min,
+    SD     = sd(log_hr_wage, na.rm = TRUE),
+    IQR    = IQR(log_hr_wage, na.rm = TRUE))
+
+kable(wage_summary_table, 
+      caption = "Table 6. Distribution of Log Hourly Wage")
+
+
+```
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+
+wage_mode <- 
+  nsece_2019_wf_log_wage %>%
+  filter(!is.na(log_hr_wage)) %>%
+  count(log_hr_wage, sort = TRUE) %>%
+  slice(1) %>%
+  pull(log_hr_wage)
+
+wage_mode
+
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+```{r, echo = FALSE, fig.width=4, fig.height=6, message = FALSE, warning = FALSE}
+
+wage_box_plot <- 
+  ggplot(nsece_2019_wf_log_wage, aes(y = log_hr_wage)) + 
+  geom_boxplot(fill="plum") + 
+    labs(title = "Summary Statistics for Log Hourly Wage", 
+         y = "Log Hourly Wage",
+         x = NULL) +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+
+wage_box_plot
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+# 2. Exploring Associations {.tabset}
+
+This section explores associations between hourly wages and race, and years of experience and gender.
+
+## Hourly Wage vs. Race 
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+
+# hourly wage (continuous) + race (discrete)
+cont_table_wage_race <-
+  nsece_2019_wf_log_wage %>% 
+  select(hr_wage, race) %>% 
+  drop_na(hr_wage, race) %>% 
+  group_by(race) %>% 
+  summarize(n = n(), 
+            mean_wage = mean(hr_wage, na.rm = TRUE))
+
+kable(cont_table_wage_race, 
+      caption = "Table 7. Contingency Table of Wage and Race")
+
+```
+
+```{r, echo = FALSE, fig.width=8, fig.height=6, message = FALSE, warning = FALSE}
+
+# Bar chart 
+wage_race_bar_plot <- 
+  ggplot(cont_table_wage_race, aes(race, mean_wage)) + 
+  geom_bar(stat = "identity", width = 0.5, fill="darkblue") + 
+      labs(title = "Mean Hourly Wage by Race Categories",
+           y = "Mean Hourly Wage",
+           x = "Race Category") +
+      theme(axis.text.x = element_text(vjust=0.6)) 
+
+wage_race_bar_plot
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+## Years of Experience vs. Gender
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+
+# years of experience (discrete) + gender (discrete)
+cont_table_yrsexp_gender <-
+  nsece_2019_wf_log_wage %>% 
+  select(yrs_experience, gender) %>% 
+  drop_na(yrs_experience, gender) %>% 
+  count(gender, yrs_experience) %>% 
+  group_by(gender) %>% 
+  mutate(proportion = (n/sum(n))*100)
+
+kable(cont_table_yrsexp_gender, 
+      caption = "Table 8. Contingency Table of Years of Experience and Gender")
+
+```
+
+```{r, echo = FALSE, fig.width=8, fig.height=6, message = FALSE, warning = FALSE}
+
+# Stack Bar chart 
+yrsexp_gender_bar_plot <- 
+  ggplot(cont_table_yrsexp_gender, aes(x = yrs_experience, y = proportion, fill = gender)) +
+  geom_col(position = "dodge") +
+  scale_fill_viridis_d() +
+  labs(x = "Years of Experience", 
+       y = "Proportion", 
+       fill = "Genger") +
+  theme(axis.text.x = element_text(angle=65, vjust=0.6))
+
+yrsexp_gender_bar_plot
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+# 3. Linear Regression {.tabset}
+
+This section estimates the following OLS regression model: 
+
+$log(Hourly Wage)=β_0+β_1 (Full Time)+β_2 (Female)+β_3…β_7 (Years of Experience categories)+ β_8 (Race categories)+ε$
+
+```{r, results = 'asis', echo = FALSE, message = FALSE, warning = FALSE}
+
+lm_wage_model <- lm(log_hr_wage ~ full_time_d + female_d + exp_5to10_d + 
+                          exp_11to15_d + exp_16to20_d + exp_21to25_d + exp_26plus_d + 
+                          black_d + asian_d + other_d,
+                        data = nsece_2019_wf_log_wage)
+
+stargazer(lm_wage_model,
+          type = "html",
+          title = "Regression Results",
+          digits = 2)
+
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+```{r, echo = FALSE, fig.width=8, fig.height=6, message = FALSE, warning = FALSE}
+
+# Re-run residuals plot 
+
+residual_data <- 
+  data.frame(
+    fitted = lm_wage_model$fitted.values,
+    residuals = lm_wage_model$residuals)
+
+residual_plot <- 
+  ggplot(residual_data, aes(x = fitted, y = residuals)) +
+  geom_point() + 
+  geom_hline(yintercept = 0, linetype = "dashed") + 
+  labs(
+    title = "Residual Plot", 
+    x = "Fitted Values", 
+    y = "Residuals") 
+
+residual_plot
+
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
+
+```{r, echo = FALSE, fig.width=8, fig.height=6, message = FALSE, warning = FALSE}
+
+# Re-run histogram
+
+hist_residual <- 
+  ggplot(residual_data, aes(x = residuals)) +
+  geom_histogram() +
+  labs(
+    title = "Histogram of Residuals",
+    x = "Residuals",
+    y = "Count")
+
+hist_residual
+
+```
+
+[INCLUDE SOME TEXT HERE WITH YOUR INTERPRETATION]
