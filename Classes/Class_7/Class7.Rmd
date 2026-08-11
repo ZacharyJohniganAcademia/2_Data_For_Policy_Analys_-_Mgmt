@@ -3,3 +3,19 @@ title: "Class7"
 output: html_document
 ---
 
+26.08.11 Class
+Ask
+Research Article Presentations
+* How should we submit our presentations?
+* Should there be any coding involved in the presentation?
+* Do we need to use R to code our own graphs or representation of the data that we talk about in our presentation 
+
+Syllabus
+* I wanted to offer some feedback about the pace of the course. I understand that summer courses are naturally accelerated, but I’ve found the amount of material we’re expected to learn and apply within such a short period pretty overwhelming. At times, it feels like we’re moving on to new concepts before there’s enough time to really understand and practice the previous ones. Would it be possible to adjust the content load or prioritize the most essential material so that we have more time to actually learn and retain it?
+* Drop lowest problem set as an option?
+
+
+Lecture Notes
+HW [] Please send email about final project idea today
+- Output for assigment should be html
+- 
