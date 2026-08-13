@@ -1,0 +1,23 @@
+---
+title: "Final Project Presentation"
+output: html_document
+---
+
+```{r}
+rm(list=ls())
+options("error") 
+options(lifecycle_disable_verbose_retirement = TRUE)
+```
+
+Add code to set up the environment.
+
+```{r}
+# import the dataset
+
+
+```
+
+```{r}
+
+glimpse()
+```

@@ -16,6 +16,9 @@ Syllabus
 
 
 Lecture Notes
-HW [] Please send email about final project idea today
-- Output for assigment should be html
-- 
+- HW [] Please send email about final project idea today
+- Output for assignment should be html
+- Quiz 2 will cover everthing since quiz 1 up to linear regression related content
+- final project should have an executive summary that mirrors 
+- Choosing the "reference group" can be the largest group
+- Question: TOC creates the table of contents, but how do you specify what the contents of the toc will be?
