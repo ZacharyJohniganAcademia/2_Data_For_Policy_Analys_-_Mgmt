@@ -1,0 +1,182 @@
+---
+title: "Final Project Presentation"
+output: html_document
+---
+#------------------------------------------------------------------------------#
+# This file prepares Mass Shootings data for the Final Project Presentation of the Data for Policy Analysis class.
+# PROJECT NAME : Data for Policy Analysis, Final Project Presentation
+# DATA SETS USED BY THIS CODE : mass_shootings.csv
+# R VERSION : 4.5.3
+# AUTHOR : Zachary Johnigan
+# DATE CREATED : 08-13-2026
+# NOTES : 
+#------------------------------------------------------------------------------#
+
+#------------------------------------------------------------------------------#
+# 1. Set up working space and import packages
+#------------------------------------------------------------------------------#
+
+```{r}
+rm(list=ls())
+options("error") 
+options(lifecycle_disable_verbose_retirement = TRUE)
+
+```
+
+# Import packages
+
+```{r}
+package.list <- c("tidyverse", "readr")
+
+for (p in package.list){
+  if (!p %in% installed.packages()[, "Package"]) install.packages(p)
+  library(p, character.only=TRUE)
+}
+
+```
+
+# Set up working directory 
+
+## check your directory
+```{r}
+getwd()
+
+```
+
+## set up working directory 
+
+```{r}
+my_directory   <- "/home/zacharyjohnigan/UChicago_Student/2_Data_For_Policy_Analys_-_Mgmt/Final_Project_Presentation/"
+my_data        <- paste0(my_directory, "Data/")
+output_dir     <- paste0(my_directory, "Presentation")
+
+```
+
+#------------------------------------------------------------------------------#
+# 2. Load dataset
+#------------------------------------------------------------------------------#
+
+# Import Mass Shootings dataset
+## To import .CSV files use this code
+## data <- read.csv("[full directory here]")
+```{r}
+#load(paste0(my_data, "mass_shootings.csv"))
+data <- read.csv("~/UChicago_Student/2_Data_For_Policy_Analys_-_Mgmt/Final_Project_Presentation/Data/mass_shootings.csv")
+
+```
+
+#------------------------------------------------------------------------------#
+# 3. Basic exploratory data inspection
+#------------------------------------------------------------------------------#
+
+# Understand variable class for location and location_type
+```{r, eval=FALSE}
+# This chunk examines the class and summary of each variable to better understand the dataset before beginning any analysis.
+class(data$location) #character
+summary(data$location) #nominal or discrete?
+
+class(data$location_type) #character
+summary(data$location_type) #nominal or discrete?
+
+glimpse(data)
+
+```
+
+#------------------------------------------------------------------------------#
+# 4. Basic cleaning and manipulation
+#------------------------------------------------------------------------------#
+
+# Rename dataset
+```{r}
+mass_shootings_data <- data
+
+```
+
+# Subset dataset and rename variables
+```{r}
+nsece_2019_wf_subset <- 
+  nsece_2019_wf %>%
+  select(WF9_PROFDEV_WRKSHP, 
+         WF9_PROFDEV_COACH, 
+         WF9_PROFDEV_MEETING, 
+         WF9_PROFDEV_COURSE,
+         WF9_WORK_WAGE) %>%
+  rename(part_workshop = WF9_PROFDEV_WRKSHP,
+         part_coaching = WF9_PROFDEV_COACH, 
+         part_meeting = WF9_PROFDEV_MEETING, 
+         part_course = WF9_PROFDEV_COURSE, 
+         hr_wage = WF9_WORK_WAGE) 
+
+```
+
+# I suggest keeping the factor variables for ordinal variables but work with numeric / character values for all other types of variables.Since all the predictor variables are nominal, I will convert them as character variables.
+
+# Recode professional development variables
+```{r}
+nsece_2019_wf_recode <- 
+  nsece_2019_wf_subset %>%
+  mutate(part_workshop_char = as.character(part_workshop), # use mutate() to create new character variables while keeping the original variables unchanged
+         part_workshop_char = case_when(
+           part_workshop == "(1) Yes" ~ "Yes", # recode the variable responses to simpler labels
+           part_workshop == "(2) No" ~ "No"),
+           
+         part_coaching_char = as.character(part_coaching),
+         part_coaching_char = case_when(
+           part_coaching == "(1) Yes" ~ "Yes",
+           part_coaching == "(2) No" ~ "No"), 
+         
+         part_meeting_char = as.character(part_meeting),
+         part_meeting_char = case_when(
+           part_meeting == "(1) Yes" ~ "Yes",
+           part_meeting == "(2) No" ~ "No"), 
+         
+         part_course_char = as.character(part_course),
+         part_course_char = case_when(
+           part_course == "(1) Yes" ~ "Yes",
+           part_course == "(2) No" ~ "No"))
+         
+```
+This chunk creates a new dataset with cleaner versions of several variables. It uses mutate() to add new columns and case_when() to replace coded responses like “(1) Yes” and “(2) No” with the simpler labels “Yes” and “No”. The original variables are preserved, while the new _char variables make the data easier to analyze, graph, and interpret.
+
+# Create new professional development variable
+```{r}
+nsece_2019_wf_pd <- 
+  nsece_2019_wf_recode %>%
+  mutate(pd = ifelse( # use mutate() to create a new variable called pd
+    part_workshop_char == "Yes" | part_coaching_char == "Yes" | part_meeting_char == "Yes" | part_course_char == "Yes", 
+    1, 0)) # If the respondent answered "Yes" to at least one of the four activities (workshop, coaching, meeting, or course), code pd as 1.
+```
+
+# Otherwise, code pd as 0.
+
+## Let's examine the new variable created
+```{r}
+class(nsece_2019_wf_pd$pd) #numeric
+table(nsece_2019_wf_pd$pd) #the variable was created as expected 
+summary(nsece_2019_wf_pd$pd) 
+glimpse(nsece_2019_wf_pd)
+```
+
+# About the variables
+```{r, eval=FALSE}
+part_workshop = participated_in_workshop,
+# Indicates whether the respondent participated in a professional development workshop.
+part_coaching = participated_in_coaching,
+# Indicates whether the respondent participated in professional coaching.
+part_meeting = participated_in_professional_meeting,
+# Indicates whether the respondent attended a professional meeting.
+part_course = completed_professional_course,
+# Indicates whether the respondent completed a professional development course.
+hr_wage = hourly_wage,
+# The respondent's hourly wage.
+part_workshop_char = participated_in_workshop_char,
+# A "Yes"/"No" version of the workshop participation variable.
+part_coaching_char = participated_in_coaching_char,
+# A "Yes"/"No" version of the coaching participation variable.
+part_meeting_char = participated_in_professional_meeting_char,
+# A "Yes"/"No" version of the meeting participation variable.
+part_course_char = completed_professional_course_char,
+# A "Yes"/"No" version of the course participation variable.
+pd = participated_in_any_professional_development
+# Indicates whether the respondent participated in at least one professional development activity (1 = Yes, 0 = No, NA = Missing).
+```
