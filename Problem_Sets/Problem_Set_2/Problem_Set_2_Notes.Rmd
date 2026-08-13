@@ -1,0 +1,6 @@
+---
+title: "Notes"
+output: html_document
+---
+
+The word document portion of the assignment should be more like a report of what you did with the code on the RMD, use the word document to document the results. The code is just for reference. Try writing it by hand like you did for . Be clearer about your AI-use.
