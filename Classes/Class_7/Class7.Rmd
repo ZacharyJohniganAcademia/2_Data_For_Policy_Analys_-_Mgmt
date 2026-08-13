@@ -15,10 +15,25 @@ Syllabus
 * Drop lowest problem set as an option?
 
 
-Lecture Notes
+26.08.11 Class
+Questions
+Research Article Presentations
+* How should we submit our presentations?
+    * No submission of any kind, hook your computer the tv or send
+* Should there be any coding involved in the presentation?
+* Do we need to use R to code our own graphs or representation of the data that we talk about in our presentation 
+
+Syllabus
+* I wanted to offer some feedback about the pace of the course. I understand that summer courses are naturally accelerated, but I’ve found the amount of material we’re expected to learn and apply within such a short period pretty overwhelming. At times, it feels like we’re moving on to new concepts before there’s enough time to really understand and practice the previous ones. Would it be possible to adjust the content load or prioritize the most essential material so that we have more time to actually learn and retain it?
+* Drop lowest problem set as an option?
+    * Lowest problem set will be dropped
+    
+Lecture Notes    
 - HW [] Please send email about final project idea today
 - Output for assignment should be html
-- Quiz 2 will cover everthing since quiz 1 up to linear regression related content
-- final project should have an executive summary that mirrors 
+- Quiz 2 will cover everything since quiz 1 up to linear regression related content
+- final project should have an executive summary that mirrors the example she gave during class. I think she said she'll make it available later 
 - Choosing the "reference group" can be the largest group
 - Question: TOC creates the table of contents, but how do you specify what the contents of the toc will be?
+
+
