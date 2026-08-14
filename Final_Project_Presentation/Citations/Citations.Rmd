@@ -1,0 +1,6 @@
+---
+title: "Citations"
+output: html_document
+---
+
+Booty M, O'Dwyer J, Webster D, McCourt A, Crifasi C. Describing a "mass shooting": the role of databases in understanding burden. Inj Epidemiol. 2019 Dec 3;6:47. doi: 10.1186/s40621-019-0226-7. PMID: 31828004; PMCID: PMC6889601.
