@@ -1,0 +1,71 @@
+---
+output: html_document
+title: Final Project Presentation
+---
+
+## Description
+
+Students will select a policy issue of interest and deliver a 10-minute
+presentation summarizing the quantitative analysis conducted to address
+their research question(s). Presentations should include the following:
+
+-   The relevance and significance of the policy issue (include appropriate references)
+-   Research question(s)
+-   A description of the quantitative analysis:
+    -   What was done and why this approach was selected
+    -   Why the chosen method is appropriate for answering the research
+        question(s)
+    -   Key findings
+    -   Interpretation of findings, including their implications for
+        policymaking, explained in clear and accessible terms
+
+## Grading rubric:
+
+  ------------------------------------------------------------------------
+  Criterion             Description                                 Points
+  --------------------- --------------------- ----------------------------
+  **Policy Issue &      Clearly explains the                             4
+  Research              relevance and         
+  Question(s)**         significance of the   
+                        policy issue,         
+                        supported by          
+                        appropriate           
+                        references, and       
+                        states clear research 
+                        question(s).          
+
+  **Quantitative        Clearly describes                                5
+  Analysis**            what analysis was     
+                        conducted, why it was 
+                        selected, and why the 
+                        method is appropriate 
+                        for answering the     
+                        research question(s). 
+
+  **Key Findings**      Clearly presents and                             4
+                        summarizes the key    
+                        findings using        
+                        appropriate           
+                        quantitative          
+                        evidence, such as     
+                        statistics, tables,   
+                        or figures.           
+
+  **Interpretation &    Accurately interprets                            4
+  Policy Implications** the findings and      
+                        clearly explains      
+                        their meaning and     
+                        implications for      
+                        policymaking in       
+                        accessible,           
+                        non-technical terms.  
+
+  **Presentation &      Presentation is                                  3
+  Organization**        clear, well           
+                        organized, and        
+                        appropriately paced   
+                        for the 10-minute     
+                        time limit.           
+
+  **Total**                                                         **20**
+  ------------------------------------------------------------------------

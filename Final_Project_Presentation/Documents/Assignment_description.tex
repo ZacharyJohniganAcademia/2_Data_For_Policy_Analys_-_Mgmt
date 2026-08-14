@@ -1,0 +1,150 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Final Project Presentation},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Final Project Presentation}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\subsection{Description}\label{description}
+
+Students will select a policy issue of interest and deliver a 10-minute
+presentation summarizing the quantitative analysis conducted to address
+their research question(s). Presentations should include the following:
+
+\begin{itemize}
+\tightlist
+\item
+  The relevance and significance of the policy issue (include
+  appropriate references)
+\item
+  Research question(s)
+\item
+  A description of the quantitative analysis:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    What was done and why this approach was selected
+  \item
+    Why the chosen method is appropriate for answering the research
+    question(s)
+  \item
+    Key findings
+  \item
+    Interpretation of findings, including their implications for
+    policymaking, explained in clear and accessible terms
+  \end{itemize}
+\end{itemize}
+
+\subsection{Grading rubric:}\label{grading-rubric}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2933}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2933}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3867}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Criterion
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Points
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Policy Issue \& Research Question(s)} & Clearly explains the
+relevance and significance of the policy issue, supported by appropriate
+references, and states clear research question(s). & 4 \\
+\textbf{Quantitative Analysis} & Clearly describes what analysis was
+conducted, why it was selected, and why the method is appropriate for
+answering the research question(s). & 5 \\
+\textbf{Key Findings} & Clearly presents and summarizes the key findings
+using appropriate quantitative evidence, such as statistics, tables, or
+figures. & 4 \\
+\textbf{Interpretation \& Policy Implications} & Accurately interprets
+the findings and clearly explains their meaning and implications for
+policymaking in accessible, non-technical terms. & 4 \\
+\textbf{Presentation \& Organization} & Presentation is clear, well
+organized, and appropriately paced for the 10-minute time limit. & 3 \\
+\textbf{Total} & & \textbf{20} \\
+\end{longtable}
+
+\end{document}
