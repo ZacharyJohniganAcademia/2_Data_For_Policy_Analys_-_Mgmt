@@ -63,9 +63,7 @@ nsece_2019_wf <- da37941.0005
 ```
 \newpage
 # Question 1 — Clean and Understand the Data (4 points)
-
 Subset the NSECE dataset to include the following variables:
-
 - `WF9_WORK_WAGE` — hourly wage
 - `WF9_WORK_ROLE` — staff role
 - `WF9_CHAR_RACE` — race
@@ -75,11 +73,9 @@ Subset the NSECE dataset to include the following variables:
 
 > **Note:** `WF9_CESD7_TOT` measures the respondent's overall level of depressive symptoms. Scores range from 0, indicating no signs of depression, to 21, indicating severe depressive symptoms. According to the NSECE User Guide (2019), a score of 8 or higher is the recommended cutoff for identifying individuals who may have major depressive disorder. For additional information about this measure, see page 220 of the NSECE User Guide (2019).
 
-Rename the variables using clear, descriptive names. Perform any data cleaning you consider necessary.
-
+# Rename the variables using clear, descriptive names. Perform any data cleaning you consider necessary.
 ```{r}
 # Subset the NSECE dataset and rename the variables
-
 nsece_ps2 <- 
   nsece_2019_wf %>%
   select(
@@ -98,7 +94,6 @@ Create the following variables using the code below:
 
 ```{r}
 # Create staff age and hourly wage categories
-
 nsece_ps2_recode <-
   nsece_ps2 %>%
   mutate(
@@ -322,13 +317,58 @@ The distribution of depression scores is strongly right-skewed. Most respondents
 !!!!!!!!Bookmark!!!!!!!!
 \newpage
 ### Staff Age
-
 ```{r}
+# Variable type: Interval/Ratio + Discrete
+
+# Descriptive statistics for staff age
+staff_age_summary <-
+  nsece_ps2_recode %>%
+  summarise(
+    n = sum(!is.na(staff_age)),
+    missing = sum(is.na(staff_age)),
+    mean = mean(staff_age, na.rm = TRUE),
+    median = median(staff_age, na.rm = TRUE),
+    sd = sd(staff_age, na.rm = TRUE),
+    min = min(staff_age, na.rm = TRUE),
+    max = max(staff_age, na.rm = TRUE),
+    IQR = IQR(staff_age, na.rm = TRUE)
+  )
+
+staff_age_summary
+```
+```{r}
+# Histogram of staff age
+nsece_ps2_recode %>%
+  filter(!is.na(staff_age)) %>%
+  ggplot(aes(x = staff_age)) +
+  geom_histogram(binwidth = 5) +
+  labs(
+    title = "Distribution of Staff Age",
+    x = "Staff Age",
+    y = "Frequency"
+  ) +
+  theme_minimal()
 
 ```
 
 **Interpretation:**
+Staff age is an interval/ratio, discrete variable because age has meaningful numerical differences and, in this dataset, is measured in whole years. Among the 4,497 respondents with available age information, the mean age was approximately 40.27 years, while the median was 38 years. Staff ages ranged from 21 to 69 years, with a standard deviation of approximately 13.64 years and an interquartile range of 22 years, indicating substantial variation in age among staff.
 
+The histogram shows that staff were more concentrated among younger ages, particularly in their 20s and 30s, with frequencies generally declining at older ages. The distribution is not symmetric, which is also consistent with the mean being somewhat higher than the median. There were 695 observations with missing age information.
+
+```{r}
+# Categorized staff age: Ordinal + Discrete
+
+# Frequency and percentage table
+staff_age_table <-
+  nsece_ps2_recode %>%
+  count(staff_age_new) %>%
+  mutate(proportion = (n / sum(n)) * 100)
+
+staff_age_table
+```
+**Interpretation 2**
+The categorized staff age variable (staff_age_new) is ordinal and discrete because the age categories have a meaningful order. Staff between ages 20 and 40 represented the largest category, accounting for approximately 47.17% of all observations. Staff between ages 41 and 50 represented 17.24%, while those in the oldest category represented 22.21%. Approximately 13.39% of observations were missing age information. The frequency distribution therefore reinforces the pattern seen in the histogram: younger staff make up the largest portion of the workforce represented in the dataset.
 \newpage
 ### Hourly Wage
 
