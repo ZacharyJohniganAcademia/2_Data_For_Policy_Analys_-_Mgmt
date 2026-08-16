@@ -455,15 +455,22 @@ nsece_ps2_recode <-
     )
   )
 
-# Examine the new binary variables
-table(nsece_ps2_recode$teacher_d)
-table(nsece_ps2_recode$other_role_d)
+# Create readable table of binary-variable counts
+staff_role_binary_table <-
+  nsece_ps2_recode %>%
+  summarise(
+    `Teacher, Instructor, or Lead Teacher` = sum(teacher_d, na.rm = TRUE),
+    `Other/Undetermined` = sum(other_role_d, na.rm = TRUE)
+  )
+
+knitr::kable(
+  staff_role_binary_table,
+  caption = "Number of Respondents Coded 1 for Each Staff Role Binary Variable"
+)
 ```
 
 **Reference group:**
 Aide or assistant teacher.
-
-!!!!!!!!Bookmark!!!!!!!!
 
 \newpage
 ## Race Binary Variables
@@ -566,19 +573,78 @@ Some college credit but no degree
 ## Staff Age Binary Variables
 
 ```{r}
+# Staff age: 3 categories, so create k - 1 = 2 binary variables
+# Reference group: Between 20 and 40
 
+nsece_ps2_recode <-
+  nsece_ps2_recode %>%
+  mutate(
+    age_41_50_d = ifelse(
+      staff_age_new == "Between 41 and 50", 1, 0
+    ),
+    
+    age_51plus_d = ifelse(
+      staff_age_new == "More than 51", 1, 0
+    )
+  )
+
+# Create readable table of binary-variable counts
+staff_age_binary_table <-
+  nsece_ps2_recode %>%
+  summarise(
+    `Between 41 and 50` = sum(age_41_50_d, na.rm = TRUE),
+    `More than 51` = sum(age_51plus_d, na.rm = TRUE)
+  )
+
+knitr::kable(
+  staff_age_binary_table,
+  caption = "Number of Respondents Coded 1 for Each Staff Age Binary Variable"
+)
 ```
 
 **Reference group:**
+Between 20 and 40
 
 \newpage
 ## Hourly Wage Binary Variables
 
 ```{r}
+# Hourly wage: 4 categories, so create k - 1 = 3 binary variables
+# Reference group: Between $11 and $20
 
+nsece_ps2_recode <-
+  nsece_ps2_recode %>%
+  mutate(
+    wage_under_10_d = ifelse(
+      hr_wage_new == "Less than $10", 1, 0
+    ),
+    
+    wage_21_30_d = ifelse(
+      hr_wage_new == "Between $21 and $30", 1, 0
+    ),
+    
+    wage_31plus_d = ifelse(
+      hr_wage_new == "More than $31", 1, 0
+    )
+  )
+
+# Create readable table of binary-variable counts
+hourly_wage_binary_table <-
+  nsece_ps2_recode %>%
+  summarise(
+    `Less than $10` = sum(wage_under_10_d, na.rm = TRUE),
+    `Between $21 and $30` = sum(wage_21_30_d, na.rm = TRUE),
+    `More than $31` = sum(wage_31plus_d, na.rm = TRUE)
+  )
+
+knitr::kable(
+  hourly_wage_binary_table,
+  caption = "Number of Respondents Coded 1 for Each Hourly Wage Binary Variable"
+)
 ```
 
 **Reference group:**
+Between $11 and $20
 
 \newpage
 # Question 3 — Estimate the OLS Regression Model (4 points)
