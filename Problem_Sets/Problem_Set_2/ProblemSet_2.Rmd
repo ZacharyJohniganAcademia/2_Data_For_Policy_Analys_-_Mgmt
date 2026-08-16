@@ -149,6 +149,9 @@ summary(nsece_ps2_recode$staff_age_new)
 
 class(nsece_ps2_recode$hr_wage_new)
 summary(nsece_ps2_recode$hr_wage_new)
+
+# Export to CSV for easy viewing
+write_csv(nsece_ps2_recode, "CSV_Files/nsece_ps2_recode.csv")
 ```
 
 Using the variables **role, race, educational attainment, depression, staff age, and hourly wage** — including the new `staff_age_new` and `hr_wage_new` variables — complete the following tasks for **each variable**:
@@ -314,7 +317,6 @@ Depression score is an interval/ratio, discrete variable ranging from 0 to 21. A
 
 The distribution of depression scores is strongly right-skewed. Most respondents reported relatively low depression scores, while a smaller number had substantially higher scores, producing a long right tail. This skewness also helps explain why the mean (2.52) is higher than the median (1). Overall, depressive symptoms were relatively low for most respondents, although some respondents reported much higher levels of depressive symptoms.
 
-!!!!!!!!Bookmark!!!!!!!!
 \newpage
 ### Staff Age
 ```{r}
@@ -335,7 +337,9 @@ staff_age_summary <-
   )
 
 staff_age_summary
+#write_csv(staff_age_summary, "staff_age_summary.csv")
 ```
+
 ```{r}
 # Histogram of staff age
 nsece_ps2_recode %>%
@@ -348,7 +352,6 @@ nsece_ps2_recode %>%
     y = "Frequency"
   ) +
   theme_minimal()
-
 ```
 
 **Interpretation:**
@@ -366,17 +369,61 @@ staff_age_table <-
   mutate(proportion = (n / sum(n)) * 100)
 
 staff_age_table
+glimpse(nsece_ps2_recode)
 ```
 **Interpretation 2**
 The categorized staff age variable (staff_age_new) is ordinal and discrete because the age categories have a meaningful order. Staff between ages 20 and 40 represented the largest category, accounting for approximately 47.17% of all observations. Staff between ages 41 and 50 represented 17.24%, while those in the oldest category represented 22.21%. Approximately 13.39% of observations were missing age information. The frequency distribution therefore reinforces the pattern seen in the histogram: younger staff make up the largest portion of the workforce represented in the dataset.
+
 \newpage
 ### Hourly Wage
 
 ```{r}
+# Variable type: Interval/Ratio + Continuous
 
+# Descriptive statistics for hourly wage
+hourly_wage_summary <-
+  nsece_ps2_recode %>%
+  summarise(
+    n = sum(!is.na(hourly_wage)),
+    missing = sum(is.na(hourly_wage)),
+    mean = mean(hourly_wage, na.rm = TRUE),
+    median = median(hourly_wage, na.rm = TRUE),
+    sd = sd(hourly_wage, na.rm = TRUE),
+    min = min(hourly_wage, na.rm = TRUE),
+    max = max(hourly_wage, na.rm = TRUE),
+    IQR = IQR(hourly_wage, na.rm = TRUE)
+  )
+
+hourly_wage_summary
+```
+```{r}
+# Histogram of hourly wage
+nsece_ps2_recode %>%
+  filter(!is.na(hourly_wage)) %>%
+  ggplot(aes(x = hourly_wage)) +
+  geom_histogram(binwidth = 5) +
+  labs(
+    title = "Distribution of Hourly Wages",
+    x = "Hourly Wage ($)",
+    y = "Frequency"
+  ) +
+  theme_minimal()
+```
+
+```{r}
+# Categorized hourly wage: Ordinal + Discrete
+
+# Frequency and percentage table
+hr_wage_table <-
+  nsece_ps2_recode %>%
+  count(hr_wage_new) %>%
+  mutate(proportion = (n / sum(n)) * 100)
+
+hr_wage_table
 ```
 
 **Interpretation:**
+The categorized hourly wage variable (hr_wage_new) is ordinal and discrete because respondents are placed into wage categories that have a meaningful order. The largest category was workers earning between $11 and $20 per hour, representing approximately 45.44% of all observations. About 20.96% earned less than $10 per hour, while 6.45% earned between $21 and $30 and 4.03% earned more than $31. Approximately 23.13% of observations were missing from the categorized wage variable. Overall, the categorical distribution supports the pattern observed in the histogram, with most workers concentrated in the lower wage categories and relatively few workers in the higher wage categories.
 
 \newpage
 # Question 2 — Prepare the Data for Linear Regression (2 points)
@@ -393,28 +440,127 @@ Create the derived variables needed to estimate a multiple linear regression mod
 ## Staff Role Binary Variables
 
 ```{r}
+# Staff role: 3 categories, so create k - 1 = 2 binary variables
+# Reference group: Aide or assistant teacher
 
+nsece_ps2_recode <-
+  nsece_ps2_recode %>%
+  mutate(
+    teacher_d = ifelse(
+      staff_role == "(2) Teacher, instructor, or lead teacher", 1, 0
+    ),
+    
+    other_role_d = ifelse(
+      staff_role == "(3) Other/undetermined", 1, 0
+    )
+  )
+
+# Examine the new binary variables
+table(nsece_ps2_recode$teacher_d)
+table(nsece_ps2_recode$other_role_d)
 ```
 
 **Reference group:**
+Aide or assistant teacher.
+
+!!!!!!!!Bookmark!!!!!!!!
 
 \newpage
 ## Race Binary Variables
 
 ```{r}
+# Race: 4 categories, so create k - 1 = 3 binary variables
+# Reference group: White Only
 
+nsece_ps2_recode <-
+  nsece_ps2_recode %>%
+  mutate(
+    black_d = ifelse(
+      race == "(2) Black or African American Only", 1, 0
+    ),
+    
+    asian_d = ifelse(
+      race == "(3) Asian Only", 1, 0
+    ),
+    
+    other_race_d = ifelse(
+      race == "(8) Other", 1, 0
+    )
+  )
+
+# Examine the new binary variables
+race_binary_table <-
+  nsece_ps2_recode %>%
+  summarise(
+    `Black or African American Only` = sum(black_d == 1, na.rm = TRUE),
+    `Asian Only` = sum(asian_d == 1, na.rm = TRUE),
+    `Other` = sum(other_race_d == 1, na.rm = TRUE)
+  )
+
+knitr::kable(
+  race_binary_table,
+  caption = "Number of Respondents Coded 1 for Each Race Binary Variable"
+)
 ```
 
 **Reference group:**
+White Only
 
 \newpage
 ## Educational Attainment Binary Variables
 
 ```{r}
+# Educational attainment: 7 categories, so create k - 1 = 6 binary variables
+# Reference group: Some college credit but no degree
 
+nsece_ps2_recode <-
+  nsece_ps2_recode %>%
+  mutate(
+    less_hs_d = ifelse(
+      education == "(1) Less than High School", 1, 0
+    ),
+    
+    ged_d = ifelse(
+      education == "(3) GED or high school equivalency", 1, 0
+    ),
+    
+    hs_grad_d = ifelse(
+      education == "(4) High school graduate", 1, 0
+    ),
+    
+    associate_d = ifelse(
+      education == "(6) Associate degree (AA, AS)", 1, 0
+    ),
+    
+    bachelor_d = ifelse(
+      education == "(7) Bachelor's degree (BA, BS, AB)", 1, 0
+    ),
+    
+    graduate_d = ifelse(
+      education == "(8) Graduate or professional degree", 1, 0
+    )
+  )
+
+# Create readable table to examine the new binary variables
+education_binary_table <-
+  nsece_ps2_recode %>%
+  summarise(
+    `Less than High School` = sum(less_hs_d == 1, na.rm = TRUE),
+    `GED or High School Equivalency` = sum(ged_d == 1, na.rm = TRUE),
+    `High School Graduate` = sum(hs_grad_d == 1, na.rm = TRUE),
+    `Associate Degree` = sum(associate_d == 1, na.rm = TRUE),
+    `Bachelor's Degree` = sum(bachelor_d == 1, na.rm = TRUE),
+    `Graduate or Professional Degree` = sum(graduate_d == 1, na.rm = TRUE)
+  )
+
+knitr::kable(
+  education_binary_table,
+  caption = "Number of Respondents Coded 1 for Each Educational Attainment Binary Variable"
+)
 ```
 
 **Reference group:**
+Some college credit but no degree
 
 \newpage
 ## Staff Age Binary Variables
