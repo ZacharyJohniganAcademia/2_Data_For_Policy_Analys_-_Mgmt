@@ -668,8 +668,69 @@ The model specified in the assignment is:
 ## Estimate the Model
 
 ```{r}
-# Estimate the OLS regression model here.
+# Estimate the OLS regression model
+depression_model <- lm(
+  depression ~
+    wage_under_10_d +
+    wage_21_30_d +
+    wage_31plus_d +
+    teacher_d +
+    other_role_d +
+    age_41_50_d +
+    age_51plus_d +
+    less_hs_d +
+    ged_d +
+    hs_grad_d +
+    associate_d +
+    bachelor_d +
+    graduate_d +
+    black_d +
+    asian_d +
+    other_race_d,
+  data = nsece_ps2_recode
+)
 
+# View regression results
+#summary(depression_model)
+
+# Create a readable regression results table
+regression_table <-
+  as.data.frame(summary(depression_model)$coefficients) %>%
+  rownames_to_column("Variable") %>%
+  rename(
+    Estimate = Estimate,
+    `Standard Error` = `Std. Error`,
+    `t-value` = `t value`,
+    `p-value` = `Pr(>|t|)`
+  ) %>%
+  mutate(
+    Variable = recode(
+      Variable,
+      "(Intercept)" = "Intercept",
+      "wage_under_10_d" = "Less than $10/hour",
+      "wage_21_30_d" = "$21–$30/hour",
+      "wage_31plus_d" = "More than $31/hour",
+      "teacher_d" = "Teacher, Instructor, or Lead Teacher",
+      "other_role_d" = "Other/Undetermined Staff Role",
+      "age_41_50_d" = "Age 41–50",
+      "age_51plus_d" = "Age 51+",
+      "less_hs_d" = "Less than High School",
+      "ged_d" = "GED or High School Equivalency",
+      "hs_grad_d" = "High School Graduate",
+      "associate_d" = "Associate Degree",
+      "bachelor_d" = "Bachelor's Degree",
+      "graduate_d" = "Graduate or Professional Degree",
+      "black_d" = "Black or African American Only",
+      "asian_d" = "Asian Only",
+      "other_race_d" = "Other Race"
+    ),
+    across(where(is.numeric), ~ round(.x, 3))
+  )
+
+knitr::kable(
+  regression_table,
+  caption = "OLS Regression Results: Factors Associated with Depression"
+)
 ```
 
 \newpage
@@ -678,6 +739,13 @@ The model specified in the assignment is:
 Interpret the coefficient estimates for each statistically significant independent variable.
 
 **Answer:**
+Holding the other variables in the model constant, teachers, instructors, or lead teachers had depression scores approximately 0.25 points higher than aides or assistant teachers, the reference group. This association was statistically significant (p = 0.039).
+
+Staff between ages 41 and 50 had depression scores approximately 0.44 points lower than staff between ages 20 and 40, the reference group (p = 0.003). Staff age 51 or older had depression scores approximately 1.29 points lower than the reference group (p < 0.001).
+
+For educational attainment, high school graduates had depression scores approximately 0.47 points lower than respondents with some college credit but no degree, the reference group (p = 0.008). Respondents with an associate degree had depression scores approximately 0.49 points lower than the same reference group (p = 0.004).
+
+None of the hourly wage or race binary variables were statistically significant at the 0.05 level. The remaining staff-role and educational-attainment variables were also not statistically significant.
 
 \newpage
 ## Interpret Overall Model Fit
@@ -685,6 +753,9 @@ Interpret the coefficient estimates for each statistically significant independe
 Interpret the overall model fit, including **R²** and **adjusted R²**.
 
 **Answer:**
+The model had an R² of approximately 0.034, indicating that the independent variables included in the model explain about 3.4% of the variation in depression scores among the staff included in the regression. The adjusted R² was approximately 0.029, meaning that after accounting for the number of predictors in the model, approximately 2.9% of the variation in depression scores was explained.
+
+Although the amount of explained variation is relatively small, the overall regression model was statistically significant (F = 7.637, p < 0.001). This indicates that the predictors, considered together, are significantly associated with depression scores, even though the model explains only a small portion of the overall variation in depression.
 
 \newpage
 ## Conclusions
@@ -692,6 +763,11 @@ Interpret the overall model fit, including **R²** and **adjusted R²**.
 What conclusions can you draw about the factors associated with depression among center-based early care and education staff?
 
 **Answer:**
+The results suggest that staff role, age, and educational attainment are associated with depression scores among center-based early care and education staff. Teachers, instructors, or lead teachers had slightly higher depression scores than aides or assistant teachers, while older staff generally had lower depression scores than staff ages 20–40. In particular, staff age 51 or older had substantially lower predicted depression scores. Educational attainment was also associated with depression for some groups, with high school graduates and respondents with associate degrees having lower depression scores than respondents with some college credit but no degree.
+
+In contrast, hourly wage and race were not statistically significantly associated with depression in this model. Although the model was statistically significant overall, it explained only about 3.4% of the variation in depression scores, suggesting that much of the variation in depression is associated with factors not included in this analysis.
+
+Overall, the findings indicate that certain demographic and employment characteristics are associated with depression among early care and education staff, particularly age, staff role, and some levels of educational attainment. However, these results represent associations rather than causal relationships and should not be interpreted as evidence that these characteristics directly cause differences in depression.
 
 \newpage
 ## Diagnostic Plots
@@ -703,15 +779,44 @@ Create:
 
 ```{r}
 # Residual plot
+# Create a dataset with fitted values and residuals
+diagnostic_data <- data.frame(
+  fitted_values = fitted(depression_model),
+  residuals = resid(depression_model)
+)
 
+# Residual plot
+ggplot(diagnostic_data,
+       aes(x = fitted_values, y = residuals)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  labs(
+    title = "Residual Plot",
+    x = "Fitted Values",
+    y = "Residuals"
+  ) +
+  theme_minimal()
 ```
 
 ```{r}
 # Histogram of residuals
-
+# Histogram of residuals
+ggplot(diagnostic_data,
+       aes(x = residuals)) +
+  geom_histogram(bins = 30) +
+  labs(
+    title = "Distribution of Model Residuals",
+    x = "Residuals",
+    y = "Frequency"
+  ) +
+  theme_minimal()
 ```
 
 Do these diagnostic plots suggest that the assumptions of **linearity, homoscedasticity, and normality** are reasonably met? What hypotheses do you have about why the plots look the way they do?
 
 **Answer:**
+The diagnostic plots suggest that the assumptions of the OLS regression model are not fully met. In the residual plot, the residuals are not evenly distributed around zero, and the spread of the residuals varies across the fitted values. This suggests that the assumptions of linearity and homoscedasticity may not be fully satisfied.
 
+The histogram of the residuals also shows a strongly right-skewed distribution rather than an approximately normal distribution. Most residuals are concentrated at lower values, while a smaller number of observations have very large positive residuals. Therefore, the normality assumption does not appear to be well satisfied.
+
+One possible explanation is the nature of the dependent variable. Depression is measured using the CESD7 score, which ranges from 0 to 21, and the earlier descriptive analysis showed that most respondents had relatively low depression scores while a smaller number had much higher scores. Because the dependent variable itself is discrete, bounded, and strongly right-skewed, the residuals from the OLS model may also exhibit an unusual and right-skewed pattern.
