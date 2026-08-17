@@ -1,0 +1,1607 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Problem Set \#2: Understanding Factors Affecting the Early Care and Education Workforce in the United States},
+  pdfauthor={Zachary Johnigan},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Problem Set \#2: Understanding Factors Affecting the Early Care
+and Education Workforce in the United States}
+\author{Zachary Johnigan}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Data for Policy Analysis and
+Management}\label{data-for-policy-analysis-and-management}
+
+\textbf{Instructor:} Aida Pacheco-Applegate\\
+\textbf{Course:} SSAD 48500\\
+\textbf{Term:} Summer 2026
+
+\subsection{Background}\label{background}
+
+The mental health of early childhood educators is a critical component
+of a high-quality early care and education system (Murphy \& Reid,
+2025). Research has shown that educators' psychological well-being
+affects not only their own work experiences but also children's
+classroom environments, emotional development, and academic achievement
+(McLean \& Connor, 2015; Oberle \& Schonert-Reichl, 2016). In addition,
+educators with better mental health tend to have more positive
+interactions with children and report fewer behavioral challenges in
+their classrooms (Jeon et al., 2014; Kwon et al., 2019). Because early
+childhood experiences have lasting effects on children's health,
+educational attainment, and future opportunities, understanding the
+factors associated with educator mental health is an important research
+and policy priority (Murphy \& Reid, 2025).
+
+In this problem set, you will examine factors associated with depression
+among staff working in center-based early care and education programs in
+the United States. Following the analytical approach of Murphy and Reid
+(2025), you will use data from the 2019 National Survey of Early Care
+and Education (NSECE) to apply the statistical techniques covered in
+class and investigate how educator characteristics are associated with
+depression. \newpage \# 1. Set up working space and import packages
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# This cleans up everything in the "Environment" pane.}
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list=}\FunctionTok{ls}\NormalTok{())}
+\FunctionTok{options}\NormalTok{(}\StringTok{"error"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $error
+## NULL
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{lifecycle\_disable\_verbose\_retirement =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Import packages}
+\NormalTok{package.list }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
+
+\CommentTok{\# read the \textasciigrave{}package.list\textasciigrave{} for the list of packages we will be needing}
+\CommentTok{\# Check what packages are installed already}
+\CommentTok{\# If any of the packages in the c() list are not currently installed, install them.}
+\CommentTok{\# Note: Check the "Packages" tab to verify that they were installed. If they were not, then check the box and click "Install".}
+\ControlFlowTok{for}\NormalTok{ (p }\ControlFlowTok{in}\NormalTok{ package.list)\{}
+  \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\NormalTok{p }\SpecialCharTok{\%in\%} \FunctionTok{installed.packages}\NormalTok{()[, }\StringTok{"Package"}\NormalTok{]) }\FunctionTok{install.packages}\NormalTok{(p)}
+  \FunctionTok{library}\NormalTok{(p, }\AttributeTok{character.only=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.2.1     v readr     2.2.0
+## v forcats   1.0.1     v stringr   1.6.0
+## v ggplot2   4.0.3     v tibble    3.3.1
+## v lubridate 1.9.5     v tidyr     1.3.2
+## v purrr     1.2.2     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Set up working directory}
+
+\DocumentationTok{\#\# check your directory}
+\FunctionTok{getwd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "/home/zacharyjohnigan/UChicago_Student/2_Data_For_Policy_Analys_-_Mgmt/Problem_Sets/Problem_Set_2"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# set up working directory}
+\NormalTok{my\_directory   }\OtherTok{\textless{}{-}} \StringTok{"/home/zacharyjohnigan/UChicago\_Student/2\_Data\_For\_Policy\_Analys\_{-}\_Mgmt/"}
+\NormalTok{my\_data        }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(my\_directory, }\StringTok{"Data/"}\NormalTok{)}
+\NormalTok{output\_dir     }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(my\_directory, }\StringTok{"Problem\_Sets/Problem\_Set\_2/"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{2. Load dataset}\label{load-dataset}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Import NSECE 2019 workforce questionnnaire}
+\FunctionTok{load}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(my\_data, }\StringTok{"37941{-}0005{-}Data.rda"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\section{4. Basic cleaning of the
+data}\label{basic-cleaning-of-the-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Rename dataset}
+\NormalTok{nsece\_2019\_wf }\OtherTok{\textless{}{-}}\NormalTok{ da37941}\FloatTok{.0005}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+\section{Question 1 --- Clean and Understand the Data (4
+points)}\label{question-1-clean-and-understand-the-data-4-points}
+
+Subset the NSECE dataset to include the following variables: -
+\texttt{WF9\_WORK\_WAGE} --- hourly wage - \texttt{WF9\_WORK\_ROLE} ---
+staff role - \texttt{WF9\_CHAR\_RACE} --- race -
+\texttt{WF9\_CHAR\_EDUC} --- highest level of education completed -
+\texttt{WF9\_CHAR\_YEAR\_BORN} --- staff's birth year -
+\texttt{WF9\_CESD7\_TOT} --- staff's total score on CESD7 (depression)
+scale
+
+\begin{quote}
+\textbf{Note:} \texttt{WF9\_CESD7\_TOT} measures the respondent's
+overall level of depressive symptoms. Scores range from 0, indicating no
+signs of depression, to 21, indicating severe depressive symptoms.
+According to the NSECE User Guide (2019), a score of 8 or higher is the
+recommended cutoff for identifying individuals who may have major
+depressive disorder. For additional information about this measure, see
+page 220 of the NSECE User Guide (2019).
+\end{quote}
+
+\section{Rename the variables using clear, descriptive names. Perform
+any data cleaning you consider
+necessary.}\label{rename-the-variables-using-clear-descriptive-names.-perform-any-data-cleaning-you-consider-necessary.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Subset the NSECE dataset and rename the variables}
+\NormalTok{nsece\_ps2 }\OtherTok{\textless{}{-}} 
+\NormalTok{  nsece\_2019\_wf }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}
+    \AttributeTok{hourly\_wage =}\NormalTok{ WF9\_WORK\_WAGE,}
+    \AttributeTok{staff\_role =}\NormalTok{ WF9\_WORK\_ROLE,}
+    \AttributeTok{race =}\NormalTok{ WF9\_CHAR\_RACE,}
+    \AttributeTok{education =}\NormalTok{ WF9\_CHAR\_EDUC,}
+    \AttributeTok{birth\_year =}\NormalTok{ WF9\_CHAR\_YEAR\_BORN,}
+    \AttributeTok{depression =}\NormalTok{ WF9\_CESD7\_TOT}
+\NormalTok{  )}
+
+\CommentTok{\#glimpse(nsece\_ps2)}
+\end{Highlighting}
+\end{Shaded}
+
+Create the following variables using the code below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create staff age and hourly wage categories}
+\NormalTok{nsece\_ps2\_recode }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{staff\_age =} \DecValTok{2019} \SpecialCharTok{{-}}\NormalTok{ birth\_year,}
+
+    \AttributeTok{staff\_age\_new =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{      staff\_age }\SpecialCharTok{\textgreater{}=} \DecValTok{20} \SpecialCharTok{\&}\NormalTok{ staff\_age }\SpecialCharTok{\textless{}=} \DecValTok{40} \SpecialCharTok{\textasciitilde{}} \StringTok{"Between 20 and 40"}\NormalTok{,}
+\NormalTok{      staff\_age }\SpecialCharTok{\textgreater{}=} \DecValTok{41} \SpecialCharTok{\&}\NormalTok{ staff\_age }\SpecialCharTok{\textless{}=} \DecValTok{50} \SpecialCharTok{\textasciitilde{}} \StringTok{"Between 41 and 50"}\NormalTok{,}
+\NormalTok{      staff\_age }\SpecialCharTok{\textgreater{}=} \DecValTok{51} \SpecialCharTok{\textasciitilde{}} \StringTok{"More than 51"}
+\NormalTok{    ),}
+
+    \AttributeTok{staff\_age\_new =} \FunctionTok{factor}\NormalTok{(}
+\NormalTok{      staff\_age\_new,}
+      \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}
+        \StringTok{"Between 20 and 40"}\NormalTok{,}
+        \StringTok{"Between 41 and 50"}\NormalTok{,}
+        \StringTok{"More than 51"}
+\NormalTok{      ),}
+      \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}
+        \StringTok{"Between 20 and 40"}\NormalTok{,}
+        \StringTok{"Between 41 and 50"}\NormalTok{,}
+        \StringTok{"More than 51"}
+\NormalTok{      )}
+\NormalTok{    ),}
+
+    \AttributeTok{hr\_wage\_new =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{      hourly\_wage }\SpecialCharTok{\textless{}=} \DecValTok{10} \SpecialCharTok{\textasciitilde{}} \StringTok{"Less than $10"}\NormalTok{,}
+\NormalTok{      hourly\_wage }\SpecialCharTok{\textgreater{}=} \DecValTok{11} \SpecialCharTok{\&}\NormalTok{ hourly\_wage }\SpecialCharTok{\textless{}=} \DecValTok{20} \SpecialCharTok{\textasciitilde{}} \StringTok{"Between $11 and $20"}\NormalTok{,}
+\NormalTok{      hourly\_wage }\SpecialCharTok{\textgreater{}=} \DecValTok{21} \SpecialCharTok{\&}\NormalTok{ hourly\_wage }\SpecialCharTok{\textless{}=} \DecValTok{30} \SpecialCharTok{\textasciitilde{}} \StringTok{"Between $21 and $30"}\NormalTok{,}
+\NormalTok{      hourly\_wage }\SpecialCharTok{\textgreater{}=} \DecValTok{31} \SpecialCharTok{\textasciitilde{}} \StringTok{"More than $31"}
+\NormalTok{    ),}
+
+    \AttributeTok{hr\_wage\_new =} \FunctionTok{factor}\NormalTok{(}
+\NormalTok{      hr\_wage\_new,}
+      \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}
+        \StringTok{"Less than $10"}\NormalTok{,}
+        \StringTok{"Between $11 and $20"}\NormalTok{,}
+        \StringTok{"Between $21 and $30"}\NormalTok{,}
+        \StringTok{"More than $31"}
+\NormalTok{      ),}
+      \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}
+        \StringTok{"Less than $10"}\NormalTok{,}
+        \StringTok{"Between $11 and $20"}\NormalTok{,}
+        \StringTok{"Between $21 and $30"}\NormalTok{,}
+        \StringTok{"More than $31"}
+\NormalTok{      )}
+\NormalTok{    )}
+\NormalTok{  )}
+
+\CommentTok{\# Examine newly created variables}
+\FunctionTok{class}\NormalTok{(nsece\_ps2\_recode}\SpecialCharTok{$}\NormalTok{staff\_age\_new)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "factor"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(nsece\_ps2\_recode}\SpecialCharTok{$}\NormalTok{staff\_age\_new)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Between 20 and 40 Between 41 and 50      More than 51              NA's 
+##              2449               895              1153               695
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(nsece\_ps2\_recode}\SpecialCharTok{$}\NormalTok{hr\_wage\_new)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "factor"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(nsece\_ps2\_recode}\SpecialCharTok{$}\NormalTok{hr\_wage\_new)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Less than $10 Between $11 and $20 Between $21 and $30       More than $31 
+##                1088                2359                 335                 209 
+##                NA's 
+##                1201
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Export to CSV for easy viewing}
+\FunctionTok{write\_csv}\NormalTok{(nsece\_ps2\_recode, }\StringTok{"CSV\_Files/nsece\_ps2\_recode.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Using the variables \textbf{role, race, educational attainment,
+depression, staff age, and hourly wage} --- including the new
+\texttt{staff\_age\_new} and \texttt{hr\_wage\_new} variables ---
+complete the following tasks for \textbf{each variable}:
+
+\begin{itemize}
+\tightlist
+\item
+  Identify its level of measurement: \textbf{nominal, ordinal, or
+  interval/ratio}.
+\item
+  Indicate whether it is \textbf{discrete or continuous}.
+\item
+  Present the appropriate \textbf{descriptive statistics, tables, or
+  graphs}, including measures of \textbf{central tendency, dispersion,
+  and shape} when applicable.
+\item
+  \textbf{Describe and interpret} your findings.
+\end{itemize}
+
+\begin{quote}
+Full visualizations using \texttt{ggplot2} are not required.
+\end{quote}
+
+\newpage
+
+\subsection{Q1 Analysis}\label{q1-analysis}
+
+\subsubsection{Staff Role}\label{staff-role}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Variable type: Nominal + Discrete}
+
+\CommentTok{\# Frequency and percentage table}
+\NormalTok{staff\_role\_table }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(staff\_role) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{proportion =}\NormalTok{ (n }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(n)) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{)}
+
+\NormalTok{staff\_role\_table}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                 staff_role    n proportion
+## 1            (1) Aide or assistant teacher 1611 31.0285054
+## 2 (2) Teacher, instructor, or lead teacher 3079 59.3027735
+## 3                   (3) Other/undetermined   18  0.3466872
+## 4                                     <NA>  484  9.3220339
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(staff\_role\_table,}
+       \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ staff\_role, }\AttributeTok{y =}\NormalTok{ proportion)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Distribution of Staff Roles"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Staff Role"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Percentage"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ProblemSet_2_files/ProblemSet_2_files/figure-latex/unnamed-chunk-9-1.pdf}}
+
+\textbf{Interpretation:} Staff role is a nominal, discrete variable
+because respondents are classified into distinct job categories that
+have no inherent ranking. Teachers, instructors, or lead teachers were
+the most common staff role (59.3\%), followed by aides or assistant
+teachers (31.0\%). Less than 1\% (0.35\%) were classified as
+other/undetermined, while 9.3\% of observations were missing staff-role
+information. The frequency table and bar graph both show that teachers,
+instructors, or lead teachers make up the majority of respondents.
+
+Because staff role is nominal, the mode is the appropriate measure of
+central tendency. The modal category is teacher, instructor, or lead
+teacher. Numerical measures such as the mean, median, standard
+deviation, and measures of distributional shape are not meaningful for
+this variable.
+
+\newpage
+
+\subsubsection{Race}\label{race}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Variable type: Nominal + Discrete}
+
+\CommentTok{\# Frequency and percentage table}
+\NormalTok{race\_table }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(race) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{proportion =}\NormalTok{ (n }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(n)) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{)}
+
+\NormalTok{race\_table}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                 race    n proportion
+## 1                     (1) White Only 2825  54.410632
+## 2 (2) Black or African American Only  991  19.087057
+## 3                     (3) Asian Only  210   4.044684
+## 4                          (8) Other  215   4.140986
+## 5                               <NA>  951  18.316641
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(race\_table,}
+       \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ race, }\AttributeTok{y =}\NormalTok{ proportion)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Distribution of Race"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Race"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Percentage"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ProblemSet_2_files/ProblemSet_2_files/figure-latex/unnamed-chunk-11-1.pdf}}
+
+\textbf{Interpretation:} Race is a nominal, discrete variable because
+respondents are classified into distinct racial categories that have no
+inherent ranking. White-only respondents were the largest group
+(54.4\%), followed by Black or African American-only respondents
+(19.1\%). Asian-only respondents accounted for 4.0\%, and respondents
+classified as Other accounted for 4.1\%. Approximately 18.3\% of
+observations were missing race information.
+
+Because race is nominal, the mode is the appropriate measure of central
+tendency. The modal category is White Only. Numerical measures such as
+the mean, median, standard deviation, and measures of distributional
+shape are not meaningful for this variable.
+
+\newpage
+
+\subsubsection{Educational Attainment}\label{educational-attainment}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Variable type: Ordinal + Discrete}
+
+\CommentTok{\# Frequency and percentage table}
+\NormalTok{education\_table }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(education) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{proportion =}\NormalTok{ (n }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(n)) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{)}
+
+\NormalTok{education\_table}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                               education    n proportion
+## 1             (1) Less than High School   85   1.637134
+## 2    (3) GED or high school equivalency  126   2.426810
+## 3              (4) High school graduate  769  14.811248
+## 4 (5) Some college credit but no degree 1279  24.634052
+## 5         (6) Associate degree (AA, AS)  834  16.063174
+## 6    (7) Bachelor's degree (BA, BS, AB) 1168  22.496148
+## 7   (8) Graduate or professional degree  424   8.166410
+## 8                                  <NA>  507   9.765023
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(education\_table,}
+       \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ education, }\AttributeTok{y =}\NormalTok{ proportion)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Distribution of Educational Attainment"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Educational Attainment"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Percentage"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ProblemSet_2_files/ProblemSet_2_files/figure-latex/unnamed-chunk-13-1.pdf}}
+\# Examine ordering of education categories
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(nsece\_ps2\_recode}\SpecialCharTok{$}\NormalTok{education)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "factor"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(nsece\_ps2\_recode}\SpecialCharTok{$}\NormalTok{education)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "(1) Less than High School"            
+## [2] "(3) GED or high school equivalency"   
+## [3] "(4) High school graduate"             
+## [4] "(5) Some college credit but no degree"
+## [5] "(6) Associate degree (AA, AS)"        
+## [6] "(7) Bachelor's degree (BA, BS, AB)"   
+## [7] "(8) Graduate or professional degree"
+\end{verbatim}
+
+\section{Cumulative percentage to identify the median
+category}\label{cumulative-percentage-to-identify-the-median-category}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{education\_median }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(education)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(education) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{proportion =}\NormalTok{ (n }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(n)) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{,}
+    \AttributeTok{cumulative\_proportion =} \FunctionTok{cumsum}\NormalTok{(proportion)}
+\NormalTok{  )}
+
+\NormalTok{education\_median}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                               education    n proportion cumulative_proportion
+## 1             (1) Less than High School   85   1.814301              1.814301
+## 2    (3) GED or high school equivalency  126   2.689434              4.503735
+## 3              (4) High school graduate  769  16.414088             20.917823
+## 4 (5) Some college credit but no degree 1279  27.299893             48.217716
+## 5         (6) Associate degree (AA, AS)  834  17.801494             66.019210
+## 6    (7) Bachelor's degree (BA, BS, AB) 1168  24.930630             90.949840
+## 7   (8) Graduate or professional degree  424   9.050160            100.000000
+\end{verbatim}
+
+\textbf{Interpretation:} Educational attainment is an ordinal, discrete
+variable because respondents fall into distinct educational categories
+that have a meaningful order. Among respondents with valid education
+data, the most common category (mode) was some college credit but no
+degree (27.3\%), followed by a bachelor's degree (24.9\%). The median
+category was associate degree (AA, AS) because the cumulative percentage
+first exceeded 50\% at that category. Approximately 9.1\% of respondents
+held a graduate or professional degree, while relatively few had less
+than a high school education (1.8\%) or a GED/high school equivalency
+(2.7\%).
+
+Because educational attainment is ordinal rather than interval/ratio,
+the mean and standard deviation are not appropriate measures. The
+median, mode, frequency distribution, cumulative percentages, and bar
+graph appropriately describe its central tendency and distribution.
+
+\newpage
+
+\subsubsection{Depression}\label{depression}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Variable type: Interval/Ratio + Discrete}
+
+\CommentTok{\# Descriptive statistics}
+\NormalTok{nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{n =} \FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(depression)),}
+    \AttributeTok{missing =} \FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(depression)),}
+    \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(depression, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{median =} \FunctionTok{median}\NormalTok{(depression, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{sd =} \FunctionTok{sd}\NormalTok{(depression, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{min =} \FunctionTok{min}\NormalTok{(depression, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{max =} \FunctionTok{max}\NormalTok{(depression, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{IQR =} \FunctionTok{IQR}\NormalTok{(depression, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      n missing     mean median       sd min max IQR
+## 1 4537     655 2.522636      1 3.219959   0  21   4
+\end{verbatim}
+
+\section{Histogram of depression
+scores}\label{histogram-of-depression-scores}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(nsece\_ps2\_recode,}
+       \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ depression)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Distribution of Depression Scores"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"CESD7 Depression Score"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Frequency"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 655 rows containing non-finite outside the scale range
+## (`stat_bin()`).
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ProblemSet_2_files/ProblemSet_2_files/figure-latex/unnamed-chunk-17-1.pdf}}
+
+\textbf{Interpretation:} Depression score is an interval/ratio, discrete
+variable ranging from 0 to 21. Among the 4,537 respondents with
+non-missing depression scores, the mean score was approximately 2.52 and
+the median was 1. The standard deviation was approximately 3.22, and the
+interquartile range was 4. There were 655 observations with missing
+depression scores.
+
+The distribution of depression scores is strongly right-skewed. Most
+respondents reported relatively low depression scores, while a smaller
+number had substantially higher scores, producing a long right tail.
+This skewness also helps explain why the mean (2.52) is higher than the
+median (1). Overall, depressive symptoms were relatively low for most
+respondents, although some respondents reported much higher levels of
+depressive symptoms.
+
+\newpage
+
+\subsubsection{Staff Age}\label{staff-age}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Variable type: Interval/Ratio + Discrete}
+
+\CommentTok{\# Descriptive statistics for staff age}
+\NormalTok{staff\_age\_summary }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{n =} \FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(staff\_age)),}
+    \AttributeTok{missing =} \FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(staff\_age)),}
+    \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(staff\_age, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{median =} \FunctionTok{median}\NormalTok{(staff\_age, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{sd =} \FunctionTok{sd}\NormalTok{(staff\_age, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{min =} \FunctionTok{min}\NormalTok{(staff\_age, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{max =} \FunctionTok{max}\NormalTok{(staff\_age, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{IQR =} \FunctionTok{IQR}\NormalTok{(staff\_age, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{staff\_age\_summary}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      n missing     mean median       sd min max IQR
+## 1 4497     695 40.26618     38 13.63905  21  69  22
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#write\_csv(staff\_age\_summary, "staff\_age\_summary.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Histogram of staff age}
+\NormalTok{nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(staff\_age)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ staff\_age)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Distribution of Staff Age"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Staff Age"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Frequency"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ProblemSet_2_files/ProblemSet_2_files/figure-latex/unnamed-chunk-19-1.pdf}}
+
+\textbf{Interpretation:} Staff age is an interval/ratio, discrete
+variable because age has meaningful numerical differences and, in this
+dataset, is measured in whole years. Among the 4,497 respondents with
+available age information, the mean age was approximately 40.27 years,
+while the median was 38 years. Staff ages ranged from 21 to 69 years,
+with a standard deviation of approximately 13.64 years and an
+interquartile range of 22 years, indicating substantial variation in age
+among staff.
+
+The histogram shows that staff were more concentrated among younger
+ages, particularly in their 20s and 30s, with frequencies generally
+declining at older ages. The distribution is not symmetric, which is
+also consistent with the mean being somewhat higher than the median.
+There were 695 observations with missing age information.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Categorized staff age: Ordinal + Discrete}
+
+\CommentTok{\# Frequency and percentage table}
+\NormalTok{staff\_age\_table }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(staff\_age\_new) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{proportion =}\NormalTok{ (n }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(n)) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{)}
+
+\NormalTok{staff\_age\_table}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       staff_age_new    n proportion
+## 1 Between 20 and 40 2449   47.16872
+## 2 Between 41 and 50  895   17.23806
+## 3      More than 51 1153   22.20724
+## 4              <NA>  695   13.38598
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{glimpse}\NormalTok{(nsece\_ps2\_recode)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 5,192
+## Columns: 9
+## $ hourly_wage   <dbl> NA, 8.653846, 4.444444, 10.000000, 8.500000, 15.000000, ~
+## $ staff_role    <fct> "(2) Teacher, instructor, or lead teacher", "(2) Teacher~
+## $ race          <fct> (1) White Only, (1) White Only, (1) White Only, (1) Whit~
+## $ education     <fct> "(6) Associate degree (AA, AS)", "(6) Associate degree (~
+## $ birth_year    <dbl> 1975, 1973, 1976, 1960, 1998, 1960, 1965, 1986, 1968, 19~
+## $ depression    <dbl> 4.000000, 0.000000, 17.000000, 14.000000, 3.000000, 3.00~
+## $ staff_age     <dbl> 44, 46, 43, 59, 21, 59, 54, 33, 51, 24, 61, 44, 69, 47, ~
+## $ staff_age_new <fct> Between 41 and 50, Between 41 and 50, Between 41 and 50,~
+## $ hr_wage_new   <fct> NA, Less than $10, Less than $10, Less than $10, Less th~
+\end{verbatim}
+
+\textbf{Interpretation 2} The categorized staff age variable
+(staff\_age\_new) is ordinal and discrete because the age categories
+have a meaningful order. Staff between ages 20 and 40 represented the
+largest category, accounting for approximately 47.17\% of all
+observations. Staff between ages 41 and 50 represented 17.24\%, while
+those in the oldest category represented 22.21\%. Approximately 13.39\%
+of observations were missing age information. The frequency distribution
+therefore reinforces the pattern seen in the histogram: younger staff
+make up the largest portion of the workforce represented in the dataset.
+
+\newpage
+
+\subsubsection{Hourly Wage}\label{hourly-wage}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Variable type: Interval/Ratio + Continuous}
+
+\CommentTok{\# Descriptive statistics for hourly wage}
+\NormalTok{hourly\_wage\_summary }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{n =} \FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(hourly\_wage)),}
+    \AttributeTok{missing =} \FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(hourly\_wage)),}
+    \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(hourly\_wage, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{median =} \FunctionTok{median}\NormalTok{(hourly\_wage, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{sd =} \FunctionTok{sd}\NormalTok{(hourly\_wage, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{min =} \FunctionTok{min}\NormalTok{(hourly\_wage, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{max =} \FunctionTok{max}\NormalTok{(hourly\_wage, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{IQR =} \FunctionTok{IQR}\NormalTok{(hourly\_wage, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{hourly\_wage\_summary}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      n missing     mean   median       sd      min   max IQR
+## 1 4270     922 15.33189 12.82526 10.65479 1.285714 107.5 6.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Histogram of hourly wage}
+\NormalTok{nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(hourly\_wage)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ hourly\_wage)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Distribution of Hourly Wages"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Hourly Wage ($)"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Frequency"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ProblemSet_2_files/ProblemSet_2_files/figure-latex/unnamed-chunk-22-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Categorized hourly wage: Ordinal + Discrete}
+
+\CommentTok{\# Frequency and percentage table}
+\NormalTok{hr\_wage\_table }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(hr\_wage\_new) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{proportion =}\NormalTok{ (n }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(n)) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{)}
+
+\NormalTok{hr\_wage\_table}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           hr_wage_new    n proportion
+## 1       Less than $10 1088  20.955316
+## 2 Between $11 and $20 2359  45.435285
+## 3 Between $21 and $30  335   6.452234
+## 4       More than $31  209   4.025424
+## 5                <NA> 1201  23.131741
+\end{verbatim}
+
+\textbf{Interpretation:} The categorized hourly wage variable
+(hr\_wage\_new) is ordinal and discrete because respondents are placed
+into wage categories that have a meaningful order. The largest category
+was workers earning between \$11 and \$20 per hour, representing
+approximately 45.44\% of all observations. About 20.96\% earned less
+than \$10 per hour, while 6.45\% earned between \$21 and \$30 and 4.03\%
+earned more than \$31. Approximately 23.13\% of observations were
+missing from the categorized wage variable. Overall, the categorical
+distribution supports the pattern observed in the histogram, with most
+workers concentrated in the lower wage categories and relatively few
+workers in the higher wage categories.
+
+\newpage
+
+\section{Question 2 --- Prepare the Data for Linear Regression (2
+points)}\label{question-2-prepare-the-data-for-linear-regression-2-points}
+
+Create the derived variables needed to estimate a multiple linear
+regression model:
+
+\begin{itemize}
+\tightlist
+\item
+  Create \textbf{k - 1 binary variables for staff role} (\texttt{k} =
+  number of categories). After examining the variable, choose a
+  \textbf{reference group}.
+\item
+  Create \textbf{k - 1 binary variables for race}. After examining the
+  variable, choose a \textbf{reference group}.
+\item
+  Create \textbf{k - 1 binary variables for educational attainment}.
+  After examining the variable, choose a \textbf{reference group}.
+\item
+  Create \textbf{k - 1 binary variables for staff age}. After examining
+  the variable, choose a \textbf{reference group}.
+\item
+  Create \textbf{k - 1 binary variables for hourly wage}. After
+  examining the variable, choose a \textbf{reference group}.
+\end{itemize}
+
+\newpage
+
+\subsection{Staff Role Binary
+Variables}\label{staff-role-binary-variables}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Staff role: 3 categories, so create k {-} 1 = 2 binary variables}
+\CommentTok{\# Reference group: Aide or assistant teacher}
+
+\NormalTok{nsece\_ps2\_recode }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{teacher\_d =} \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{      staff\_role }\SpecialCharTok{==} \StringTok{"(2) Teacher, instructor, or lead teacher"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}
+\NormalTok{    ),}
+    
+    \AttributeTok{other\_role\_d =} \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{      staff\_role }\SpecialCharTok{==} \StringTok{"(3) Other/undetermined"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}
+\NormalTok{    )}
+\NormalTok{  )}
+
+\CommentTok{\# Create readable table of binary{-}variable counts}
+\NormalTok{staff\_role\_binary\_table }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \StringTok{\textasciigrave{}}\AttributeTok{Teacher, Instructor, or Lead Teacher}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sum}\NormalTok{(teacher\_d, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \StringTok{\textasciigrave{}}\AttributeTok{Other/Undetermined}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sum}\NormalTok{(other\_role\_d, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
+\NormalTok{  staff\_role\_binary\_table,}
+  \AttributeTok{caption =} \StringTok{"Number of Respondents Coded 1 for Each Staff Role Binary Variable"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}rr@{}}
+\caption{Number of Respondents Coded 1 for Each Staff Role Binary
+Variable}\tabularnewline
+\toprule\noalign{}
+Teacher, Instructor, or Lead Teacher & Other/Undetermined \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Teacher, Instructor, or Lead Teacher & Other/Undetermined \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+3079 & 18 \\
+\end{longtable}
+
+\textbf{Reference group:} Aide or assistant teacher.
+
+\newpage
+
+\subsection{Race Binary Variables}\label{race-binary-variables}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Race: 4 categories, so create k {-} 1 = 3 binary variables}
+\CommentTok{\# Reference group: White Only}
+
+\NormalTok{nsece\_ps2\_recode }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{black\_d =} \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{      race }\SpecialCharTok{==} \StringTok{"(2) Black or African American Only"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}
+\NormalTok{    ),}
+    
+    \AttributeTok{asian\_d =} \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{      race }\SpecialCharTok{==} \StringTok{"(3) Asian Only"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}
+\NormalTok{    ),}
+    
+    \AttributeTok{other\_race\_d =} \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{      race }\SpecialCharTok{==} \StringTok{"(8) Other"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}
+\NormalTok{    )}
+\NormalTok{  )}
+
+\CommentTok{\# Examine the new binary variables}
+\NormalTok{race\_binary\_table }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \StringTok{\textasciigrave{}}\AttributeTok{Black or African American Only}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sum}\NormalTok{(black\_d }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \StringTok{\textasciigrave{}}\AttributeTok{Asian Only}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sum}\NormalTok{(asian\_d }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \StringTok{\textasciigrave{}}\AttributeTok{Other}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sum}\NormalTok{(other\_race\_d }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
+\NormalTok{  race\_binary\_table,}
+  \AttributeTok{caption =} \StringTok{"Number of Respondents Coded 1 for Each Race Binary Variable"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}rrr@{}}
+\caption{Number of Respondents Coded 1 for Each Race Binary
+Variable}\tabularnewline
+\toprule\noalign{}
+Black or African American Only & Asian Only & Other \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Black or African American Only & Asian Only & Other \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+991 & 210 & 215 \\
+\end{longtable}
+
+\textbf{Reference group:} White Only
+
+\newpage
+
+\subsection{Educational Attainment Binary
+Variables}\label{educational-attainment-binary-variables}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Educational attainment: 7 categories, so create k {-} 1 = 6 binary variables}
+\CommentTok{\# Reference group: Some college credit but no degree}
+
+\NormalTok{nsece\_ps2\_recode }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{less\_hs\_d =} \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{      education }\SpecialCharTok{==} \StringTok{"(1) Less than High School"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}
+\NormalTok{    ),}
+    
+    \AttributeTok{ged\_d =} \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{      education }\SpecialCharTok{==} \StringTok{"(3) GED or high school equivalency"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}
+\NormalTok{    ),}
+    
+    \AttributeTok{hs\_grad\_d =} \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{      education }\SpecialCharTok{==} \StringTok{"(4) High school graduate"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}
+\NormalTok{    ),}
+    
+    \AttributeTok{associate\_d =} \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{      education }\SpecialCharTok{==} \StringTok{"(6) Associate degree (AA, AS)"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}
+\NormalTok{    ),}
+    
+    \AttributeTok{bachelor\_d =} \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{      education }\SpecialCharTok{==} \StringTok{"(7) Bachelor\textquotesingle{}s degree (BA, BS, AB)"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}
+\NormalTok{    ),}
+    
+    \AttributeTok{graduate\_d =} \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{      education }\SpecialCharTok{==} \StringTok{"(8) Graduate or professional degree"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}
+\NormalTok{    )}
+\NormalTok{  )}
+
+\CommentTok{\# Create readable table to examine the new binary variables}
+\NormalTok{education\_binary\_table }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \StringTok{\textasciigrave{}}\AttributeTok{Less than High School}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sum}\NormalTok{(less\_hs\_d }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \StringTok{\textasciigrave{}}\AttributeTok{GED or High School Equivalency}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sum}\NormalTok{(ged\_d }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \StringTok{\textasciigrave{}}\AttributeTok{High School Graduate}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sum}\NormalTok{(hs\_grad\_d }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \StringTok{\textasciigrave{}}\AttributeTok{Associate Degree}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sum}\NormalTok{(associate\_d }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \StringTok{\textasciigrave{}}\AttributeTok{Bachelor\textquotesingle{}s Degree}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sum}\NormalTok{(bachelor\_d }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \StringTok{\textasciigrave{}}\AttributeTok{Graduate or Professional Degree}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sum}\NormalTok{(graduate\_d }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
+\NormalTok{  education\_binary\_table,}
+  \AttributeTok{caption =} \StringTok{"Number of Respondents Coded 1 for Each Educational Attainment Binary Variable"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1560}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.2199}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1489}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1206}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1277}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.2270}}@{}}
+\caption{Number of Respondents Coded 1 for Each Educational Attainment
+Binary Variable}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedleft
+Less than High School
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+GED or High School Equivalency
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+High School Graduate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Associate Degree
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Bachelor's Degree
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Graduate or Professional Degree
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedleft
+Less than High School
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+GED or High School Equivalency
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+High School Graduate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Associate Degree
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Bachelor's Degree
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Graduate or Professional Degree
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+85 & 126 & 769 & 834 & 1168 & 424 \\
+\end{longtable}
+
+\textbf{Reference group:} Some college credit but no degree
+
+\newpage
+
+\subsection{Staff Age Binary
+Variables}\label{staff-age-binary-variables}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Staff age: 3 categories, so create k {-} 1 = 2 binary variables}
+\CommentTok{\# Reference group: Between 20 and 40}
+
+\NormalTok{nsece\_ps2\_recode }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{age\_41\_50\_d =} \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{      staff\_age\_new }\SpecialCharTok{==} \StringTok{"Between 41 and 50"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}
+\NormalTok{    ),}
+    
+    \AttributeTok{age\_51plus\_d =} \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{      staff\_age\_new }\SpecialCharTok{==} \StringTok{"More than 51"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}
+\NormalTok{    )}
+\NormalTok{  )}
+
+\CommentTok{\# Create readable table of binary{-}variable counts}
+\NormalTok{staff\_age\_binary\_table }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \StringTok{\textasciigrave{}}\AttributeTok{Between 41 and 50}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sum}\NormalTok{(age\_41\_50\_d, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \StringTok{\textasciigrave{}}\AttributeTok{More than 51}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sum}\NormalTok{(age\_51plus\_d, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
+\NormalTok{  staff\_age\_binary\_table,}
+  \AttributeTok{caption =} \StringTok{"Number of Respondents Coded 1 for Each Staff Age Binary Variable"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}rr@{}}
+\caption{Number of Respondents Coded 1 for Each Staff Age Binary
+Variable}\tabularnewline
+\toprule\noalign{}
+Between 41 and 50 & More than 51 \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Between 41 and 50 & More than 51 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+895 & 1153 \\
+\end{longtable}
+
+\textbf{Reference group:} Between 20 and 40
+
+\newpage
+
+\subsection{Hourly Wage Binary
+Variables}\label{hourly-wage-binary-variables}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Hourly wage: 4 categories, so create k {-} 1 = 3 binary variables}
+\CommentTok{\# Reference group: Between $11 and $20}
+
+\NormalTok{nsece\_ps2\_recode }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{wage\_under\_10\_d =} \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{      hr\_wage\_new }\SpecialCharTok{==} \StringTok{"Less than $10"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}
+\NormalTok{    ),}
+    
+    \AttributeTok{wage\_21\_30\_d =} \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{      hr\_wage\_new }\SpecialCharTok{==} \StringTok{"Between $21 and $30"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}
+\NormalTok{    ),}
+    
+    \AttributeTok{wage\_31plus\_d =} \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{      hr\_wage\_new }\SpecialCharTok{==} \StringTok{"More than $31"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}
+\NormalTok{    )}
+\NormalTok{  )}
+
+\CommentTok{\# Create readable table of binary{-}variable counts}
+\NormalTok{hourly\_wage\_binary\_table }\OtherTok{\textless{}{-}}
+\NormalTok{  nsece\_ps2\_recode }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \StringTok{\textasciigrave{}}\AttributeTok{Less than $10}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sum}\NormalTok{(wage\_under\_10\_d, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \StringTok{\textasciigrave{}}\AttributeTok{Between $21 and $30}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sum}\NormalTok{(wage\_21\_30\_d, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \StringTok{\textasciigrave{}}\AttributeTok{More than $31}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sum}\NormalTok{(wage\_31plus\_d, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
+\NormalTok{  hourly\_wage\_binary\_table,}
+  \AttributeTok{caption =} \StringTok{"Number of Respondents Coded 1 for Each Hourly Wage Binary Variable"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}rrr@{}}
+\caption{Number of Respondents Coded 1 for Each Hourly Wage Binary
+Variable}\tabularnewline
+\toprule\noalign{}
+Less than \$10 & Between \$21 and \$30 & More than \$31 \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Less than \$10 & Between \$21 and \$30 & More than \$31 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1088 & 335 & 209 \\
+\end{longtable}
+
+\textbf{Reference group:} Between \$11 and \$20
+
+\newpage
+
+\section{Question 3 --- Estimate the OLS Regression Model (4
+points)}\label{question-3-estimate-the-ols-regression-model-4-points}
+
+Estimate an OLS regression model to examine factors associated with
+depression among center-based early care and education staff.
+
+The model specified in the assignment is:
+
+\[
+\text{Depression} =
+\beta_0 +
+\beta(\text{hourly wage}) +
+\beta(\text{staff role}) +
+\beta(\text{staff age}) +
+\beta(\text{education level categories}) +
+\beta(\text{race categories}) +
+\varepsilon
+\]
+
+\newpage
+
+\subsection{Estimate the Model}\label{estimate-the-model}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Estimate the OLS regression model}
+\NormalTok{depression\_model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}
+\NormalTok{  depression }\SpecialCharTok{\textasciitilde{}}
+\NormalTok{    wage\_under\_10\_d }\SpecialCharTok{+}
+\NormalTok{    wage\_21\_30\_d }\SpecialCharTok{+}
+\NormalTok{    wage\_31plus\_d }\SpecialCharTok{+}
+\NormalTok{    teacher\_d }\SpecialCharTok{+}
+\NormalTok{    other\_role\_d }\SpecialCharTok{+}
+\NormalTok{    age\_41\_50\_d }\SpecialCharTok{+}
+\NormalTok{    age\_51plus\_d }\SpecialCharTok{+}
+\NormalTok{    less\_hs\_d }\SpecialCharTok{+}
+\NormalTok{    ged\_d }\SpecialCharTok{+}
+\NormalTok{    hs\_grad\_d }\SpecialCharTok{+}
+\NormalTok{    associate\_d }\SpecialCharTok{+}
+\NormalTok{    bachelor\_d }\SpecialCharTok{+}
+\NormalTok{    graduate\_d }\SpecialCharTok{+}
+\NormalTok{    black\_d }\SpecialCharTok{+}
+\NormalTok{    asian\_d }\SpecialCharTok{+}
+\NormalTok{    other\_race\_d,}
+  \AttributeTok{data =}\NormalTok{ nsece\_ps2\_recode}
+\NormalTok{)}
+
+\CommentTok{\# View regression results}
+\CommentTok{\#summary(depression\_model)}
+
+\CommentTok{\# Create a readable regression results table}
+\NormalTok{regression\_table }\OtherTok{\textless{}{-}}
+  \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{summary}\NormalTok{(depression\_model)}\SpecialCharTok{$}\NormalTok{coefficients) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rownames\_to\_column}\NormalTok{(}\StringTok{"Variable"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rename}\NormalTok{(}
+    \AttributeTok{Estimate =}\NormalTok{ Estimate,}
+    \StringTok{\textasciigrave{}}\AttributeTok{Standard Error}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{\textasciigrave{}}\AttributeTok{Std. Error}\StringTok{\textasciigrave{}}\NormalTok{,}
+    \StringTok{\textasciigrave{}}\AttributeTok{t{-}value}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{\textasciigrave{}}\AttributeTok{t value}\StringTok{\textasciigrave{}}\NormalTok{,}
+    \StringTok{\textasciigrave{}}\AttributeTok{p{-}value}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{\textasciigrave{}}\AttributeTok{Pr(\textgreater{}|t|)}\StringTok{\textasciigrave{}}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{Variable =} \FunctionTok{recode}\NormalTok{(}
+\NormalTok{      Variable,}
+      \StringTok{"(Intercept)"} \OtherTok{=} \StringTok{"Intercept"}\NormalTok{,}
+      \StringTok{"wage\_under\_10\_d"} \OtherTok{=} \StringTok{"Less than $10/hour"}\NormalTok{,}
+      \StringTok{"wage\_21\_30\_d"} \OtherTok{=} \StringTok{"$21–$30/hour"}\NormalTok{,}
+      \StringTok{"wage\_31plus\_d"} \OtherTok{=} \StringTok{"More than $31/hour"}\NormalTok{,}
+      \StringTok{"teacher\_d"} \OtherTok{=} \StringTok{"Teacher, Instructor, or Lead Teacher"}\NormalTok{,}
+      \StringTok{"other\_role\_d"} \OtherTok{=} \StringTok{"Other/Undetermined Staff Role"}\NormalTok{,}
+      \StringTok{"age\_41\_50\_d"} \OtherTok{=} \StringTok{"Age 41–50"}\NormalTok{,}
+      \StringTok{"age\_51plus\_d"} \OtherTok{=} \StringTok{"Age 51+"}\NormalTok{,}
+      \StringTok{"less\_hs\_d"} \OtherTok{=} \StringTok{"Less than High School"}\NormalTok{,}
+      \StringTok{"ged\_d"} \OtherTok{=} \StringTok{"GED or High School Equivalency"}\NormalTok{,}
+      \StringTok{"hs\_grad\_d"} \OtherTok{=} \StringTok{"High School Graduate"}\NormalTok{,}
+      \StringTok{"associate\_d"} \OtherTok{=} \StringTok{"Associate Degree"}\NormalTok{,}
+      \StringTok{"bachelor\_d"} \OtherTok{=} \StringTok{"Bachelor\textquotesingle{}s Degree"}\NormalTok{,}
+      \StringTok{"graduate\_d"} \OtherTok{=} \StringTok{"Graduate or Professional Degree"}\NormalTok{,}
+      \StringTok{"black\_d"} \OtherTok{=} \StringTok{"Black or African American Only"}\NormalTok{,}
+      \StringTok{"asian\_d"} \OtherTok{=} \StringTok{"Asian Only"}\NormalTok{,}
+      \StringTok{"other\_race\_d"} \OtherTok{=} \StringTok{"Other Race"}
+\NormalTok{    ),}
+    \FunctionTok{across}\NormalTok{(}\FunctionTok{where}\NormalTok{(is.numeric), }\SpecialCharTok{\textasciitilde{}} \FunctionTok{round}\NormalTok{(.x, }\DecValTok{3}\NormalTok{))}
+\NormalTok{  )}
+
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
+\NormalTok{  regression\_table,}
+  \AttributeTok{caption =} \StringTok{"OLS Regression Results: Factors Associated with Depression"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.4805}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1169}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1948}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1039}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1039}}@{}}
+\caption{OLS Regression Results: Factors Associated with
+Depression}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Estimate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Standard Error
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+t-value
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p-value
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Estimate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Standard Error
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+t-value
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p-value
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Intercept & 3.071 & 0.150 & 20.532 & 0.000 \\
+Less than \$10/hour & 0.163 & 0.137 & 1.193 & 0.233 \\
+\$21--\$30/hour & -0.030 & 0.213 & -0.141 & 0.888 \\
+More than \$31/hour & 0.003 & 0.269 & 0.012 & 0.990 \\
+Teacher, Instructor, or Lead Teacher & 0.250 & 0.121 & 2.061 & 0.039 \\
+Other/Undetermined Staff Role & 0.910 & 0.961 & 0.947 & 0.344 \\
+Age 41--50 & -0.443 & 0.151 & -2.938 & 0.003 \\
+Age 51+ & -1.289 & 0.137 & -9.385 & 0.000 \\
+Less than High School & -0.077 & 0.450 & -0.172 & 0.863 \\
+GED or High School Equivalency & -0.066 & 0.359 & -0.183 & 0.855 \\
+High School Graduate & -0.470 & 0.176 & -2.668 & 0.008 \\
+Associate Degree & -0.495 & 0.174 & -2.843 & 0.004 \\
+Bachelor's Degree & -0.236 & 0.162 & -1.464 & 0.143 \\
+Graduate or Professional Degree & -0.358 & 0.231 & -1.550 & 0.121 \\
+Black or African American Only & 0.102 & 0.137 & 0.741 & 0.459 \\
+Asian Only & 0.124 & 0.267 & 0.464 & 0.643 \\
+Other Race & 0.437 & 0.249 & 1.758 & 0.079 \\
+\end{longtable}
+
+\newpage
+
+\subsection{Interpret Statistically Significant
+Coefficients}\label{interpret-statistically-significant-coefficients}
+
+Interpret the coefficient estimates for each statistically significant
+independent variable.
+
+\textbf{Answer:} Holding the other variables in the model constant,
+teachers, instructors, or lead teachers had depression scores
+approximately 0.25 points higher than aides or assistant teachers, the
+reference group. This association was statistically significant (p =
+0.039).
+
+Staff between ages 41 and 50 had depression scores approximately 0.44
+points lower than staff between ages 20 and 40, the reference group (p =
+0.003). Staff age 51 or older had depression scores approximately 1.29
+points lower than the reference group (p \textless{} 0.001).
+
+For educational attainment, high school graduates had depression scores
+approximately 0.47 points lower than respondents with some college
+credit but no degree, the reference group (p = 0.008). Respondents with
+an associate degree had depression scores approximately 0.49 points
+lower than the same reference group (p = 0.004).
+
+None of the hourly wage or race binary variables were statistically
+significant at the 0.05 level. The remaining staff-role and
+educational-attainment variables were also not statistically
+significant.
+
+\newpage
+
+\subsection{Interpret Overall Model
+Fit}\label{interpret-overall-model-fit}
+
+Interpret the overall model fit, including \textbf{R²} and
+\textbf{adjusted R²}.
+
+\textbf{Answer:} The model had an R² of approximately 0.034, indicating
+that the independent variables included in the model explain about 3.4\%
+of the variation in depression scores among the staff included in the
+regression. The adjusted R² was approximately 0.029, meaning that after
+accounting for the number of predictors in the model, approximately
+2.9\% of the variation in depression scores was explained.
+
+Although the amount of explained variation is relatively small, the
+overall regression model was statistically significant (F = 7.637, p
+\textless{} 0.001). This indicates that the predictors, considered
+together, are significantly associated with depression scores, even
+though the model explains only a small portion of the overall variation
+in depression.
+
+\newpage
+
+\subsection{Conclusions}\label{conclusions}
+
+What conclusions can you draw about the factors associated with
+depression among center-based early care and education staff?
+
+\textbf{Answer:} The results suggest that staff role, age, and
+educational attainment are associated with depression scores among
+center-based early care and education staff. Teachers, instructors, or
+lead teachers had slightly higher depression scores than aides or
+assistant teachers, while older staff generally had lower depression
+scores than staff ages 20--40. In particular, staff age 51 or older had
+substantially lower predicted depression scores. Educational attainment
+was also associated with depression for some groups, with high school
+graduates and respondents with associate degrees having lower depression
+scores than respondents with some college credit but no degree.
+
+In contrast, hourly wage and race were not statistically significantly
+associated with depression in this model. Although the model was
+statistically significant overall, it explained only about 3.4\% of the
+variation in depression scores, suggesting that much of the variation in
+depression is associated with factors not included in this analysis.
+
+Overall, the findings indicate that certain demographic and employment
+characteristics are associated with depression among early care and
+education staff, particularly age, staff role, and some levels of
+educational attainment. However, these results represent associations
+rather than causal relationships and should not be interpreted as
+evidence that these characteristics directly cause differences in
+depression.
+
+\newpage
+
+\subsection{Diagnostic Plots}\label{diagnostic-plots}
+
+Create:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  A \textbf{residual plot}
+\item
+  A \textbf{histogram of the model residuals}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Residual plot}
+\CommentTok{\# Create a dataset with fitted values and residuals}
+\NormalTok{diagnostic\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{fitted\_values =} \FunctionTok{fitted}\NormalTok{(depression\_model),}
+  \AttributeTok{residuals =} \FunctionTok{resid}\NormalTok{(depression\_model)}
+\NormalTok{)}
+
+\CommentTok{\# Residual plot}
+\FunctionTok{ggplot}\NormalTok{(diagnostic\_data,}
+       \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ fitted\_values, }\AttributeTok{y =}\NormalTok{ residuals)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept =} \DecValTok{0}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Residual Plot"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Fitted Values"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Residuals"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ProblemSet_2_files/ProblemSet_2_files/figure-latex/unnamed-chunk-30-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Histogram of residuals}
+\CommentTok{\# Histogram of residuals}
+\FunctionTok{ggplot}\NormalTok{(diagnostic\_data,}
+       \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ residuals)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{30}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Distribution of Model Residuals"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Residuals"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Frequency"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ProblemSet_2_files/ProblemSet_2_files/figure-latex/unnamed-chunk-31-1.pdf}}
+
+Do these diagnostic plots suggest that the assumptions of
+\textbf{linearity, homoscedasticity, and normality} are reasonably met?
+What hypotheses do you have about why the plots look the way they do?
+
+\textbf{Answer:} The diagnostic plots suggest that the assumptions of
+the OLS regression model are not fully met. In the residual plot, the
+residuals are not evenly distributed around zero, and the spread of the
+residuals varies across the fitted values. This suggests that the
+assumptions of linearity and homoscedasticity may not be fully
+satisfied.
+
+The histogram of the residuals also shows a strongly right-skewed
+distribution rather than an approximately normal distribution. Most
+residuals are concentrated at lower values, while a smaller number of
+observations have very large positive residuals. Therefore, the
+normality assumption does not appear to be well satisfied.
+
+One possible explanation is the nature of the dependent variable.
+Depression is measured using the CESD7 score, which ranges from 0 to 21,
+and the earlier descriptive analysis showed that most respondents had
+relatively low depression scores while a smaller number had much higher
+scores. Because the dependent variable itself is discrete, bounded, and
+strongly right-skewed, the residuals from the OLS model may also exhibit
+an unusual and right-skewed pattern.
+
+\end{document}
