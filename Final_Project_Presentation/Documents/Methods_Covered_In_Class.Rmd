@@ -15,23 +15,22 @@ The following code chunks are placeholders for methods that may be useful as the
 
 ## Load Packages
 ```{r}
-library(tidyverse)
+
 ```
 
 ## Load Built-In Dataset
 ```{r}
-data(mtcars)
+
 ```
 
 ## Create Working Dataset
 ```{r}
-cars <- mtcars
+cars 
 ```
 
 ## Import Dataset
 ```{r}
-# Use the code below if the dataset is a CSV file
-#mass_shootings <- read_csv("mass_shootings.csv")
+
 ```
 
 ## Inspect the Dataset
