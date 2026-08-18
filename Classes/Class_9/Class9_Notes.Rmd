@@ -3,3 +3,73 @@ title: "Class9_Notes"
 output: html_document
 ---
 
+# 26.08.18 Class
+- Final Project
+    - Will accept questions about the final project until Thursday at 7:00p
+    - The 36-hour extension does not extend to the final project
+- Lab session of this class is to work on the final project
+- This class is slightly short, we will finish covering all the quasi-experimental methodologies.
+
+3 Lecture Notes
+- Some times randaomized controlled trials are too difficult to do.
+- It solves the problem of the causaul. Why Researchers value Rndomized, Controlled. Trials
+- There are some things you need to untangle with an RTC
+- Comparing one thing to one groups "if nothing would have happened to this group, then they would have behaved the same". 
+- The treatment and controll. You can not ever think that two groups can have the same treatment and control group. You cannot draw any conclussions to the poliscy that you. Thge outcome and ideas is that any difference you ovserve after the treatment, you are vey confident that your policy is observe in groups, I f you hve two groups that re similrar, your are confidentnt that the results will sho you a causal effecrt. This is another strenght of the RCT. It means that you can really trust the results you are getting for that specific program or intervention that you are observing. Randomization, there is no selection bias. If you wanna do an RCT, who is going to come. Going to a low income neighborhood, perhaps the people struggling the most may particicpate. I am introduceing a problem there. You don't want to produce problems, so randomization prevents the chance of selection bias.
+
+### Internal Validity. The strength of RCTs.
+Motivation. People that are eager to participate. The best RCT will possibly get rid of any aeffect that you see. If you see that the ... is doing better than the control group, then you can be sure that the explanation that the group is doing better is because of the treatment.
+
+In this type of regression analysis, you cannot attribute that to .... We cannot say that. 
+
+If you conduct an RCT, you are really sure that what you are observing is due to the treatment. Attributing improvement to the mental health services you provided.
+
+### Critique of RCTs
+1. Ethical challenges
+- The key question is that we should be looking who is receiiv
+- 
+
+2. Practical and Implementation Challenges
+- 
+- 
+
+3. Generalizability and External Validity
+- Some RCTs have very strong internal validity. 
+- Findings may not generalize beyond the study's original context or community.
+- A housing intervention that 
+- Strong internal validity does not guarantee that results travel well across-contexts. The fact that you have a good IV, does not mean you will have replicatable results.
+
+
+Define: External Validity - how well the results of a research study can be generalized or applied to other people, settings, times, and real-world situations outside the original study
+Define: Internal Validity - the degree of confidence that a causal relationship tested in a study is trustworthy and not influenced by other factors.
+
+Question: Which neighborhood did you conduct research in?
+
+# A Quasi-Experimental Alternative: Learning from Policy Variation
+1. Indentify Challenge
+- Families differ in Socioecomic and housing
+2. Gather Data
+- 
+3. Estimate Effect
+-
+ 
+# RCTs: Powerful, but Not Perfect
+1. RCT Stengths
+- Strong causaual identification through randomization
+- Protection against selection bias and confounding variabls
+- Clear treament comparisons between groups
+
+2. Key Considerations
+- Ethical constraints limit when randomization is feasible
+- Im
+
+3. When RCTs Work Best
+- 
+- 
+
+
+4. When Alternatives Are Needed
+-
+- 
+
+4. 
