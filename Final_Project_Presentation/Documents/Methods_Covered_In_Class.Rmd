@@ -1,0 +1,182 @@
+---
+title: "Methods We Have Covered in Class"
+author: "Zachary Johnigan"
+output: html_document
+---
+
+# Methods We Have Covered in Class
+
+The following code chunks are placeholders for methods that may be useful as the project develops. Not all methods will necessarily be used in the final analysis.
+
+# Clean Environment
+```{r}
+
+```
+
+## Load Packages
+```{r}
+library(tidyverse)
+```
+
+## Load Built-In Dataset
+```{r}
+data(mtcars)
+```
+
+## Create Working Dataset
+```{r}
+cars <- mtcars
+```
+
+## Import Dataset
+```{r}
+# Use the code below if the dataset is a CSV file
+#mass_shootings <- read_csv("mass_shootings.csv")
+```
+
+## Inspect the Dataset
+```{r}
+
+```
+
+## Data Cleaning and Recoding
+
+```{r}
+# Data cleaning and recoding
+
+```
+
+## Variable Types and Levels of Measurement
+
+```{r}
+# Examine variable types and classes
+
+```
+
+## Descriptive Statistics
+
+```{r}
+# Mean, median, mode, range, standard deviation, and IQR
+
+```
+
+## Frequencies and Percentages
+
+```{r}
+# Frequency and percentage tables
+
+```
+
+## Cross-Tabulations
+
+```{r}
+# Examine frequencies across two categorical variables
+
+```
+
+## Bar Graph
+
+```{r}
+# Bar graph
+
+```
+
+## Histogram
+
+```{r}
+# Histogram
+
+```
+
+## Boxplot
+
+```{r}
+# Boxplot
+
+```
+
+## Scatterplot
+
+```{r}
+# Scatterplot
+
+```
+
+## Comparing Groups
+
+```{r}
+# Compare groups
+
+```
+
+## Binary Variables
+
+```{r}
+# Create binary/dummy variables
+
+# Reference group:
+
+```
+
+## Correlation
+
+```{r}
+# Examine correlation between variables
+
+```
+
+## Simple OLS Regression
+
+```{r}
+# Estimate a simple OLS regression model
+
+```
+
+## Multiple OLS Regression
+
+```{r}
+# Estimate a multiple OLS regression model
+
+```
+
+## Regression Results
+
+```{r}
+# Examine coefficient estimates and statistical significance
+
+```
+
+## Model Fit
+
+```{r}
+# Examine R-squared and adjusted R-squared
+
+```
+
+## Regression Diagnostics
+
+### Residual Plot
+
+```{r}
+# Create residual plot
+
+```
+
+### Histogram of Residuals
+
+```{r}
+# Examine distribution of model residuals
+
+```
+
+# Interpretation
+
+**Relationship being examined:**
+
+**Independent variable(s):**
+
+**Dependent variable:**
+
+**Main finding:**
+
+**Policy relevance:**

@@ -1,0 +1,226 @@
+---
+title: "Methods We Have Covered in Class"
+author: "Zachary Johnigan"
+output: html_document
+---
+
+# Methods We Have Covered in Class
+
+The following code chunks are placeholders for methods that may be useful as the project develops. Not all methods will necessarily be used in the final analysis.
+
+# Clean Environment
+```{r}
+rm(list=ls())
+options("error") 
+options(lifecycle_disable_verbose_retirement = TRUE)
+
+```
+
+## Load Packages
+```{r}
+library(tidyverse)
+```
+
+## Load Built-In Dataset
+```{r}
+data(mtcars)
+```
+
+## Create Working Dataset
+```{r}
+cars <- mtcars
+```
+
+## Import Dataset
+```{r}
+# Use the code below if the dataset is a CSV file
+#mass_shootings <- read_csv("mass_shootings.csv")
+```
+
+## Inspect the Dataset
+```{r}
+
+```
+
+## Data Cleaning and Recoding
+
+```{r}
+# Data cleaning and recoding
+cars <-
+  cars %>%
+  mutate(
+    transmission = ifelse(am == 1, "Manual", "Automatic")
+  )
+```
+
+## Variable Types and Levels of Measurement
+
+```{r}
+# Examine variable types and classes
+class(cars$mpg)
+class(cars$cyl)
+class(cars$transmission)
+```
+
+## Descriptive Statistics
+
+```{r}
+# Descriptive statistics
+cars %>%
+  summarise(
+    mean = mean(mpg),
+    median = median(mpg),
+    sd = sd(mpg),
+    min = min(mpg),
+    max = max(mpg),
+    IQR = IQR(mpg)
+  )
+```
+
+## Frequencies and Percentages
+
+```{r}
+# Frequency and percentage table
+cars %>%
+  count(cyl) %>%
+  mutate(percent = (n / sum(n)) * 100)
+```
+
+## Cross-Tabulations
+
+```{r}
+# Cross-tabulation
+table(cars$cyl, cars$transmission)
+```
+
+## Bar Graph
+
+```{r}
+# Bar graph
+ggplot(cars, aes(x = factor(cyl))) +
+  geom_bar()
+```
+
+## Histogram
+
+```{r}
+# Histogram
+ggplot(cars, aes(x = mpg)) +
+  geom_histogram()
+```
+
+## Boxplot
+
+```{r}
+# Boxplot
+ggplot(cars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot()
+```
+
+## Scatterplot
+
+```{r}
+# Scatterplot
+ggplot(cars, aes(x = wt, y = mpg)) +
+  geom_point()
+```
+
+## Comparing Groups
+
+```{r}
+# Compare groups
+cars %>%
+  group_by(cyl) %>%
+  summarise(mean_mpg = mean(mpg))
+```
+
+## Binary Variables
+
+```{r}
+# Create binary/dummy variable
+cars <-
+  cars %>%
+  mutate(
+    manual_d = ifelse(am == 1, 1, 0)
+  )
+
+# Reference group: Automatic
+```
+
+## Correlation
+
+```{r}
+# Correlation
+cor(cars$wt, cars$mpg)
+```
+
+## Simple OLS Regression
+
+```{r}
+# Simple OLS regression
+model_simple <- lm(
+  mpg ~ wt,
+  data = cars
+)
+
+summary(model_simple)
+```
+
+## Multiple OLS Regression
+
+```{r}
+# Multiple OLS regression
+model_multiple <- lm(
+  mpg ~ wt + hp,
+  data = cars
+)
+
+summary(model_multiple)
+```
+
+## Regression Results
+
+```{r}
+# Regression coefficients and statistical significance
+summary(model_multiple)$coefficients
+```
+
+## Model Fit
+
+```{r}
+# Model fit
+summary(model_multiple)$r.squared
+summary(model_multiple)$adj.r.squared
+```
+
+## Regression Diagnostics
+
+### Residual Plot
+
+```{r}
+# Residual plot
+plot(
+  fitted(model_multiple),
+  resid(model_multiple)
+)
+abline(h = 0)
+```
+
+### Histogram of Residuals
+
+```{r}
+# Histogram of residuals
+hist(resid(model_multiple))
+```
+
+# Interpretation
+
+**Relationship being examined:**
+
+**Independent variable(s):**
+
+**Dependent variable:**
+
+**Main finding:**
+
+**Policy relevance:**

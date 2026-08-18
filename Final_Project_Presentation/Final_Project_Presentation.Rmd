@@ -16,6 +16,7 @@ output: html_document
 # 1. Set up working space and import packages
 #------------------------------------------------------------------------------#
 
+# Clean Environment
 ```{r}
 rm(list=ls())
 options("error") 
@@ -24,7 +25,6 @@ options(lifecycle_disable_verbose_retirement = TRUE)
 ```
 
 # Import packages
-
 ```{r}
 package.list <- c("tidyverse", "readr")
 
@@ -40,11 +40,10 @@ for (p in package.list){
 ## check your directory
 ```{r}
 getwd()
-
+# /home/zacharyjohnigan/UChicago_Student/2_Data_For_Policy_Analys_-_Mgmt/Final_Project_Presentation
 ```
 
 ## set up working directory 
-
 ```{r}
 my_directory   <- "/home/zacharyjohnigan/UChicago_Student/2_Data_For_Policy_Analys_-_Mgmt/Final_Project_Presentation/"
 my_data        <- paste0(my_directory, "Data/")
