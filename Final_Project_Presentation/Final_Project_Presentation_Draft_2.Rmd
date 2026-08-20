@@ -1,0 +1,218 @@
+---
+title: "Final Project Presentation"
+author: "Zachary Johnigan"
+output: html_document
+---
+
+# Research Question
+
+**Are differences in mass-shooting location type associated with differences in the number of fatalities per incident?**
+
+# Class and teacher comments
+- Perhaps look into grouping by region
+- Find the code book for your dataset
+
+# Clean Environment
+```{r}
+rm(list=ls())
+options("error")
+options(lifecycle_disable_verbose_retirement = TRUE)
+```
+
+# Load Packages
+```{r}
+library(tidyverse)
+library(rcis)
+```
+
+# Load Dataset
+```{r}
+data("mass_shootings")
+```
+
+# Create Working Dataset
+```{r}
+mass_shootings_project <- mass_shootings
+```
+
+# Inspect the Dataset
+```{r}
+glimpse(mass_shootings_project)
+view(mass_shootings)
+names(mass_shootings)
+```
+
+```{r}
+names(mass_shootings_project)
+```
+
+```{r}
+head(mass_shootings_project)
+```
+
+# Variables of Interest
+For this analysis:
+- **Independent variable:** `location_type`
+- **Dependent variable:** `fatalities`
+
+```{r}
+class(mass_shootings_project$location_type)
+class(mass_shootings_project$fatalities)
+```
+
+# Location Type  
+
+## Frequencies and Percentages
+```{r}
+location_table <-
+  mass_shootings_project %>%
+  count(location_type) %>%
+  mutate(percent = (n / sum(n)) * 100)
+
+location_table
+```
+This code counts how many mass shootings occurred in each type of location and calculates what percentage of all shootings each location type represents.
+
+## Bar Graph
+```{r}
+ggplot(mass_shootings_project,
+       aes(x = location_type)) +
+  geom_bar() +
+  coord_flip() +
+  labs(
+    title = "Mass Shootings by Location Type",
+    x = "Location Type",
+    y = "Number of Incidents"
+  )
+```
+This code creates a horizontal bar graph showing how many mass-shooting incidents occurred in each location type, making the categories easy to compare visually.
+
+# Fatalities
+
+## Descriptive Statistics
+
+```{r}
+mass_shootings_project %>%
+  summarise(
+    mean = mean(fatalities, na.rm = TRUE),
+    median = median(fatalities, na.rm = TRUE),
+    sd = sd(fatalities, na.rm = TRUE),
+    min = min(fatalities, na.rm = TRUE),
+    max = max(fatalities, na.rm = TRUE),
+    IQR = IQR(fatalities, na.rm = TRUE)
+  )
+```
+
+## Histogram
+
+```{r}
+ggplot(mass_shootings_project,
+       aes(x = fatalities)) +
+  geom_histogram() +
+  labs(
+    title = "Distribution of Fatalities",
+    x = "Number of Fatalities",
+    y = "Frequency"
+  )
+```
+
+# Compare Location Type and Fatalities
+
+## Group Means
+
+```{r}
+mass_shootings_project %>%
+  group_by(location_type) %>%
+  summarise(
+    mean_fatalities = mean(fatalities, na.rm = TRUE)
+  )
+```
+
+## More Detailed Group Comparison
+
+```{r}
+mass_shootings_project %>%
+  group_by(location_type) %>%
+  summarise(
+    n = n(),
+    mean_fatalities = mean(fatalities, na.rm = TRUE),
+    median_fatalities = median(fatalities, na.rm = TRUE),
+    sd_fatalities = sd(fatalities, na.rm = TRUE)
+  )
+```
+
+# Boxplot
+
+```{r}
+ggplot(mass_shootings_project,
+       aes(x = location_type,
+           y = fatalities)) +
+  geom_boxplot() +
+  coord_flip() +
+  labs(
+    title = "Fatalities by Location Type",
+    x = "Location Type",
+    y = "Number of Fatalities"
+  )
+```
+
+# OLS Regression
+
+```{r}
+model <-
+  lm(
+    fatalities ~ location_type,
+    data = mass_shootings_project
+  )
+
+summary(model)
+```
+
+# Regression Results
+
+```{r}
+summary(model)$coefficients
+```
+
+# Model Fit
+
+```{r}
+summary(model)$r.squared
+summary(model)$adj.r.squared
+```
+
+# Regression Diagnostics
+
+## Residual Plot
+
+```{r}
+plot(
+  fitted(model),
+  resid(model)
+)
+
+abline(h = 0)
+```
+
+## Histogram of Residuals
+
+```{r}
+hist(resid(model))
+```
+
+# Interpretation
+
+**Research question:**  
+Are differences in mass-shooting location type associated with differences in the number of fatalities per incident?
+
+**Independent variable:**  
+Location type
+
+**Dependent variable:**  
+Number of fatalities
+
+**Main finding:**  
+
+
+**Policy relevance:**  
+
