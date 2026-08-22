@@ -1,0 +1,60 @@
+---
+title: "Final Policy Report"
+output: html_document
+---
+
+# Final Policy Report
+
+**Due:** Sun Aug 23, 2026 11:59pm  
+**Points:** 25
+
+## Details
+
+This assignment is the written component of your final project presentation and analysis. Students will produce a ~5-page interactive HTML report using R and R Markdown that presents their analysis of a selected policy issue. The report should include the following components:
+
+## Executive Summary
+
+In no more than three paragraphs, clearly summarize the policy issue, research questions, analytical approach, and main findings. This section should provide a concise synthesis of your entire project. After reading it, a policymaker should underst‚and what you did, why it matters, and what you found.
+
+## Motivation and Research Questions
+
+Describe the policy issue, including appropriate references, and explain its relevance and significance. Clearly state your research questions.
+
+## Data
+
+Describe the dataset(s) used to address your research questions, including any data cleaning and preparation steps undertaken to create your analytical dataset.
+
+## Methodology
+
+Explain your analytical approach, including what was done and why this method was selected. Justify why the chosen approach is appropriate for addressing your research question(s).
+
+## Key Findings
+
+Present your main results in clear, accessible language. Your explanation should be understandable to an audience without a quantitative background. Include statistical descriptions of all measures used in the analysis with appropriate graphs or tables.
+
+## Conclusion and Policy Implications
+
+Summarize your key findings and discuss their broader implications for policymakers.
+
+# Submission Requirements
+
+For this final assignment, students are required to submit:
+
+- The HTML report.
+- An R script (.R file) that prepares the data for analysis and runs the report.
+- An R Markdown script (.Rmd file) that produces the HTML report.
+
+All code should follow the formatting conventions demonstrated in class, and be clearly commented.
+
+# Grading Rubric
+
+| Criterion | Description | With Presentation | Without Presentation |
+|---|---|---:|---:|
+| Executive Summary | Clearly and concisely summarizes the policy issue, research questions, analytical approach, and main findings in no more than three paragraphs. | 4 | 7 |
+| Motivation & Research Questions | Clearly explains the policy issue and its relevance and significance, uses appropriate references, and states clear research questions. | 3 | 6 |
+| Data | Clearly describes the dataset(s), including relevant data cleaning and preparation steps used to create the analytical dataset. | 3 | 6 |
+| Methodology | Clearly explains the analytical approach, why it was selected, and why it is appropriate for answering the research question(s). | 3 | 6 |
+| Key Findings | Clearly presents and interprets the main results using appropriate quantitative evidence and accessible language for a non-technical audience. Includes statistical descriptions of all measures used in the analysis with appropriate graphs or tables. | 6 | 10 |
+| Conclusion & Policy Implications | Summarizes the key findings and clearly discusses their broader implications for policymakers. | 4 | 7 |
+| R Code & Report | Submits the HTML, R, and R Markdown files. Code follows formatting conventions demonstrated in class, is clearly commented, and successfully produces the report. | 2 | 3 |
+| **Total** |  | **25** | **45** |
