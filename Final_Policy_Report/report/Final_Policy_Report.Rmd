@@ -1,0 +1,228 @@
+---
+title: "Final Policy Report"
+author: "Zachary Johnigan"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+
+#------------------------------------------------------------------------------#
+# This file generates the Final Policy Report
+
+#
+# PROJECT NAME : Data for Policy Analysis and Management
+# DATA SETS USED BY THIS CODE : Mother Jones Mass Shootings Database
+# R VERSION :
+#
+# AUTHOR : Zachary Johnigan
+# DATE CREATED : 08-23-2026
+# NOTES : This file should be run using the Final Policy Report .R script
+#------------------------------------------------------------------------------#
+```
+
+# Executive Summary
+
+Mass shootings are a significant public policy and public health concern in the United States. Their consequences extend beyond deaths and physical injuries to survivors, witnesses, and affected communities (Abba-Aji et al., 2024). This project examines whether the number of fatalities in mass-shooting incidents differs depending on the type of location where the incident occurred.
+
+The analysis uses the Mother Jones Mass Shootings Database. The analytical dataset contains 161 incidents and classifies incidents into six location types: Airport, Military, Other, Religious, School, and Workplace. Descriptive statistics and visualizations are used to compare fatalities across location types, followed by an ordinary least squares (OLS) regression model.
+
+Average fatalities differed across location categories, but the regression analysis did not find statistically significant evidence that fatalities differ by location type overall (p = 0.596). Location type explained approximately 2.3% of the variation in fatalities. These findings suggest that other characteristics of mass-shooting incidents may be more important than location type alone in explaining differences in fatalities.
+
+# Motivation and Research Questions
+
+Mass shootings are a significant public health concern in the United States, with consequences extending beyond immediate deaths and injuries to the psychological well-being of survivors, witnesses, and affected communities (Abba-Aji et al., 2024).
+
+One characteristic that may be important is the **type of location** where a mass shooting occurs. Mass shootings in the dataset occurred in workplaces, schools, religious institutions, military locations, airports, and other settings. The circumstances surrounding these locations may differ, including the number of people present and the opportunities available for prevention or emergency response. Examining whether fatalities vary across these settings provides a simple way to explore whether location type is associated with the severity of an incident.
+
+**Research Question:** Do fatalities differ depending on the type of location where a mass shooting occurs in the United States?
+
+# Data
+
+This analysis uses the **Mother Jones Mass Shootings Database**, which contains information on mass-shooting incidents in the United States. The version used for this analysis contains **161 incidents** and includes information about fatalities, injuries, location, location type, weapons, and characteristics of the shooter.
+
+For this analysis, I selected two variables: **fatalities**, which measures the number of people killed in each incident, and **location type**, which identifies the type of location where the incident occurred. The original location-type variable was renamed `location_type` for clarity.
+
+The location-type variable required minor cleaning because some categories differed in capitalization and contained extra spaces or line breaks. These values were standardized into six categories: **Airport, Military, Other, Religious, School, and Workplace**. Observations missing either fatalities or location type were excluded from the analytical dataset.
+
+```{r}
+kable(
+  location_table,
+  digits = 1,
+  col.names = c("Location Type", "Number of Incidents", "Percent"),
+  caption = "Table 1. Distribution of Mass Shootings by Location Type"
+)
+```
+
+The most common location categories were **Other** and **Workplace**, which together accounted for most incidents in the analytical dataset.
+
+# Methodology
+
+The analysis uses **descriptive statistics, data visualizations, and linear regression** to examine whether the number of fatalities differs across types of locations where mass shootings occurred.
+
+First, I calculated the number and percentage of incidents in each location category and summarized the distribution of fatalities. I then compared the **mean and median number of fatalities across location types** and used a boxplot to visualize differences and identify unusually high-fatality incidents.
+
+Finally, I estimated an **ordinary least squares (OLS) regression model** with fatalities as the outcome variable and location type as the explanatory variable. This approach provides a straightforward way to test whether observed differences in fatalities across location categories are statistically significant. Regression diagnostics were also examined to identify potential limitations of the model.
+
+# Key Findings {.tabset}
+
+## Overall Fatalities
+
+```{r}
+fatalities_summary_display <-
+  fatalities_summary %>%
+  mutate(
+    mean = round(mean, 2)
+  )
+
+kable(
+  fatalities_summary_display,
+  col.names = c("N", "Mean", "Median", "Minimum", "Maximum"),
+  caption = "Table 2. Summary of Fatalities"
+)
+```
+
+Across all 161 incidents, the average number of fatalities was **7.41**, while the median was **5**. Fatalities ranged from **3 to 60**. The mean being higher than the median indicates that a small number of especially deadly incidents increased the overall average.
+
+## Location Type
+
+```{r, fig.width=8, fig.height=6}
+location_plot <-
+  ggplot(mass_shootings_project, aes(x = location_type)) +
+  geom_bar() +
+  coord_flip() +
+  labs(
+    title = "Mass Shootings by Location Type",
+    x = "Location Type",
+    y = "Number of Incidents"
+  )
+
+location_plot
+```
+
+Of the 161 incidents, **Other** was the most common category with 62 incidents (38.5%), followed by **Workplace** with 57 incidents (35.4%). Schools accounted for 25 incidents (15.5%), religious locations for 10 (6.2%), military locations for 6 (3.7%), and airports for 1 (0.6%).
+
+## Fatalities by Location Type
+
+```{r}
+fatalities_by_location_display <-
+  fatalities_by_location %>%
+  mutate(
+    mean_fatalities = round(mean_fatalities, 2),
+    median_fatalities = round(median_fatalities, 1)
+  )
+
+kable(
+  fatalities_by_location_display,
+  col.names = c(
+    "Location Type",
+    "N",
+    "Mean Fatalities",
+    "Median Fatalities"
+  ),
+  caption = "Table 3. Fatalities by Location Type"
+)
+```
+
+School shootings had the highest average number of fatalities at **8.76**, followed by religious locations (**8.20**) and other locations (**8.10**). Workplace shootings had an average of **6.04 fatalities**. The airport category contained only one incident, so its average should not be treated as a meaningful group comparison.
+
+```{r, fig.width=8, fig.height=6}
+fatalities_boxplot <-
+  ggplot(
+    mass_shootings_project,
+    aes(x = location_type, y = fatalities)
+  ) +
+  geom_boxplot() +
+  coord_flip() +
+  labs(
+    title = "Fatalities by Location Type",
+    x = "Location Type",
+    y = "Fatalities"
+  )
+
+fatalities_boxplot
+```
+
+The boxplot shows substantial variation within several location categories and several unusually deadly incidents. These extreme observations help explain why the mean number of fatalities is higher than the median.
+
+## OLS Regression
+
+The following model was estimated:
+
+$Fatalities = \beta_0 + \beta(Location\ Type) + \varepsilon$
+
+```{r, results='asis'}
+model <- lm(
+  fatalities ~ location_type,
+  data = mass_shootings_project
+)
+
+stargazer(
+  model,
+  type = "html",
+  title = "Table 4. OLS Regression Results",
+  digits = 2,
+  dep.var.labels = "Fatalities"
+)
+```
+
+Although average fatalities varied across location types, the regression analysis did **not** find statistically significant evidence that fatalities differ by location type overall. The overall model p-value was **0.596**, which is greater than the conventional 0.05 threshold.
+
+The model's **R-squared was 0.023**, meaning that location type explained approximately **2.3% of the variation in fatalities**. In practical terms, location type alone does not appear to be a strong predictor of how many people are killed in an incident in this dataset.
+
+## Regression Diagnostics
+
+```{r, fig.width=8, fig.height=6}
+residual_data <-
+  data.frame(
+    fitted = model$fitted.values,
+    residuals = model$residuals
+  )
+
+residual_plot <-
+  ggplot(residual_data, aes(x = fitted, y = residuals)) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(
+    title = "Residual Plot",
+    x = "Fitted Values",
+    y = "Residuals"
+  )
+
+residual_plot
+```
+
+The residual plot shows several large positive residuals. This suggests that a small number of unusually deadly incidents are not well explained by location type alone.
+
+```{r, fig.width=8, fig.height=6}
+hist_residual <-
+  ggplot(residual_data, aes(x = residuals)) +
+  geom_histogram() +
+  labs(
+    title = "Distribution of Model Residuals",
+    x = "Residuals",
+    y = "Count"
+  )
+
+hist_residual
+```
+
+The residual distribution is strongly right-skewed and contains several large positive outliers. This suggests that the assumptions of the simple OLS model may not be fully satisfied, so the regression results should be interpreted cautiously.
+
+# Conclusion and Policy Implications
+
+This analysis examined whether the number of fatalities in mass shootings differs depending on the type of location where an incident occurs. Although average fatalities varied across location types, the regression analysis did not find a statistically significant relationship between location type and fatalities. Location type explained only about **2.3% of the variation in fatalities**, suggesting that it alone is not a strong predictor of how deadly a mass-shooting incident will be.
+
+For policymakers, these findings suggest that policies aimed at reducing fatalities from mass shootings should **not focus exclusively on particular types of locations**, such as schools or workplaces. Instead, policymakers may need to consider other characteristics of these incidents that could better explain differences in fatalities, such as weapons used, number of victims, or other circumstances surrounding an attack.
+
+This analysis is limited by the relatively small number of incidents in some location categories and by several unusually deadly incidents that affect the averages. Future research could examine additional variables in the dataset and use a broader analytical approach to better understand what factors are associated with the severity of mass shootings.
+
+# References
+
+Abba-Aji, M., Abdalla, S. M., Moreland, A., Rancher, C., Kilpatrick, D. G., & Galea, S. (2024). Prevalence and risk factors of depression in U.S. adults post mass shootings: Evidence from population-based surveys of multiple communities. *Public Health, 232*, 66–73.
+
+Follman, M., Aronsen, G., & Pan, D. (2026, August 2). *US mass shootings, 1982–2026: Data from Mother Jones' investigation*. Mother Jones.
